@@ -1,6 +1,6 @@
 import React from 'react';
 import PizzaCSS from './Pizza.module.css';
-import {useSetState} from './AppState';
+import {useStateDispatch} from './AppState';
 
 interface Pizza {
     id: number;
@@ -16,39 +16,18 @@ interface Props{
 const Pizza: React.FunctionComponent<Props> = ({pizza}) => {
 
     //retrieve the setState function using the custom hook from AppState
-    const setState = useSetState();
+    const dispatch = useStateDispatch();
 
+    //classic REDUX like dispatch action event
     const handleAddToCartClick = () => {
-
-        //this setState will update the state of the AppState
-        //search for existing pizzas with the same id (if yes update quantity)
-        //if not then simply set default value for quantity
-        setState((prevState => {
-
-            const itemExists = prevState.cart.items.find(item => {
-                return item.id === pizza.id
-            })
-
-            return {
-                ...prevState,
-                cart: {
-                    ...prevState.cart,
-                    items: itemExists ? prevState.cart.items.map(item => {
-                            if (item.id === pizza.id) {
-                                return {
-                                    ...item,
-                                    quantity: item.quantity + 1
-                                }
-                            }
-                            return item;
-                        })
-                        : [
-                            ...prevState.cart.items,
-                            {id: pizza.id, name: pizza.name, price: pizza.price, quantity: 1 }
-                        ]
+        dispatch({
+            type: 'ADD_TO_CART',
+            payload: {
+                item: {
+                    id: pizza.id, name: pizza.name, price: pizza.price
                 }
-            };
-        }));
+            }
+        })
     }
 
     return (
