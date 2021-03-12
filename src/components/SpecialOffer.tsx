@@ -1,14 +1,14 @@
 import React from 'react';
-import PizzaCSS from './Pizza.module.css';
-import {useStateDispatch} from './AppState';
-import {Pizza} from "../types";
+import {Pizza} from '../types';
+import {useStateDispatch} from "./AppState";
 
+import SpecialOfferCSS from './SpecialOffer.module.css';
 
 interface Props{
     pizza: Pizza
 }
 
-const PizzaItem: React.FunctionComponent<Props> = ({pizza}) => {
+const SpecialOffer:React.FunctionComponent<Props> = ({pizza}) => {
 
     //retrieve the setState function using the custom hook from AppState
     const dispatch = useStateDispatch();
@@ -26,13 +26,13 @@ const PizzaItem: React.FunctionComponent<Props> = ({pizza}) => {
     }
 
     return (
-        <li className={PizzaCSS.container}>
+        <div className={SpecialOfferCSS.container}>
             <h2>{pizza.name}</h2>
             <p>{pizza.description}</p>
             <p>{pizza.price}</p>
             <button type='button' onClick={handleAddToCartClick}>Add to Cart</button>
-        </li>
+        </div>
     )
 }
 
-export default PizzaItem;
+export default SpecialOffer;
