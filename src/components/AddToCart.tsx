@@ -30,3 +30,22 @@ export function withAddToCart<OriginalProps extends AddToCartProps>(ChildCompone
     return AddToCartHOC;
 
 }
+
+//HOC with Render props pattern
+//React doesnt like getting function for props and return a JSX element so we must write our implementation
+export const WithAddToCartProps: React.FC<{
+    children: (props: AddToCartProps) => JSX.Element;
+}> = ({ children }) => {
+
+    //cross cutting logic added here
+    const dispatch = useStateDispatch();
+    const addToCart: AddToCartProps['addToCart'] = (item) => {
+        dispatch({
+            type: 'ADD_TO_CART',
+            payload: {
+                item,
+            },
+        });
+    };
+    return children({ addToCart });
+};
