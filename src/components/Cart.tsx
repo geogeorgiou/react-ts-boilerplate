@@ -32,9 +32,12 @@ class Cart extends React.Component<Props, State> {
         return (
             <AppStateContext.Consumer>
                 {(state) => {
+
+                    //total Pizza item counter
                     const itemsCount = state.cart.items.reduce((sum, item) => {
                         return sum + item.quantity;
                     }, 0);
+
                     return (
                         <div className={CartCSS.cartContainer}>
                             <button type="button" className={CartCSS.button} onClick={this.handleClick}>
