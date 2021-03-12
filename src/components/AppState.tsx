@@ -1,7 +1,7 @@
 import React, {createContext, useContext, useEffect, useReducer} from 'react';
 
 //setup a reusable item shared across the interfaces in AppState
-interface CartItem { id: number,name: string; price: number, quantity: number; }
+export interface CartItem { id: number,name: string; price: number, quantity: number; }
 
 interface AppStateValue {
     cart: {

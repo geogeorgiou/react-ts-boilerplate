@@ -1,28 +1,22 @@
 import React from 'react';
 import {Pizza} from '../types';
-import {useStateDispatch} from "./AppState";
 
 import SpecialOfferCSS from './SpecialOffer.module.css';
+import {AddToCartProps, withAddToCart} from "./AddToCart";
 
-interface Props{
+interface Props extends AddToCartProps{
     pizza: Pizza
 }
 
-const SpecialOffer:React.FunctionComponent<Props> = ({pizza}) => {
+const SpecialOffer:React.FunctionComponent<Props> = ({pizza, addToCart}) => {
 
-    //retrieve the setState function using the custom hook from AppState
-    const dispatch = useStateDispatch();
 
-    //classic REDUX like dispatch action event
     const handleAddToCartClick = () => {
-        dispatch({
-            type: 'ADD_TO_CART',
-            payload: {
-                item: {
-                    id: pizza.id, name: pizza.name, price: pizza.price
-                }
-            }
-        })
+        addToCart({
+            id: pizza.id,
+            name: pizza.name,
+            price: pizza.price
+        });
     }
 
     return (
@@ -35,4 +29,4 @@ const SpecialOffer:React.FunctionComponent<Props> = ({pizza}) => {
     )
 }
 
-export default SpecialOffer;
+export default withAddToCart(SpecialOffer);
