@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useReducer} from 'react';
+import React, {createContext, useContext, useEffect, useReducer} from 'react';
 
 //setup a reusable item shared across the interfaces in AppState
 interface CartItem { id: number,name: string; price: number, quantity: number; }
@@ -23,6 +23,12 @@ interface Action<T> {
     type: T;
 }
 
+interface InitializeCartAction extends Action<'INITIALIZE_CART'> {
+    payload: {
+        cart: AppStateValue['cart']
+    }
+}
+
 //IMPORTANT! Since we handle the quantity property in the reducer
 //the add CartItem payload should not have quantity
 interface AddToCartAction extends Action<'ADD_TO_CART'> {
@@ -35,7 +41,10 @@ interface AddToCartAction extends Action<'ADD_TO_CART'> {
 //Redux like logic
 //reducer function that exists to update the AppState state when update action is dispatched
 //when multiple Actions are possible we will use a union to describe this action
-const reducer = (state: AppStateValue, action: AddToCartAction) => {
+const reducer = (
+    state: AppStateValue,
+    action: AddToCartAction | InitializeCartAction
+) => {
 
     if (action.type === 'ADD_TO_CART') {
 
@@ -69,6 +78,13 @@ const reducer = (state: AppStateValue, action: AddToCartAction) => {
             }
         };
 
+    } else if (action.type === 'INITIALIZE_CART') {
+
+        return {
+            ...state,
+            cart: action.payload.cart
+        };
+
     }
 
     return state;
@@ -91,6 +107,29 @@ const AppStateProvider: React.FunctionComponent = ({children}) => {
 
     //define here that the reducer state will hold AppStateValue as a generic interface
     const [state, dispatch] = useReducer(reducer, defaultStateValue);
+
+    //IMPORTANT NOTE THE ORDER OF THE USE EFFECTS DOES MATTER
+
+    //loadCart Data from LS on init
+    useEffect(() => {
+
+        const cart = window.localStorage.getItem('cart');
+
+        if (cart) {
+            dispatch({type: 'INITIALIZE_CART', payload: {cart: JSON.parse(cart)}})
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    //store state to localStorage when rendering
+    useEffect(() => {
+
+        window.localStorage.setItem('cart', JSON.stringify(state.cart));
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [state.cart]);
+
 
     //by passing state only and not an object with {state, setState} on each re-render no new object will be made
     //thus no re-renders for all the child components wrapped by the provider
