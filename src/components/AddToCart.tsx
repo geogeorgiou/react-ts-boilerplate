@@ -49,3 +49,23 @@ export const WithAddToCartProps: React.FC<{
     };
     return children({ addToCart });
 };
+
+
+//custom hooks is a function that uses otherHooks or not
+//and provides some kind of functionality to a given component
+export const userAddToCart = () => {
+
+    //cross cutting logic added here
+    const dispatch = useStateDispatch();
+    const addToCart: AddToCartProps['addToCart'] = (item) => {
+        dispatch({
+            type: 'ADD_TO_CART',
+            payload: {
+                item,
+            },
+        });
+    };
+
+    return addToCart;
+
+}
