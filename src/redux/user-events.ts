@@ -20,7 +20,7 @@ interface UserEventsState {
 
 const LOAD_REQUEST = 'userEvents/load_request';
 
-interface LoadReaquestAction extends Action<typeof LOAD_REQUEST> {}
+interface LoadRequestAction extends Action<typeof LOAD_REQUEST> {}
 
 const LOAD_SUCCESS = 'userEvents/load_success';
 
@@ -40,7 +40,7 @@ export const loadUserEvents = (): ThunkAction<
   void,
   RootState,
   undefined,
-  LoadReaquestAction | LoadSuccessAction | LoadFailureAction
+  LoadRequestAction | LoadSuccessAction | LoadFailureAction
 > => async (dispatch, getState) => {
   dispatch({
     type: LOAD_REQUEST
