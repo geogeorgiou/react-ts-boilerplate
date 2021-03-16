@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import pizzas from '../data/pizzas.json';
 import Pizza from './Pizza';
 import Cart from "./Cart";
@@ -11,6 +11,24 @@ import SpecialOffer from "./SpecialOffer";
 const App = () => {
 
     const specialOfferPizza = pizzas.find(item => item.specialOffer);
+
+    // useEffect(() => {
+    //
+    //     const listener = () => {
+    //         alert('Hello');
+    //     }
+    //
+    //     document.addEventListener('mousedown', listener);
+    //
+    //     //call cleanup callback before calling the next useEffect callback
+    //     //AND when component unmounts
+    //     //...cleanup -> callback -> cleanup -> callback ....
+    //     return () => {
+    //         document.removeEventListener('mousedown', listener);
+    //     }
+    //
+    //
+    // }, [])
 
     return (
         <AppStateProvider>
