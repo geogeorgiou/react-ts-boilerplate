@@ -1,0 +1,16 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "title": "Jogging",
+      "dateStart": "2021-03-16T08:48:38.847Z",
+      "dateEnd": "2021-03-16T09:48:38.847Z"
+    },
+    {
+      "title": "Learning TS",
+      "dateStart": "2021-03-16T08:48:38.847Z",
+      "dateEnd": "2021-03-16T08:48:38.847Z",
+      "id": 2
+    }
+  ]
+}
