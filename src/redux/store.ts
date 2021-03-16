@@ -1,4 +1,4 @@
-import {combineReducers, createStore, applyMiddleware, compose} from 'redux';
+import {combineReducers, createStore} from 'redux';
 import userEventsReducer from './user-events';
 import recorderReducer from './recorder';
 import middleware from "./middleware";
