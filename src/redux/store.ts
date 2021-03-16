@@ -2,9 +2,11 @@
 
 import {combineReducers, createStore} from "redux";
 import userEventsReducer from "./user-events";
+import recorderReducer from "./recorder";
 
 const rootReducer = combineReducers({
-    userEvents: userEventsReducer
+    userEvents: userEventsReducer,
+    recorder: recorderReducer
 });
 
 //Return type demands a function to extract the return type!
