@@ -1,7 +1,7 @@
 import React from "react";
 import { Theme } from "@material-ui/core";
 import { SpacingProps } from "@material-ui/system";
-import { ThemeProps } from "styled-components";
+import { ThemeProps } from "styled-components/macro";
 
 export type GlobalStyleProps = {
 	theme: ThemeProps<Theme> & { palette: any; };

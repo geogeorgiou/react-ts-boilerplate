@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { RouteType } from "../types/routes";
 import AuthLayout from "../layouts/AuthLayout";
 import { authLayoutRoutes } from "./index";
+import Page404 from "../pages/auth/Page404";
 
 
 export const browserHistory = createBrowserHistory({
@@ -57,6 +58,14 @@ const Routes = () => {
 		<Router history={browserHistory}>
 			<Switch>
 				{childRoutes(AuthLayout, authLayoutRoutes)}
+
+				<Route
+					render={() => (
+						<AuthLayout>
+							<Page404/>
+						</AuthLayout>
+					)}
+				/>
 			</Switch>
 		</Router>
 	);

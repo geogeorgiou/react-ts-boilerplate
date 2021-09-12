@@ -11,6 +11,10 @@ export const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
 		height: 100%
 	}
 	
+	body {
+		background: ${(props => props.theme.palette.background.default)};
+	}
+	
 `;
 
 export const Root = styled.div`

@@ -33,6 +33,19 @@ const defaultVariant = {
 			card: "#F9FAFD"
 		}
 	},
+	header: {
+		color: grey[500],
+		background: "#FFF",
+		search: {
+			color: grey[800]
+		},
+		indicator: {
+			background: customBlue[600]
+		},
+		filterCategory: {
+			background: "#022388"
+		}
+	},
 	footer: {
 		color: grey[500],
 		background: "#FFF"
@@ -68,6 +81,7 @@ const defaultVariant = {
 const darkVariant = merge(defaultVariant, {
 	name: THEMES.DARK,
 	palette: {
+		type: "dark",
 		primary: {
 			main: customBlue[600],
 			contrastText: "#FFF"

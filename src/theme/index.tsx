@@ -1,4 +1,4 @@
-import { createTheme as createMuiTheme } from "@material-ui/core";
+import { createTheme as muiThemeGenerator } from "@material-ui/core/styles";
 import breakpoints from "./breakpoints";
 import overrides from "./overrides";
 import props from "./props";
@@ -15,7 +15,9 @@ const createTheme = (name: string) => {
 		themeConfig = variants[0];
 	}
 
-	return createMuiTheme({
+	console.log(themeConfig.palette);
+
+	return muiThemeGenerator({
 			spacing: 4,
 			breakpoints: breakpoints,
 			overrides: overrides,
@@ -31,6 +33,23 @@ const createTheme = (name: string) => {
 			sidebar: themeConfig.sidebar
 		}
 	);
+
+	// return createTheme({
+	// 		spacing: 4,
+	// 		breakpoints: breakpoints,
+	// 		overrides: overrides,
+	// 		props: props,
+	// 		typography: typography,
+	// 		shadows: shadows,
+	// 		palette: themeConfig.palette
+	// 	},
+	// 	{
+	// 		name: themeConfig.name,
+	// 		header: themeConfig.header,
+	// 		footer: themeConfig.footer,
+	// 		sidebar: themeConfig.sidebar
+	// 	}
+	// );
 
 };
 
