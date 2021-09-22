@@ -1,6 +1,6 @@
 import { createBrowserHistory } from "history";
 import { Route, RouteComponentProps, Router, Switch } from "react-router-dom";
-import React, { Component } from "react";
+import React from "react";
 import { RouteType } from "../types/routes";
 import AuthLayout from "../layouts/AuthLayout";
 import { authLayoutRoutes } from "./index";

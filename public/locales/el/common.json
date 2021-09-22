@@ -1,0 +1,12 @@
+{
+  "general": {
+    "appTitle": "Dummy App",
+    "username": "Όνομα Χρήστη",
+    "password": "Κωδικός Πρόσβασης"
+  },
+  "signIn": {
+    "title": "Σύνδεση Χρήστη",
+    "authenticate": "Πιστοποίηση",
+    "reset": "Επαναφορά"
+  }
+}

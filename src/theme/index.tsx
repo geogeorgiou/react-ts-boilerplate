@@ -15,8 +15,6 @@ const createTheme = (name: string) => {
 		themeConfig = variants[0];
 	}
 
-	console.log(themeConfig.palette);
-
 	return muiThemeGenerator({
 			spacing: 4,
 			breakpoints: breakpoints,

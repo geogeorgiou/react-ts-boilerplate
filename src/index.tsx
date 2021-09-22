@@ -1,13 +1,23 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+import i18n from "./i18n";
+import { I18nextProvider } from "react-i18next";
+
+const WrappedApp = () => (
+	<Suspense fallback="...is loading">
+		<I18nextProvider i18n={i18n}>
+			<App />
+		</I18nextProvider>
+
+	</Suspense>
+)
+
 ReactDOM.render(
-	// <React.StrictMode>
-		<App />,
-	// </React.StrictMode>,
+	<WrappedApp/>,
 	document.getElementById("root")
 );
 
