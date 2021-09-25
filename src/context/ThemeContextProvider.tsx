@@ -32,11 +32,13 @@ const ThemeContextProvider: React.FC = ({ children }) => {
 
 	const [currentTheme, setCurrentTheme] = useState(THEME.DEFAULT);
 
+	const currentThemeObject = createTheme(currentTheme);
+
 	return (
 		<StylesProvider jss={jss}>
 			<IThemeContext.Provider value={{ currentTheme, setCurrentTheme }}>
-				<MuiThemeProvider theme={createTheme(currentTheme)} >
-					<ThemeProvider theme={createTheme(currentTheme)} >
+				<MuiThemeProvider theme={currentThemeObject} >
+					<ThemeProvider theme={currentThemeObject} >
 						{children}
 					</ThemeProvider>
 				</MuiThemeProvider>

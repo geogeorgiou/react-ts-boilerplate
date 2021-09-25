@@ -1,6 +1,8 @@
 import merge from "deepmerge";
 import { green, grey } from "@material-ui/core/colors";
 import { THEME } from "../constants";
+import { Theme } from "@material-ui/core/styles";
+import { CommonColors } from "@material-ui/core/styles/createPalette";
 
 const customBlue = {
 	50: "#e9f0fb",
@@ -12,8 +14,8 @@ const customBlue = {
 	600: "#407ad6",
 	700: "#022388",
 	800: "#2f65cb",
-	900: "#2052c2",
-}
+	900: "#2052c2"
+};
 
 const defaultVariant = {
 	name: THEME.DEFAULT,
@@ -31,6 +33,12 @@ const defaultVariant = {
 			default: "#EEF2F9",
 			paper: "#FFF",
 			card: "#F9FAFD"
+		},
+		regularCommon: {
+			blue: "#3c31dd",
+			red: "#dd3f31",
+			pink: "#ff0066",
+			dark: "#0f0f10"
 		}
 	},
 	header: {
@@ -66,17 +74,18 @@ const defaultVariant = {
 			online: {
 				background: green[500]
 			}
+		},
+		badge: {
+			color: "#FFF",
+			background: "#a80049",
+			notificationTime: {
+				color: "#c75e8b"
+			}
 		}
 	},
-	badge: {
-		color: "#FFF",
-		background: "#a80049",
-		notificationTime: {
-			color: "#c75e8b"
-		}
-	}
 
-}
+
+};
 
 const darkVariant = merge(defaultVariant, {
 	name: THEME.DARK,
@@ -91,28 +100,47 @@ const darkVariant = merge(defaultVariant, {
 			paper: "#233044",
 			card: "#c2d2ec66"
 		},
-		text: {
-			primary: "rgba(255, 255, 255, 0.95)",
-			secondary: "rgba(255, 255, 255, 0.5)"
-		}
+		// text: {
+		// 	primary: "rgba(255, 255, 255, 0.95)",
+		// 	secondary: "rgba(255, 255, 255, 0.5)"
+		// }
 	},
-	footer: {
-		color: grey[300],
-		background: "#233044"
-	}
-})
+	// footer: {
+	// 	color: grey[300],
+	// 	background: "#233044"
+	// }
+});
 
-const variants: Array<any> = [
+const variants: Array<VariantType> = [
 	defaultVariant,
-	darkVariant,
+	darkVariant
 	// lightVariant
-]
+];
 
 export type VariantType = {
 	name: string;
 	palette: {
 		primary: MainContrastTextType,
-		secondary: MainContrastTextType
+		secondary: MainContrastTextType,
+		regularCommon: {
+			blue: string,
+			red: string,
+			pink: string,
+			dark: string
+		}
+	},
+	header: {
+		color: string,
+		background: string,
+		search: {
+			color: string
+		},
+		indicator: {
+			background: string
+		},
+		filterCategory: {
+			background: string
+		}
 	},
 	footer: ColorBgType,
 	sidebar: ColorBgType & {

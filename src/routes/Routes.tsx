@@ -3,8 +3,8 @@ import { Route, RouteComponentProps, Router, Switch } from "react-router-dom";
 import React from "react";
 import { RouteType } from "../types/routes";
 import AuthLayout from "../layouts/AuthLayout";
-import { authLayoutRoutes } from "./index";
 import Page404 from "../pages/auth/Page404";
+import Main from "../pages/Main";
 
 
 export const browserHistory = createBrowserHistory({
@@ -57,7 +57,9 @@ const Routes = () => {
 	return (
 		<Router history={browserHistory}>
 			<Switch>
-				{childRoutes(AuthLayout, authLayoutRoutes)}
+				{/*{childRoutes(AuthLayout, authLayoutRoutes)}*/}
+
+				<Main/>
 
 				<Route
 					render={() => (

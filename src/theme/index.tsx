@@ -1,4 +1,4 @@
-import { createTheme as muiThemeGenerator } from "@material-ui/core/styles";
+import { createTheme as muiThemeGenerator, Theme } from "@material-ui/core/styles";
 import breakpoints from "./breakpoints";
 import overrides from "./overrides";
 import props from "./props";
@@ -6,7 +6,7 @@ import typography from "./typography";
 import shadows from "./shadows";
 import variants from "./variants";
 
-const createTheme = (name: string) => {
+const createTheme = (name: string): Theme => {
 
 	let themeConfig = variants.find((variant) => variant.name === name);
 
