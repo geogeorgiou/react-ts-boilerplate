@@ -1,10 +1,11 @@
 import { createBrowserHistory } from "history";
 import { Route, RouteComponentProps, Router, Switch } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import { RouteType } from "../types/routes";
 import AuthLayout from "../layouts/AuthLayout";
 import Page404 from "../pages/auth/Page404";
 import Main from "../pages/Main";
+import Header from "../pages/common/Header";
 
 
 export const browserHistory = createBrowserHistory({
@@ -54,8 +55,20 @@ const childRoutes = (Layout: React.ElementType, routes: Array<RouteType>) =>
 
 const Routes = () => {
 
+	//These are Header related values
+	const [value, setValue] = useState(0);
+	const [selectedIndex, setSelectedIndex] = useState(0);
+
 	return (
 		<Router history={browserHistory}>
+
+			<Header
+				value={value}
+				setValue={setValue}
+				selectedIndex={selectedIndex}
+				setSelectedIndex={setSelectedIndex}
+			/>
+
 			<Switch>
 				{/*{childRoutes(AuthLayout, authLayoutRoutes)}*/}
 

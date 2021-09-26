@@ -4,6 +4,10 @@
     "username": "Username",
     "password": "Password"
   },
+  "theme": {
+    "default": "Light",
+    "dark": "Dark"
+  },
   "signIn": {
     "title": "Σύνδεση Χρήστη",
     "authenticate": "Authenticate",

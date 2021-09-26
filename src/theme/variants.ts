@@ -1,8 +1,6 @@
 import merge from "deepmerge";
 import { green, grey } from "@material-ui/core/colors";
 import { THEME } from "../constants";
-import { Theme } from "@material-ui/core/styles";
-import { CommonColors } from "@material-ui/core/styles/createPalette";
 
 const customBlue = {
 	50: "#e9f0fb",
