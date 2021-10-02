@@ -2,7 +2,7 @@ import * as React from "react";
 import { FC, ReactNode } from "react";
 import styled, { ThemeConsumer } from "styled-components/macro";
 import { withTheme } from "@material-ui/styles";
-import { KnowledgeSection } from "../components/section/KnowledgeContent";
+import { GoalSectionContent } from "../components/section/GoalSectionContent";
 import { useTranslation } from "react-i18next";
 
 
@@ -144,7 +144,7 @@ const BannerSection: FC<SectionPropsType> = ({ theme, title, text }) => (
 const GoalSection: FC<SectionPropsType> = ({ theme, title }) => (
 	<SectionItem>
 		{title && <h1>{title}</h1>}
-		<KnowledgeSection />
+		<GoalSectionContent />
 
 		<GeneratedCurve />
 	</SectionItem>

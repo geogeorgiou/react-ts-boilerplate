@@ -17,6 +17,20 @@
       "title": "Contact"
     }
   ],
+  "goalSection": [
+    {
+      "title": "Quality",
+      "text": "We do care to create a quality and useful product for the end user that will have a positive impact to the business"
+    },
+    {
+      "title": "Time Management",
+      "text": "For every project there's a calculated time schedule to meet the client's needs"
+    },
+    {
+      "title": "Maintenance",
+      "text": "Even after the completion of the site we stand by you in all your requests for improvements and changes"
+    }
+  ],
   "cardContent": {
     "webDevelopment": "Web Development",
     "objectOriented": "Object Oriented",

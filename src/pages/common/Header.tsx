@@ -43,13 +43,13 @@ const useStyles = makeStyles(theme => ({
 
 	toolbarMargin: {
 		...theme.mixins.toolbar,
-		marginBottom: "3em",
-		[theme.breakpoints.down("md")]: {
-			marginBottom: "2em"
-		},
-		[theme.breakpoints.down("xs")]: {
-			marginBottom: "1.25em"
-		}
+		// marginBottom: "3em",
+		// [theme.breakpoints.down("md")]: {
+		// 	marginBottom: "2em"
+		// },
+		// [theme.breakpoints.down("xs")]: {
+		// 	marginBottom: "1.25em"
+		// }
 	},
 
 	logo: {
@@ -138,9 +138,9 @@ const useStyles = makeStyles(theme => ({
 		// backgroundColor: theme.palette.common.orange
 	},
 
-	appBar: {
-		zIndex: theme.zIndex.modal + 1
-	}
+	// appBar: {
+	// 	zIndex: theme.zIndex.modal + 1
+	// }
 
 }));
 
@@ -370,7 +370,7 @@ export default function Header(props: any) {
 	return (
 		<>
 			<ElevationScroll {...props}>
-				<AppBar position="fixed" className={classes.appBar}>
+				<AppBar position="fixed" >
 					<Toolbar disableGutters={true}>
 
 						<Button

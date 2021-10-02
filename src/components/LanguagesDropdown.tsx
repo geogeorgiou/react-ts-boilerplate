@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components/macro";
 import { IconButton as MuiIconButton } from "@material-ui/core";
 import { getLangFlagSvgAccessor, getLangOptionIndex, LangOption, useLang } from "../context/LangContextProvider";
 import Tooltip from "@material-ui/core/Tooltip";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 
 const IconButton = styled(MuiIconButton)`
 	svg {
@@ -54,6 +54,21 @@ const langMenuOptions: LangMenuOptionType[] = [
 	{ i18nOption: LangOption.Greek, menuIndex: 0 },
 	{ i18nOption: LangOption.English, menuIndex: 1 }
 ];
+
+// type ShowMenuItemType = {
+// 	chosen?: boolean
+// }
+
+
+// const ShowMenuItem = styled(MenuItem)<ShowMenuItemType>`
+// 	${props => props.chosen && css`
+// 		display: none;
+//   `};
+// `
+
+const LangMenu = styled(Menu)`
+	margin-top: 2rem;
+`
 
 
 const LanguagesDropdown = () => {
@@ -107,7 +122,7 @@ const LanguagesDropdown = () => {
 					<FlagIcon currentLang={currentLang}/>
 				</IconButton>
 			</Tooltip>
-			<Menu
+			<LangMenu
 				id={"menu-appbar"}
 				anchorEl={anchorMenu}
 				open={Boolean(anchorMenu)}
@@ -115,27 +130,17 @@ const LanguagesDropdown = () => {
 				keepMounted
 			>
 				{
-					langMenuOptions.map(({ i18nOption }, i) => {
-
-						const ifNotSelected = !(selectedIndex === i)
-
-						return (
-							<>
-								{ifNotSelected && (
-									<MenuItem
-										key={`lang-option-${i18nOption}`}
-										onClick={() => onClickHandler(i)}
-										// selected={selectedIndex === i}
-									>
-										{t(`lang.${i18nOption}`)}
-									</MenuItem>
-								)}
-							</>
-						)
-
-					})
+					langMenuOptions.map(({ i18nOption }, i) => (
+						<MenuItem
+							key={`lang-option-${i18nOption}`}
+							onClick={() => onClickHandler(i)}
+							selected={selectedIndex === i}
+						>
+							{t(`lang.${i18nOption}`)}
+						</MenuItem>
+					))
 				}
-			</Menu>
+			</LangMenu>
 		</>
 	);
 

@@ -10,9 +10,10 @@ export type CardComponentType = {
 	title: string;
 	textContent: string;
 	showCardActions?: boolean;
+	icon: React.ReactNode;
 }
 
-export function CardComponent({title, textContent, showCardActions}: CardComponentType) {
+export function CardComponent({title, textContent, showCardActions, icon}: CardComponentType) {
 
 	return (
 		<Card>
@@ -20,7 +21,7 @@ export function CardComponent({title, textContent, showCardActions}: CardCompone
 				component="img"
 				height="140"
 				image="/static/images/cards/contemplative-reptile.jpg"
-				alt="green iguana"
+				alt={`card-icon-${title}`}
 			/>
 			<CardContent>
 				<Typography gutterBottom variant="h5" component="div">
