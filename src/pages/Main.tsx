@@ -118,12 +118,6 @@ const GeneratedCurve = () => (
 // 	}
 // `;
 
-// type SectionComponentMapType = {
-// 	jsxElement: ReactNode,
-// 	title: SectionPropsType["title"],
-// 	text: SectionPropsType["text"]
-// }
-
 type SectionPropsType = {
 	theme: any,
 	title?: string;

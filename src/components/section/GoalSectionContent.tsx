@@ -1,26 +1,25 @@
 import React from "react";
-import { CardComponent, CardComponentType } from "../CardComponent";
+import { CardComponent } from "../CardComponent";
 import { Grid } from "@material-ui/core";
 
-import QualityIcon from '@material-ui/icons/Devices';
-import TimeIcon from '@material-ui/icons/Timelapse';
-import MaintenanceIcon from '@material-ui/icons/NewReleases';
+import QualityIcon from "@material-ui/icons/Devices";
+import TimeIcon from "@material-ui/icons/Timelapse";
+import MaintenanceIcon from "@material-ui/icons/NewReleases";
 import { useTranslation } from "react-i18next";
+
+// const BigQualityIcon = styled(QualityIcon)`
+// font-size: 5rem`
+// const BigTimeIcon = styled(QualityIcon)` font-size: 5rem`
+// const BigMaintenanceIcon = styled(QualityIcon)` font-size: 5rem`
 
 const cardContentArr = [
 	{
-		// title: "Ποιότητα",
-		// textContent: "Μας ενδιαφέρει να παραδωθεί κάτι χρήσιμο και ποιοτικό που να έχει αντίκτυπο στην επιχείρησή του",
 		icon: QualityIcon
 	},
 	{
-		// title: "Χρόνος",
-		// textContent: "Το κάθε προτζεκτ υπολογίζεται στο χρόνο που πρέπει για να ικανοποιηθεί ο πελάτης",
 		icon: TimeIcon
 	},
 	{
-		// title: "Συντήρηση",
-		// textContent: "Ακόμα και μετά το πέρας της ολοκλήρωσης ενός site είμαστε κοντά σας σε ότι χρειαστεί για βελτιώσεις / διορθώσεις",
 		icon: MaintenanceIcon
 	}
 ]
@@ -30,8 +29,17 @@ export function GoalSectionContent() {
 
 	const { t } = useTranslation("translation");
 
+	// const theme = useThemeObj();
+	// const matches = useMediaQuery(theme.breakpoints.down('sm'));
+
 	return (
-		<Grid container direction={"row"} justifyContent={"center"} spacing={6} style={{ flexWrap: "nowrap" }}>
+		<Grid
+			container
+			// direction={matches ? "column" : "row"}
+			justifyContent={"center"}
+			// alignItems={"baseline"}
+			spacing={6}
+		>
 			{
 				cardContentArr.map(({icon}, index) => {
 
@@ -42,7 +50,10 @@ export function GoalSectionContent() {
 					return (
 						<Grid
 							item
-							key={`knowledge-section-${title}`}>
+							key={`knowledge-section-${i18Accessor}`}
+							sm={12}
+							md={4}
+						>
 							<CardComponent
 								icon={icon}
 								title={title}
