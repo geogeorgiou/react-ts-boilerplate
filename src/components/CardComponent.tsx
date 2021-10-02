@@ -8,11 +8,11 @@ import Button from "@material-ui/core/Button";
 
 export type CardComponentType = {
 	title: string;
-	content: string;
+	textContent: string;
 	showCardActions?: boolean;
 }
 
-export function CardComponent({title, content, showCardActions}: CardComponentType) {
+export function CardComponent({title, textContent, showCardActions}: CardComponentType) {
 
 	return (
 		<Card>
@@ -27,7 +27,7 @@ export function CardComponent({title, content, showCardActions}: CardComponentTy
 					{title}
 				</Typography>
 				<Typography variant="body2" color="secondary">
-					{content}
+					{textContent}
 				</Typography>
 			</CardContent>
 			{

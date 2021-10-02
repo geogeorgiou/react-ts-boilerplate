@@ -1,9 +1,9 @@
-// import { useTheme } from "../context/ThemeContextProvider";
 import * as React from "react";
+import { FC, ReactNode } from "react";
 import styled, { ThemeConsumer } from "styled-components/macro";
-import { Grid } from "@material-ui/core";
 import { withTheme } from "@material-ui/styles";
 import { KnowledgeSection } from "../components/section/KnowledgeContent";
+import { useTranslation } from "react-i18next";
 
 
 /**
@@ -65,105 +65,143 @@ const HaikeiCurve = styled.div<HaikeCurveProps>`
 	background-size: cover;
 	
 	background-image: url(${props => props.svg});
-`
+`;
 
 const GeneratedCurve = () => (
 	<GeneratedCurveStyles>
 		<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
 			<path
-	d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-	className="shape-fill"/>
+				d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+				className="shape-fill" />
 		</svg>
 	</GeneratedCurveStyles>
-)
+);
 
 //Implemented only w CSS
-const ComplexCurve = styled.div`
-	position: absolute;
-	height: 225px;
-	width: 100%;
-	bottom: 0;
-	
-	&::before,
-	&::after{
-		content: '';
-		display: block;
-		position: absolute;
-		border-radius: 100% 50%; //vertical horizontal radius
-		width: 55%; 
-		height: 100%;
-	}
-	
-	&::before {
-		background-color: #202731;
-		transform: translate(85%,60%); //translate(-40%,40%);
-	}
-	
-	&::after{
-		background-color: #3c31dd;
-		transform: translate(-4%, 40%); //translate(-40%,40%);
-		z-index: -1;
-	}
-	
-	.bubble::after {
-		content: '';
-		border-top-left-radius: 50% 100%;
-		border-top-right-radius: 50% 100%;
-		position: absolute;
-		bottom: 0;
-		height: 85%;
-		width: 100%;
-		background-color: #0f0f10;
-		z-index: -1;
-	}
-`;
+// const ComplexCurve = styled.div`
+// 	position: absolute;
+// 	height: 225px;
+// 	width: 100%;
+// 	bottom: 0;
+//
+// 	&::before,
+// 	&::after{
+// 		content: '';
+// 		display: block;
+// 		position: absolute;
+// 		border-radius: 100% 50%; //vertical horizontal radius
+// 		width: 55%;
+// 		height: 100%;
+// 	}
+//
+// 	&::before {
+// 		background-color: #202731;
+// 		transform: translate(85%,60%); //translate(-40%,40%);
+// 	}
+//
+// 	&::after{
+// 		background-color: #3c31dd;
+// 		transform: translate(-4%, 40%); //translate(-40%,40%);
+// 		z-index: -1;
+// 	}
+//
+// 	.bubble::after {
+// 		content: '';
+// 		border-top-left-radius: 50% 100%;
+// 		border-top-right-radius: 50% 100%;
+// 		position: absolute;
+// 		bottom: 0;
+// 		height: 85%;
+// 		width: 100%;
+// 		background-color: #0f0f10;
+// 		z-index: -1;
+// 	}
+// `;
+
+// type SectionComponentMapType = {
+// 	jsxElement: ReactNode,
+// 	title: SectionPropsType["title"],
+// 	text: SectionPropsType["text"]
+// }
+
+type SectionPropsType = {
+	theme: any,
+	title?: string;
+	text?: string;
+}
+
+
+const BannerSection: FC<SectionPropsType> = ({ theme, title, text }) => (
+	<SectionItem background={theme.palette.regularCommon.blue}>
+		{title && <h1>{title}</h1>}
+		{text && <p>{text}</p>}
+
+		{/*<ComplexCurve />*/}
+		<GeneratedCurve />
+	</SectionItem>
+);
+
+const GoalSection: FC<SectionPropsType> = ({ theme, title }) => (
+	<SectionItem>
+		{title && <h1>{title}</h1>}
+		<KnowledgeSection />
+
+		<GeneratedCurve />
+	</SectionItem>
+);
+
+
+const AboutSection: FC<SectionPropsType> = ({ theme, title, text }) => (
+	<SectionItem background={theme.palette.regularCommon.red}>
+		{title && <h1>{title}</h1>}
+		{text && <p>{text}</p>}
+	</SectionItem>
+);
+
+const WaveSection: FC<SectionPropsType> = () => (
+	<section>
+		<HaikeiCurve svg={"/svg/LayeredWaves.svg"} />
+	</section>
+);
+
+const ContactSection: FC<SectionPropsType> = ({ theme, title, text }) => (
+	<SectionItem>
+		{title && <h1>{title}</h1>}
+	</SectionItem>
+);
+
+
+const sectionComponentMap: ReactNode[] = [
+	BannerSection,
+	GoalSection,
+	AboutSection,
+	WaveSection,
+	ContactSection
+];
 
 const Main = () => {
+
+		const { t } = useTranslation(["translation"]);
 
 		return (
 			<ThemeConsumer>
 				{(theme) => (
 					<>
-						<SectionItem background={theme.palette.regularCommon.blue}>
-							<h1>Καλως ορίσατε</h1>
-							<p>
-								Βρισκόμαστε στη διάθεση σας για να σας βοηθήσουμε να προωθήσετε την εταιρία ή και το γραφείο σας
-								καλύτερα σε μία εποχή όπου κάθε επαγγελματίας πρέπει να έχει ψηφιακή παρουσία στο διαδίκτυο. Πλοηγηθείτε στην ιστοσελίδα
-								βρείτε αυτό που σας ενδιαφέρει και εποικοινωνίστε μαζί μας!
-							</p>
+						{
+							sectionComponentMap.map((JsxItem: any, index) => {
 
-							{/*<ComplexCurve />*/}
-							<GeneratedCurve/>
-						</SectionItem>
+								const i18Accessor = `sectionContent.${index}`;
 
-						<SectionItem>
-							<h1>Στόχοι μας</h1>
-							<KnowledgeSection/>
-
-							<GeneratedCurve/>
-						</SectionItem>
-
-						<SectionItem background={theme.palette.regularCommon.red}>
-							<h1>Σχετικά</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, aspernatur at autem
-								blanditiis
-								deserunt dolore doloremque expedita hic illo inventore itaque nihil quam quia rerum
-								saepe soluta
-								tempora tenetur velit?</p>
-						</SectionItem>
-
-						<section>
-							<HaikeiCurve svg={"/svg/LayeredWaves.svg"}/>
-						</section>
-
-						<SectionItem>
-							<h1>Επικοινωνία</h1>
-						</SectionItem>
-
-						{/*<SectionItem background={theme.palette.regularCommon.dark}>*/}
-						{/*	<HaikeiCurve/>*/}
-						{/*</SectionItem>*/}
-
+								return (
+									<JsxItem
+										key={i18Accessor}
+										theme={theme}
+										title={t(`${i18Accessor}.title`)}
+										text={t(`${i18Accessor}.text`)}
+									/>
+								);
+							})
+						}
 
 					</>
 				)}

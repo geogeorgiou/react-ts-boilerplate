@@ -1,4 +1,22 @@
 {
+  "sectionContent": [
+    {
+      "title": "Welcome",
+      "text": "We are at your disposal to assist you to promote your business better in an era where there's a need for every professional to have an online presence. Navigate in our site get informed about our services and goals and contact us!"
+    },
+    {
+      "title": "Goals"
+    },
+    {
+      "title": "About",
+      "text": "We work using state of the art technologies like React JS and popular UI Frameworks to provide you the best product possible that is made according to your needs"
+    },
+    {
+    },
+    {
+      "title": "Contact"
+    }
+  ],
   "cardContent": {
     "webDevelopment": "Web Development",
     "objectOriented": "Object Oriented",

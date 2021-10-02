@@ -6,12 +6,22 @@ import Switch from '@material-ui/core/Switch';
 
 type ControlledSwitchProps = {
 	isChecked?: boolean
-	handleChange?: (args?: any) => void
+	handleChange?: (args?: any) => void,
+	labelConfig?: LabelConfigType['labelConfig']
 	[key: string]: any
 }
 
-const ControlledSwitch: FC<ControlledSwitchProps> = ({ isChecked, handleChange, ...rest}) => {
+type LabelConfigType = {
+	labelConfig: {
+		checked: React.ReactNode;
+		unchecked: React.ReactNode;
+	}
+}
+
+const ControlledSwitch: FC<ControlledSwitchProps> = ({ isChecked, handleChange, label, labelConfig, ...rest}) => {
 	const [checked, setChecked] = React.useState(isChecked || false);
+
+	const TransformedLabelJsx = labelConfig ? checked ? labelConfig.checked : labelConfig.unchecked : label;
 
 	const handleChecked = (event) => {
 		setChecked(event.target.checked);
@@ -34,7 +44,7 @@ const ControlledSwitch: FC<ControlledSwitchProps> = ({ isChecked, handleChange, 
 					// inputProps={{ "aria-label": "secondary checkbox" }}
 				/>
 			}
-			label={"label"}
+			label={labelConfig ? <TransformedLabelJsx style={{marginTop: "0.3rem"}}/> : label}
 			labelPlacement="start"
 			{...rest}
 		/>

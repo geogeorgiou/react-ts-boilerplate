@@ -1,19 +1,10 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "../../context/ThemeContextProvider";
-import {
-	Button,
-	Menu,
-	MenuItem,
-	SwipeableDrawer,
-	Tab,
-	Tabs,
-	useMediaQuery,
-	useTheme as useThemeObject
-} from "@material-ui/core";
+import { Button, SwipeableDrawer, Tab, Tabs, useMediaQuery, useTheme as useThemeObject } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
@@ -21,13 +12,16 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Link } from "react-router-dom";
 
-// import clsx from "clsx";
-// import logo from '../../assets/logo.svg';
 import SettingsEthernetIcon from "@material-ui/icons/SettingsEthernet";
 import ControlledSwitch from "../../components/ControlledSwitch";
 import { THEME } from "../../constants";
 import { useTranslation } from "react-i18next";
-import { LangOption, useLang } from "../../context/LangContextProvider";
+import LanguagesDropdown from "../../components/LanguagesDropdown";
+import styled from "styled-components/macro";
+
+import LightModeIcon from '@material-ui/icons/Brightness7';
+import DarkModeIcon from '@material-ui/icons/Brightness3';
+import Box from "@material-ui/core/Box";
 
 function ElevationScroll(props) {
 	const { children } = props;
@@ -150,12 +144,16 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-type HeaderMenuOptionType = {
-	name: string,
-	link: string,
-	activeIndex: number,
-	selectedIndex: number
-}
+// type HeaderMenuOptionType = {
+// 	name: string,
+// 	link: string,
+// 	activeIndex: number,
+// 	selectedIndex: number
+// }
+
+const TabContainer = styled(Tabs)`
+	margin-right: 1rem;
+`
 
 enum HeaderIndexEnum {
 	INDEX_0,
@@ -163,93 +161,6 @@ enum HeaderIndexEnum {
 	INDEX_2,
 	INDEX_3,
 	INDEX_4
-}
-
-// const menuOptions: HeaderMenuOptionType[] = [
-// 	{
-// 		name: "Services",
-// 		link: "/services",
-// 		activeIndex: 1,
-// 		selectedIndex: HeaderIndexEnum.INDEX_0
-// 	},
-// 	{
-// 		name: "Custom Software Development",
-// 		link: "/customsoftware",
-// 		activeIndex: 1,
-// 		selectedIndex: HeaderIndexEnum.INDEX_1
-// 	}
-// ];
-
-type HeaderLangOptionType = {
-	name: string,
-}
-
-const langMenuOptions: HeaderLangOptionType[] = [
-	{
-		name: "el"
-	},
-	{
-		name: "en"
-	}
-];
-
-
-type LangMenuProps = {
-	anchorEl: any;
-	openMenu: boolean;
-	handleClose: () => void
-}
-
-
-const ControlledLangMenu: FC<LangMenuProps> = ({ anchorEl, openMenu, handleClose }) => {
-
-	const { currentLang, setCurrentLang } = useLang();
-
-	const { t } = useTranslation(["common"]);
-
-	const handleMenuItemClick = (i: string) => {
-		handleClose();
-		setCurrentLang(i as LangOption);
-	};
-
-	const isMenuItemSelected = (i: string) => currentLang === (i as LangOption);
-
-	return (
-		<Menu
-			id="simple-menu"
-			anchorEl={anchorEl}
-			open={openMenu}
-			onClose={handleClose}
-
-			// classes={{ paper: classes.menu }}
-
-			//important we can set props on nested items
-			MenuListProps={{ onMouseLeave: handleClose }}
-
-			elevation={0}
-			style={{ zIndex: 1302 }}
-			// keepMounted
-		>
-			{
-				langMenuOptions.map(({ name }, i) => {
-					return (
-						<MenuItem
-							key={`menu_opt_${name}`}
-							onClick={() => handleMenuItemClick(name)}
-							// component={Link}
-							// to={link}
-							// classes={{ root: classes.menuItem }}
-
-							//set selected if is same and current tab is services tab
-							selected={isMenuItemSelected(name)}
-						>
-							{t(`lang.${name}`)}
-						</MenuItem>
-					);
-				})}
-		</Menu>
-	)
-
 }
 
 const ThemeSwitch = () => {
@@ -264,6 +175,7 @@ const ThemeSwitch = () => {
 	return (
 		<ControlledSwitch
 			// label={t(`theme.${currentTheme.toLowerCase()}`)}
+			labelConfig={{checked: LightModeIcon, unchecked: DarkModeIcon}}
 			label={label}
 			labelPlacement={"end"}
 			isChecked={currentTheme === THEME.DEFAULT}
@@ -274,12 +186,47 @@ const ThemeSwitch = () => {
 }
 
 
+const routes = [
+	{
+		link: "/",
+		name: "header.homepage",
+		activeIndex: HeaderIndexEnum.INDEX_0
+	},
+	{
+		link: "/services",
+		name: "header.services",
+		activeIndex: HeaderIndexEnum.INDEX_1,
+		// ariaOwns: anchorEl ? "simple-menu" : undefined,
+		// ariaPopup: anchorEl ? "true" : undefined,
+		// mouseOver: event => handleClick(event)
+	},
+	{
+		link: "/about",
+		name: "header.about-us",
+		activeIndex: HeaderIndexEnum.INDEX_2
+	},
+	{
+		link: "/contact",
+		name: "header.contact-us",
+		activeIndex: HeaderIndexEnum.INDEX_3
+	},
+	// {
+	// 	link: "",
+	// 	name: "lol",
+	// 	activeIndex: -1,
+	// 	ariaOwns: anchorEl ? "simple-menu" : undefined,
+	// 	ariaPopup: anchorEl ? "true" : undefined,
+	// 	contextValue: currentLang,
+	// 	mouseOver: event => handleClick(event)
+	// },
+];
+
+
 export default function Header(props: any) {
 
 	const theme = useThemeObject();
 	const classes = useStyles();
 	const { t } = useTranslation("common");
-	const { currentLang } = useLang();
 
 	//selects anything that's medium and below
 	const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -288,63 +235,10 @@ export default function Header(props: any) {
 
 	const [openDrawer, setOpenDrawer] = useState(false);
 
-	const [anchorEl, setAnchorEl] = useState(null);
-	const [openMenu, setOpenMenu] = useState(false);
 
 	const handleChange = (e, value) => {
 		props.setValue(value);
 	};
-
-	const handleClick = (e) => {
-		setAnchorEl(e.currentTarget);
-		setOpenMenu(true);
-	};
-
-	const handleMenuItemClick = (e, i) => {
-		setAnchorEl(null);
-		setOpenMenu(false);
-		props.setSelectedIndex(i);
-	};
-
-	const handleClose = () => {
-		setAnchorEl(null);
-		setOpenMenu(false);
-	};
-
-	const routes = [
-		{
-			link: "/",
-			name: "header.homepage",
-			activeIndex: HeaderIndexEnum.INDEX_0
-		},
-		{
-			link: "/services",
-			name: "header.services",
-			activeIndex: HeaderIndexEnum.INDEX_1,
-			// ariaOwns: anchorEl ? "simple-menu" : undefined,
-			// ariaPopup: anchorEl ? "true" : undefined,
-			// mouseOver: event => handleClick(event)
-		},
-		{
-			link: "/about",
-			name: "header.about-us",
-			activeIndex: HeaderIndexEnum.INDEX_2
-		},
-		{
-			link: "/contact",
-			name: "header.contact-us",
-			activeIndex: HeaderIndexEnum.INDEX_3
-		},
-		{
-			link: "",
-			name: "lol",
-			activeIndex: -1,
-			ariaOwns: anchorEl ? "simple-menu" : undefined,
-			ariaPopup: anchorEl ? "true" : undefined,
-			contextValue: currentLang,
-			mouseOver: event => handleClick(event)
-		},
-	];
 
 	//basically check when user refreshes the page set the correct active tab
 	//if not set it via custom way
@@ -411,38 +305,15 @@ export default function Header(props: any) {
 										disableTypography
 										className={classes.drawerItem}
 									>
-										{t(tab.contextValue || tab.name)}
+										{tab.name}
 									</ListItemText>
 								</ListItem>
 							);
 						})
 					}
 
-					<ControlledLangMenu
-						openMenu={openMenu}
-						anchorEl={anchorEl}
-						handleClose={handleClose}
-					/>
+					<LanguagesDropdown/>
 
-					{/*<ListItem*/}
-					{/*	divider*/}
-					{/*	button*/}
-					{/*	component={Link}*/}
-					{/*	to="/estimate"*/}
-					{/*	onClick={() => {*/}
-					{/*		setOpenDrawer(false);*/}
-					{/*		props.setValue(5);*/}
-					{/*	}}*/}
-					{/*	classes={{ root: classes.drawerItemEstimate, selected: classes.drawerItemSelected }}*/}
-					{/*	selected={props.value === 5}*/}
-					{/*>*/}
-					{/*	<ListItemText*/}
-					{/*		disableTypography*/}
-					{/*		className={classes.drawerItem}*/}
-					{/*	>*/}
-					{/*		Free Estimate*/}
-					{/*	</ListItemText>*/}
-					{/*</ListItem>*/}
 				</List>
 			</SwipeableDrawer>
 			<IconButton
@@ -457,7 +328,7 @@ export default function Header(props: any) {
 
 	const tabs = (
 		<>
-			<Tabs
+			<TabContainer
 				value={props.value}
 				className={classes.tabContainer}
 				onChange={handleChange}
@@ -468,9 +339,6 @@ export default function Header(props: any) {
 						return (
 							<Tab
 								key={`route_${index}`}
-								aria-owns={route.ariaOwns}
-								aria-haspopup={route.ariaPopup}
-								onMouseOver={route.mouseOver}
 								className={classes.tab}
 								component={Link}
 								to={route.link}
@@ -479,52 +347,23 @@ export default function Header(props: any) {
 						);
 					})
 				}
-			</Tabs>
+
+				{/*<Tab*/}
+				{/*	key={`lang_tab`}*/}
+				{/*	className={classes.tab}*/}
+				{/*	component={LanguagesDropdown}*/}
+				{/*	// to={route.link}*/}
+				{/*	// label={t(route.name)}*/}
+				{/*/>*/}
+
+			</TabContainer>
+
+			<Box mr={6}>
+				<LanguagesDropdown/>
+			</Box>
 
 			<ThemeSwitch/>
 
-			<ControlledLangMenu
-				openMenu={openMenu}
-				anchorEl={anchorEl}
-				handleClose={handleClose}
-			/>
-
-			{/*<Menu*/}
-			{/*	id="simple-menu"*/}
-			{/*	anchorEl={anchorEl}*/}
-			{/*	open={openMenu}*/}
-			{/*	onClose={handleClose}*/}
-
-			{/*	classes={{ paper: classes.menu }}*/}
-
-			{/*	//important we can set props on nested items*/}
-			{/*	MenuListProps={{ onMouseLeave: handleClose }}*/}
-
-			{/*	elevation={0}*/}
-			{/*	style={{ zIndex: 1302 }}*/}
-			{/*	keepMounted*/}
-			{/*>*/}
-			{/*	{*/}
-			{/*		menuOptions.map((option, i) => {*/}
-			{/*			return (*/}
-			{/*				<MenuItem*/}
-			{/*					key={`menu_opt_${option.name}`}*/}
-			{/*					onClick={(e) => {*/}
-			{/*						handleMenuItemClick(e, i);*/}
-			{/*						props.setValue(option.activeIndex);*/}
-			{/*					}}*/}
-			{/*					component={Link}*/}
-			{/*					to={option.link}*/}
-			{/*					classes={{ root: classes.menuItem }}*/}
-
-			{/*					//set selected if is same and current tab is services tab*/}
-			{/*					selected={i === props.selectedIndex && props.value === option.activeIndex}*/}
-			{/*				>*/}
-			{/*					{option.name}*/}
-			{/*				</MenuItem>*/}
-			{/*			);*/}
-			{/*		})}*/}
-			{/*</Menu>*/}
 		</>
 	);
 

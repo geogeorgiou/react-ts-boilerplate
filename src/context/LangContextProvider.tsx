@@ -2,9 +2,43 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { I18nextProvider, useTranslation } from "react-i18next";
 import i18n from "../i18n";
 
+/**
+ * the options for language in enum form
+ */
 export enum LangOption {
 	Greek = "el",
 	English = "en"
+}
+
+
+/**
+ * Map function that returns svg accessor related to langOption
+ * @param langOption
+ */
+export const getLangFlagSvgAccessor = (langOption: LangOption) => ({
+	[LangOption.Greek]: "gr",
+	[LangOption.English]: "gb"
+})[langOption]
+
+/**
+ * returns langIndex
+ *
+ * @param langOption - currentLang option
+ */
+export function getLangOptionIndex(langOption: LangOption): number {
+
+	let langIndex; //greek
+
+	switch (langOption) {
+		case LangOption.English:
+			langIndex = 1;
+			break;
+		default:
+			langIndex = 0;
+	}
+
+	return langIndex;
+
 }
 
 type LangContextState = {
@@ -44,6 +78,8 @@ const LangContextProvider: React.FC = ({ children }) => {
 
 	useEffect(() => {
 		i18n.changeLanguage(currentLang);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentLang]);
 
 	return (
