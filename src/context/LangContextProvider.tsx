@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { I18nextProvider, useTranslation } from "react-i18next";
+import i18n from "../i18n";
 
 export enum LangOption {
 	Greek = "el",
@@ -22,21 +24,35 @@ export const LangContext = createContext({
 
 export const useLang = () => useContext(LangContext);
 
+//basically an App Wrapper for localisation exposed from this file
+export const EnhancedI18Provider: React.FC = ({ children }) => {
+
+	return (
+		<I18nextProvider i18n={i18n}>
+			<LangContextProvider>
+				{children}
+			</LangContextProvider>
+		</I18nextProvider>
+	)
+
+};
 
 const LangContextProvider: React.FC = ({ children }) => {
 
-	// const { t, i18n } = useTranslation(["common", "translation"]);
-	const [currentLang, setCurrentLang] = useState(LangOption.Greek);
+	const { i18n } = useTranslation();
+	const [currentLang, setCurrentLang] = useState(i18n.language as LangOption || LangOption.Greek);
 
-	// useEffect(() => {
-	// 	i18n.changeLanguage(currentLang);
-	// }, [currentLang]);
+	useEffect(() => {
+		i18n.changeLanguage(currentLang);
+	}, [currentLang]);
 
 	return (
-		<LangContext.Provider value={{ currentLang, setCurrentLang }}>
-			{children}
-		</LangContext.Provider>
-	);
+		<I18nextProvider i18n={i18n}>
+			<LangContext.Provider value={{ currentLang, setCurrentLang }}>
+				{children}
+			</LangContext.Provider>
+		</I18nextProvider>
+	)
 
 };
 

@@ -3,6 +3,7 @@ import * as React from "react";
 import styled, { ThemeConsumer } from "styled-components/macro";
 import { Grid } from "@material-ui/core";
 import { withTheme } from "@material-ui/styles";
+import { KnowledgeSection } from "../components/section/KnowledgeContent";
 
 
 /**
@@ -124,44 +125,46 @@ const Main = () => {
 				{(theme) => (
 					<>
 						<SectionItem background={theme.palette.regularCommon.blue}>
-							<h1>Nice Curves</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, aspernatur at autem
-								blanditiis
-								deserunt dolore doloremque expedita hic illo inventore itaque nihil quam quia rerum
-								saepe soluta
-								tempora tenetur velit?</p>
+							<h1>Καλως ορίσατε</h1>
+							<p>
+								Βρισκόμαστε στη διάθεση σας για να σας βοηθήσουμε να προωθήσετε την εταιρία ή και το γραφείο σας
+								καλύτερα σε μία εποχή όπου κάθε επαγγελματίας πρέπει να έχει ψηφιακή παρουσία στο διαδίκτυο. Πλοηγηθείτε στην ιστοσελίδα
+								βρείτε αυτό που σας ενδιαφέρει και εποικοινωνίστε μαζί μας!
+							</p>
+
 							{/*<ComplexCurve />*/}
 							<GeneratedCurve/>
 						</SectionItem>
 
 						<SectionItem>
-							<h1>Nice Curves</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, aspernatur at autem
-								blanditiis
-								deserunt dolore doloremque expedita hic illo inventore itaque nihil quam quia rerum
-								saepe soluta
-								tempora tenetur velit?</p>
-							{/*<ComplexCurve />*/}
+							<h1>Στόχοι μας</h1>
+							<KnowledgeSection/>
+
 							<GeneratedCurve/>
 						</SectionItem>
 
 						<SectionItem background={theme.palette.regularCommon.red}>
-							<h1>Nice Curves</h1>
+							<h1>Σχετικά</h1>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, aspernatur at autem
 								blanditiis
 								deserunt dolore doloremque expedita hic illo inventore itaque nihil quam quia rerum
 								saepe soluta
 								tempora tenetur velit?</p>
-							{/*<GeneratedCurve/>*/}
+						</SectionItem>
+
+						<section>
+							<HaikeiCurve svg={"/svg/LayeredWaves.svg"}/>
+						</section>
+
+						<SectionItem>
+							<h1>Επικοινωνία</h1>
 						</SectionItem>
 
 						{/*<SectionItem background={theme.palette.regularCommon.dark}>*/}
 						{/*	<HaikeiCurve/>*/}
 						{/*</SectionItem>*/}
 
-						<section>
-							<HaikeiCurve svg={"/svg/LayeredWaves.svg"}/>
-						</section>
+
 					</>
 				)}
 			</ThemeConsumer>

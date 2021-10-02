@@ -8,6 +8,16 @@
     "default": "Light",
     "dark": "Dark"
   },
+  "header": {
+    "homepage": "Homepage",
+    "services": "Services",
+    "contact-us": "Contact Us",
+    "about-us": "About us"
+  },
+  "lang": {
+    "el": "Greek",
+    "en": "English"
+  },
   "signIn": {
     "title": "Σύνδεση Χρήστη",
     "authenticate": "Authenticate",

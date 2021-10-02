@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
@@ -27,6 +27,7 @@ import SettingsEthernetIcon from "@material-ui/icons/SettingsEthernet";
 import ControlledSwitch from "../../components/ControlledSwitch";
 import { THEME } from "../../constants";
 import { useTranslation } from "react-i18next";
+import { LangOption, useLang } from "../../context/LangContextProvider";
 
 function ElevationScroll(props) {
 	const { children } = props;
@@ -164,26 +165,96 @@ enum HeaderIndexEnum {
 	INDEX_4
 }
 
-const menuOptions: HeaderMenuOptionType[] = [
-	{ name: "Services", link: "/services", activeIndex: 1, selectedIndex: HeaderIndexEnum.INDEX_0 },
+// const menuOptions: HeaderMenuOptionType[] = [
+// 	{
+// 		name: "Services",
+// 		link: "/services",
+// 		activeIndex: 1,
+// 		selectedIndex: HeaderIndexEnum.INDEX_0
+// 	},
+// 	{
+// 		name: "Custom Software Development",
+// 		link: "/customsoftware",
+// 		activeIndex: 1,
+// 		selectedIndex: HeaderIndexEnum.INDEX_1
+// 	}
+// ];
+
+type HeaderLangOptionType = {
+	name: string,
+}
+
+const langMenuOptions: HeaderLangOptionType[] = [
 	{
-		name: "Custom Software Development",
-		link: "/customsoftware",
-		activeIndex: 1,
-		selectedIndex: HeaderIndexEnum.INDEX_1
+		name: "el"
 	},
 	{
-		name: "iOS/Android App Development",
-		link: "/mobileapps",
-		activeIndex: 1,
-		selectedIndex: HeaderIndexEnum.INDEX_2
-	},
-	{ name: "Websites", link: "/websites", activeIndex: 1, selectedIndex: HeaderIndexEnum.INDEX_3 }
+		name: "en"
+	}
 ];
+
+
+type LangMenuProps = {
+	anchorEl: any;
+	openMenu: boolean;
+	handleClose: () => void
+}
+
+
+const ControlledLangMenu: FC<LangMenuProps> = ({ anchorEl, openMenu, handleClose }) => {
+
+	const { currentLang, setCurrentLang } = useLang();
+
+	const { t } = useTranslation(["common"]);
+
+	const handleMenuItemClick = (i: string) => {
+		handleClose();
+		setCurrentLang(i as LangOption);
+	};
+
+	const isMenuItemSelected = (i: string) => currentLang === (i as LangOption);
+
+	return (
+		<Menu
+			id="simple-menu"
+			anchorEl={anchorEl}
+			open={openMenu}
+			onClose={handleClose}
+
+			// classes={{ paper: classes.menu }}
+
+			//important we can set props on nested items
+			MenuListProps={{ onMouseLeave: handleClose }}
+
+			elevation={0}
+			style={{ zIndex: 1302 }}
+			// keepMounted
+		>
+			{
+				langMenuOptions.map(({ name }, i) => {
+					return (
+						<MenuItem
+							key={`menu_opt_${name}`}
+							onClick={() => handleMenuItemClick(name)}
+							// component={Link}
+							// to={link}
+							// classes={{ root: classes.menuItem }}
+
+							//set selected if is same and current tab is services tab
+							selected={isMenuItemSelected(name)}
+						>
+							{t(`lang.${name}`)}
+						</MenuItem>
+					);
+				})}
+		</Menu>
+	)
+
+}
 
 const ThemeSwitch = () => {
 
-	const { t } = useTranslation("common");
+	const { t } = useTranslation(["common"]);
 
 	const { currentTheme, setCurrentTheme } = useTheme();
 
@@ -200,7 +271,6 @@ const ThemeSwitch = () => {
 		/>
 	)
 
-
 }
 
 
@@ -208,6 +278,8 @@ export default function Header(props: any) {
 
 	const theme = useThemeObject();
 	const classes = useStyles();
+	const { t } = useTranslation("common");
+	const { currentLang } = useLang();
 
 	//selects anything that's medium and below
 	const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -240,25 +312,45 @@ export default function Header(props: any) {
 	};
 
 	const routes = [
-		{ link: "/", name: "Home Page", activeIndex: HeaderIndexEnum.INDEX_0 },
+		{
+			link: "/",
+			name: "header.homepage",
+			activeIndex: HeaderIndexEnum.INDEX_0
+		},
 		{
 			link: "/services",
-			name: "Services",
+			name: "header.services",
 			activeIndex: HeaderIndexEnum.INDEX_1,
+			// ariaOwns: anchorEl ? "simple-menu" : undefined,
+			// ariaPopup: anchorEl ? "true" : undefined,
+			// mouseOver: event => handleClick(event)
+		},
+		{
+			link: "/about",
+			name: "header.about-us",
+			activeIndex: HeaderIndexEnum.INDEX_2
+		},
+		{
+			link: "/contact",
+			name: "header.contact-us",
+			activeIndex: HeaderIndexEnum.INDEX_3
+		},
+		{
+			link: "",
+			name: "lol",
+			activeIndex: -1,
 			ariaOwns: anchorEl ? "simple-menu" : undefined,
 			ariaPopup: anchorEl ? "true" : undefined,
+			contextValue: currentLang,
 			mouseOver: event => handleClick(event)
 		},
-		// {link: '/revolution', name: 'Revolution', activeIndex: HeaderIndexEnum.INDEX_2},
-		{ link: "/about", name: "About us", activeIndex: HeaderIndexEnum.INDEX_2 },
-		{ link: "/contact", name: "Contact us", activeIndex: HeaderIndexEnum.INDEX_3 }
 	];
 
 	//basically check when user refreshes the page set the correct active tab
 	//if not set it via custom way
 	useEffect(() => {
 
-		[...menuOptions, ...routes].forEach(route => {
+		[...routes].forEach(route => {
 
 			switch (window.location.pathname) {
 				case `${route.link}`:
@@ -284,7 +376,7 @@ export default function Header(props: any) {
 		});
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [props.value, menuOptions, props.selectedIndex, routes, props]);
+	}, [props.value, props.selectedIndex, routes, props]);
 
 	const drawer = (
 		<>
@@ -319,32 +411,38 @@ export default function Header(props: any) {
 										disableTypography
 										className={classes.drawerItem}
 									>
-										{tab.name}
+										{t(tab.contextValue || tab.name)}
 									</ListItemText>
 								</ListItem>
 							);
 						})
 					}
 
-					<ListItem
-						divider
-						button
-						component={Link}
-						to="/estimate"
-						onClick={() => {
-							setOpenDrawer(false);
-							props.setValue(5);
-						}}
-						classes={{ root: classes.drawerItemEstimate, selected: classes.drawerItemSelected }}
-						selected={props.value === 5}
-					>
-						<ListItemText
-							disableTypography
-							className={classes.drawerItem}
-						>
-							Free Estimate
-						</ListItemText>
-					</ListItem>
+					<ControlledLangMenu
+						openMenu={openMenu}
+						anchorEl={anchorEl}
+						handleClose={handleClose}
+					/>
+
+					{/*<ListItem*/}
+					{/*	divider*/}
+					{/*	button*/}
+					{/*	component={Link}*/}
+					{/*	to="/estimate"*/}
+					{/*	onClick={() => {*/}
+					{/*		setOpenDrawer(false);*/}
+					{/*		props.setValue(5);*/}
+					{/*	}}*/}
+					{/*	classes={{ root: classes.drawerItemEstimate, selected: classes.drawerItemSelected }}*/}
+					{/*	selected={props.value === 5}*/}
+					{/*>*/}
+					{/*	<ListItemText*/}
+					{/*		disableTypography*/}
+					{/*		className={classes.drawerItem}*/}
+					{/*	>*/}
+					{/*		Free Estimate*/}
+					{/*	</ListItemText>*/}
+					{/*</ListItem>*/}
 				</List>
 			</SwipeableDrawer>
 			<IconButton
@@ -376,63 +474,57 @@ export default function Header(props: any) {
 								className={classes.tab}
 								component={Link}
 								to={route.link}
-								label={route.name}
+								label={t(route.name)}
 							/>
 						);
 					})
 				}
 			</Tabs>
 
-
-			<Button
-				variant="contained"
-				color="secondary"
-				component={Link}
-				to={"/estimate"}
-				className={classes.button}
-				onClick={() => props.setValue(5)}
-			>
-				Free Estimate
-			</Button>
-
 			<ThemeSwitch/>
 
-			<Menu
-				id="simple-menu"
+			<ControlledLangMenu
+				openMenu={openMenu}
 				anchorEl={anchorEl}
-				open={openMenu}
-				onClose={handleClose}
+				handleClose={handleClose}
+			/>
 
-				classes={{ paper: classes.menu }}
+			{/*<Menu*/}
+			{/*	id="simple-menu"*/}
+			{/*	anchorEl={anchorEl}*/}
+			{/*	open={openMenu}*/}
+			{/*	onClose={handleClose}*/}
 
-				//important we can set props on nested items
-				MenuListProps={{ onMouseLeave: handleClose }}
+			{/*	classes={{ paper: classes.menu }}*/}
 
-				elevation={0}
-				style={{ zIndex: 1302 }}
-				keepMounted
-			>
-				{
-					menuOptions.map((option, i) => {
-						return (
-							<MenuItem
-								key={`menu_opt_${option.name}`}
-								onClick={(e) => {
-									handleMenuItemClick(e, i);
-									props.setValue(option.activeIndex);
-								}}
-								component={Link}
-								to={option.link}
-								classes={{ root: classes.menuItem }}
+			{/*	//important we can set props on nested items*/}
+			{/*	MenuListProps={{ onMouseLeave: handleClose }}*/}
 
-								//set selected if is same and current tab is services tab
-								selected={i === props.selectedIndex && props.value === option.activeIndex}
-							>
-								{option.name}
-							</MenuItem>
-						);
-					})}
-			</Menu>
+			{/*	elevation={0}*/}
+			{/*	style={{ zIndex: 1302 }}*/}
+			{/*	keepMounted*/}
+			{/*>*/}
+			{/*	{*/}
+			{/*		menuOptions.map((option, i) => {*/}
+			{/*			return (*/}
+			{/*				<MenuItem*/}
+			{/*					key={`menu_opt_${option.name}`}*/}
+			{/*					onClick={(e) => {*/}
+			{/*						handleMenuItemClick(e, i);*/}
+			{/*						props.setValue(option.activeIndex);*/}
+			{/*					}}*/}
+			{/*					component={Link}*/}
+			{/*					to={option.link}*/}
+			{/*					classes={{ root: classes.menuItem }}*/}
+
+			{/*					//set selected if is same and current tab is services tab*/}
+			{/*					selected={i === props.selectedIndex && props.value === option.activeIndex}*/}
+			{/*				>*/}
+			{/*					{option.name}*/}
+			{/*				</MenuItem>*/}
+			{/*			);*/}
+			{/*		})}*/}
+			{/*</Menu>*/}
 		</>
 	);
 
