@@ -2,12 +2,7 @@ import {TypographyOptions} from "@material-ui/core/styles/createTypography"
 
 const typography: TypographyOptions = {
 	fontFamily: [
-		"-apple-system",
-		"BlinkMacSystemFont",
-		"'Segoe-UI'",
-		"Roboto",
-		"'Helvetica-Neue'",
-		"Arial",
+		"Prompt",
 		"sans-serif"
 	].join(","),
 	fontSize: 13,

@@ -52,6 +52,12 @@ const defaultVariant = {
 			background: "#022388"
 		}
 	},
+	typography: {
+		fontFamily: `"Prompt", sans-serif`,
+		h2: {
+			fontSize: "1.5rem",
+		}
+	},
 	footer: {
 		color: grey[500],
 		background: "#FFF"

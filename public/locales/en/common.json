@@ -11,8 +11,8 @@
   "header": {
     "homepage": "Homepage",
     "services": "Services",
-    "contact-us": "Contact Us",
-    "about-us": "About us"
+    "goals": "Goals",
+    "contact-us": "Contact Us"
   },
   "lang": {
     "el": "Greek",

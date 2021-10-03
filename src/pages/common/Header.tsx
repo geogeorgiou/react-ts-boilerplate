@@ -196,29 +196,17 @@ const routes = [
 		link: "/services",
 		name: "header.services",
 		activeIndex: HeaderIndexEnum.INDEX_1,
-		// ariaOwns: anchorEl ? "simple-menu" : undefined,
-		// ariaPopup: anchorEl ? "true" : undefined,
-		// mouseOver: event => handleClick(event)
 	},
 	{
-		link: "/about",
-		name: "header.about-us",
+		link: "/goals",
+		name: "header.goals",
 		activeIndex: HeaderIndexEnum.INDEX_2
 	},
 	{
 		link: "/contact",
 		name: "header.contact-us",
 		activeIndex: HeaderIndexEnum.INDEX_3
-	},
-	// {
-	// 	link: "",
-	// 	name: "lol",
-	// 	activeIndex: -1,
-	// 	ariaOwns: anchorEl ? "simple-menu" : undefined,
-	// 	ariaPopup: anchorEl ? "true" : undefined,
-	// 	contextValue: currentLang,
-	// 	mouseOver: event => handleClick(event)
-	// },
+	}
 ];
 
 

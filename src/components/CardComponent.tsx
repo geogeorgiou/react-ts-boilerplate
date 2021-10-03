@@ -14,10 +14,6 @@ export type CardComponentType = {
 	icon: any;
 }
 
-const StyledCard = styled(CardContent)`
-	height: 11rem;
-`
-
 const GridIconWrapper = styled(Grid)`
     && {
     	> svg {
@@ -28,6 +24,10 @@ const GridIconWrapper = styled(Grid)`
 
 const GridContentWrapper = styled(Grid)`
 	margin-bottom: 1rem;
+`
+
+const GridContainer = styled(Grid)`
+	height: 11rem;
 `
 
 export function CardComponent({title, textContent, showCardActions, icon}: CardComponentType) {
@@ -42,11 +42,12 @@ export function CardComponent({title, textContent, showCardActions, icon}: CardC
 			{/*	image="/static/images/cards/contemplative-reptile.jpg"*/}
 			{/*	alt={`card-icon-${title}`}*/}
 			{/*/>*/}
-			<StyledCard>
-				<Grid
+			<CardContent>
+				<GridContainer
 					container
 					direction={"column"}
 					alignItems={"center"}
+					justifyContent={"center"}
 				>
 					<GridIconWrapper item>
 						<CardIcon />
@@ -61,8 +62,8 @@ export function CardComponent({title, textContent, showCardActions, icon}: CardC
 							{textContent}
 						</Typography>
 					</Grid>
-				</Grid>
-			</StyledCard>
+				</GridContainer>
+			</CardContent>
 			{
 				showCardActions && (
 					<CardActions>

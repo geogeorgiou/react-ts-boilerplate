@@ -5,16 +5,16 @@
       "text": "We are at your disposal to assist you to promote your business better in an era where there's a need for every professional to have an online presence. Navigate in our site get informed about our services and goals and contact us!"
     },
     {
-      "title": "Goals"
+      "title": "Our Goals"
     },
     {
-      "title": "About",
+      "title": "Services",
       "text": "We work using state of the art technologies like React JS and popular UI Frameworks to provide you the best product possible that is made according to your needs"
     },
     {
     },
     {
-      "title": "Contact"
+      "title": "Contact Form"
     }
   ],
   "goalSection": [
@@ -28,7 +28,7 @@
     },
     {
       "title": "Maintenance",
-      "text": "Even after the completion of the site we stand by you in all your requests for improvements and changes"
+      "text": "Even after the completion of the site we stand by your side for improvements, changes and all your requests"
     }
   ],
   "cardContent": {

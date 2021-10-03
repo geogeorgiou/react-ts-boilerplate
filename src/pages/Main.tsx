@@ -4,6 +4,8 @@ import styled, { ThemeConsumer } from "styled-components/macro";
 import { withTheme } from "@material-ui/styles";
 import { GoalSectionContent } from "../components/section/GoalSectionContent";
 import { useTranslation } from "react-i18next";
+import { Typography } from "@material-ui/core";
+import props from "../theme/props";
 
 
 /**
@@ -124,10 +126,12 @@ type SectionPropsType = {
 	text?: string;
 }
 
+const SectionTitle = (props) => <Typography variant={"h3"} style={{marginBottom: "3rem"}}>{props.title}</Typography>
+
 
 const BannerSection: FC<SectionPropsType> = ({ theme, title, text }) => (
 	<SectionItem background={theme.palette.regularCommon.blue}>
-		{title && <h1>{title}</h1>}
+		{title && <SectionTitle title={title}/>}
 		{text && <p>{text}</p>}
 
 		{/*<ComplexCurve />*/}
@@ -137,7 +141,7 @@ const BannerSection: FC<SectionPropsType> = ({ theme, title, text }) => (
 
 const GoalSection: FC<SectionPropsType> = ({ theme, title }) => (
 	<SectionItem>
-		{title && <h1>{title}</h1>}
+		{title && <SectionTitle title={title}/>}
 		<GoalSectionContent />
 
 		<GeneratedCurve />
@@ -147,7 +151,7 @@ const GoalSection: FC<SectionPropsType> = ({ theme, title }) => (
 
 const AboutSection: FC<SectionPropsType> = ({ theme, title, text }) => (
 	<SectionItem background={theme.palette.regularCommon.red}>
-		{title && <h1>{title}</h1>}
+		{title && <SectionTitle title={title}/>}
 		{text && <p>{text}</p>}
 	</SectionItem>
 );
@@ -160,7 +164,7 @@ const WaveSection: FC<SectionPropsType> = () => (
 
 const ContactSection: FC<SectionPropsType> = ({ theme, title, text }) => (
 	<SectionItem>
-		{title && <h1>{title}</h1>}
+		{title && <SectionTitle title={title}/>}
 	</SectionItem>
 );
 
