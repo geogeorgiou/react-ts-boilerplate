@@ -35,7 +35,7 @@
     "title": "Title",
     "request": {
       "label": "Request",
-      "placeholder": "Please write your request in this free form area"
+      "placeholder": "Please write your request in free form"
     }
   },
   "cardContent": {

@@ -25,7 +25,7 @@ const StyledCardContent = styled(CardContent)`
 const initialValues = {
 	title: "",
 	request: ""
-}
+};
 
 const ContactForm = () => {
 
@@ -44,7 +44,7 @@ const ContactForm = () => {
 
 
 	const methods = useForm({
-		defaultValues: {...initialValues}, //just get the values from state...
+		defaultValues: { ...initialValues }, //just get the values from state...
 		mode: "onSubmit"
 	});
 
@@ -72,11 +72,11 @@ const ContactForm = () => {
 										required: "common:validation.required",
 										minLength: {
 											value: 2,
-											message: "MIN LENGTH 2"
+											message: t("common:validation.minChar", { minCharNum: 2 })
 										},
 										maxLength: {
 											value: 8,
-											message: "MAX LENGTH 80"
+											message: t("common:validation.maxChar", { maxCharNum: 8 })
 										}
 									}}
 								/>
@@ -91,12 +91,12 @@ const ContactForm = () => {
 										required: "common:validation.required",
 										minLength: {
 											value: 100,
-											message: "MIN LENGTH 100",
+											message: t("common:validation.minChar", { minCharNum: 100 })
 										},
 										maxLength: {
 											value: 800,
-											message: "MAX LENGTH 800",
-										},
+											message: t("common:validation.maxChar", { maxCharNum: 800 })
+										}
 									}}
 									multiline
 									rows={10}
@@ -133,7 +133,7 @@ const ContactForm = () => {
 									variant={"outlined"}
 									color="secondary"
 									endIcon={<ResetIcon />}
-									onClick={() => methods.reset({...initialValues})}
+									onClick={() => methods.reset({ ...initialValues })}
 								>
 									{t("common:form.reset")}
 								</Button>

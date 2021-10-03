@@ -28,6 +28,8 @@
     "reset": "Reset"
   },
   "validation": {
-    "required": "Required Field"
+    "required": "Required Field",
+    "minChar": "{minCharNum, plural, =0 {Required Field} =1 {At least one character is needed} other {Minimum Length #}}",
+    "maxChar": "{maxCharNum, plural, =0 {Required Field} other {Maximum Length #}}"
   }
 }

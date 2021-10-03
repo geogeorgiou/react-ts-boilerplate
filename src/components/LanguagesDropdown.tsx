@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { IconButton as MuiIconButton } from "@material-ui/core";
-import { getLangFlagSvgAccessor, getLangOptionIndex, LangOption, useLang } from "../context/LangContextProvider";
+import {
+	getLangFlagSvgAccessor,
+	getLangOptionIndex,
+	LangOption,
+	LocalesNsOption,
+	useLang
+} from "../context/LangContextProvider";
 import Tooltip from "@material-ui/core/Tooltip";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -77,7 +83,7 @@ const LanguagesDropdown = () => {
 	const [selectedIndex, setSelectedIndex] = useState(-1);
 	const [anchorMenu, setAnchorMenu] = useState<any>(null);
 
-	const { t } = useTranslation("common");
+	const { t } = useTranslation(LocalesNsOption.Common);
 
 	const toggleMenu = (event: React.SyntheticEvent) => {
 		setAnchorMenu(event.currentTarget);
@@ -136,7 +142,7 @@ const LanguagesDropdown = () => {
 							onClick={() => onClickHandler(i)}
 							selected={selectedIndex === i}
 						>
-							{t(`lang.${i18nOption}`)}
+							{t(`common:lang.${i18nOption}`)}
 						</MenuItem>
 					))
 				}

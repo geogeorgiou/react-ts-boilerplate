@@ -182,7 +182,6 @@ const sectionComponentMap: ReactNode[] = [
 
 const Main = () => {
 
-		// const { t } = useTranslation(["translation"]);
 		const { t } = useTranslation([LocalesNsOption.Translation, LocalesNsOption.Common]);
 
 		return (
