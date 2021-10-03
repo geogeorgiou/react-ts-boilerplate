@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { Typography } from "@material-ui/core";
 import props from "../theme/props";
 import ContactForm from "../components/section/contact/ContactForm";
+import { LocalesNsOption } from "../context/LangContextProvider";
 
 
 /**
@@ -181,7 +182,8 @@ const sectionComponentMap: ReactNode[] = [
 
 const Main = () => {
 
-		const { t } = useTranslation(["translation"]);
+		// const { t } = useTranslation(["translation"]);
+		const { t } = useTranslation([LocalesNsOption.Translation, LocalesNsOption.Common]);
 
 		return (
 			<ThemeConsumer>

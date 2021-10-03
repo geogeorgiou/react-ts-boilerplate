@@ -22,5 +22,12 @@
     "title": "Σύνδεση Χρήστη",
     "authenticate": "Authenticate",
     "reset": "Reset"
+  },
+  "form": {
+    "submit": "Submit",
+    "reset": "Reset"
+  },
+  "validation": {
+    "required": "Required Field"
   }
 }

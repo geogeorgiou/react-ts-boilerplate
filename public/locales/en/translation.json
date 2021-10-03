@@ -33,7 +33,10 @@
   ],
   "contactForm": {
     "title": "Title",
-    "request": "Request"
+    "request": {
+      "label": "Request",
+      "placeholder": "Please write your request in this free form area"
+    }
   },
   "cardContent": {
     "webDevelopment": "Web Development",

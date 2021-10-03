@@ -33,7 +33,10 @@
   ],
   "contactForm": {
     "title": "Τίτλος",
-    "request": "Αίτημα"
+    "request": {
+      "label": "Αίτημα",
+      "placeholder": "παρακαλώ συμπληρώστε το αίτημά σας εδω σε μορφή ελευθέρου κειμένου"
+    }
   },
   "cardContent": {
     "webDevelopment": "Web Development",
