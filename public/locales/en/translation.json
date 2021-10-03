@@ -31,6 +31,10 @@
       "text": "Even after the completion of the site we stand by your side for improvements, changes and all your requests"
     }
   ],
+  "contactForm": {
+    "title": "Title",
+    "request": "Request"
+  },
   "cardContent": {
     "webDevelopment": "Web Development",
     "objectOriented": "Object Oriented",

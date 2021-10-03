@@ -10,6 +10,26 @@ export enum LangOption {
 	English = "en"
 }
 
+/**
+ * easy enum locales enum
+ */
+export enum LocalesNsOption {
+	Common= "common",
+	Translation= "translation"
+}
+
+// /**
+//  * map function to use with i18n translation hook to retrieve all namespaces
+//  */
+// export function getAllLocalesNs(): LocalesNsOption[] {
+//
+// 	return [
+// 		LocalesNsOption.Common,
+// 		LocalesNsOption.Translation
+// 	];
+//
+// }
+
 
 /**
  * Map function that returns svg accessor related to langOption

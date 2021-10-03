@@ -1,11 +1,12 @@
 import React from "react";
-import { CardComponent } from "../CardComponent";
+import { CardComponent } from "../../CardComponent";
 import { Grid } from "@material-ui/core";
 
 import QualityIcon from "@material-ui/icons/Devices";
 import TimeIcon from "@material-ui/icons/Timelapse";
 import MaintenanceIcon from "@material-ui/icons/NewReleases";
 import { useTranslation } from "react-i18next";
+import { LocalesNsOption } from "../../../context/LangContextProvider";
 
 // const BigQualityIcon = styled(QualityIcon)`
 // font-size: 5rem`
@@ -27,7 +28,7 @@ const cardContentArr = [
 
 export function GoalSectionContent() {
 
-	const { t } = useTranslation("translation");
+	const { t } = useTranslation(LocalesNsOption.Translation);
 
 	// const theme = useThemeObj();
 	// const matches = useMediaQuery(theme.breakpoints.down('sm'));

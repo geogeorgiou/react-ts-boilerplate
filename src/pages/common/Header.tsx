@@ -22,6 +22,7 @@ import styled from "styled-components/macro";
 import LightModeIcon from '@material-ui/icons/Brightness7';
 import DarkModeIcon from '@material-ui/icons/Brightness3';
 import Box from "@material-ui/core/Box";
+import { LocalesNsOption } from "../../context/LangContextProvider";
 
 function ElevationScroll(props) {
 	const { children } = props;
@@ -165,7 +166,7 @@ enum HeaderIndexEnum {
 
 const ThemeSwitch = () => {
 
-	const { t } = useTranslation(["common"]);
+	const { t } = useTranslation(LocalesNsOption.Common);
 
 	const { currentTheme, setCurrentTheme } = useTheme();
 
@@ -214,7 +215,7 @@ export default function Header(props: any) {
 
 	const theme = useThemeObject();
 	const classes = useStyles();
-	const { t } = useTranslation("common");
+	const { t } = useTranslation(LocalesNsOption.Common);
 
 	//selects anything that's medium and below
 	const matches = useMediaQuery(theme.breakpoints.down("md"));

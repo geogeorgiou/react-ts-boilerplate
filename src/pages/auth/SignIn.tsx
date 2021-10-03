@@ -9,6 +9,7 @@ import * as Yup from "yup";
 import i18n from "../../i18n";
 import { Formik, FormikConfig } from "formik";
 import { useTranslation } from "react-i18next";
+import { LocalesNsOption } from "../../context/LangContextProvider";
 
 const Wrapper = styled(Paper)`
 	padding: ${props => props.theme.spacing(6)}px;
@@ -45,7 +46,7 @@ const FormikForm:React.FC<FormikConfig<any>> = ({children, ...rest}) => {
 
 function SignIn() {
 
-	const { t } = useTranslation(["common", "translation"]);
+	const { t } = useTranslation([LocalesNsOption.Common, LocalesNsOption.Translation]);
 
 
 	return (
