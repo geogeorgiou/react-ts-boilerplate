@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { LocalesNsOption } from "../../../context/LangContextProvider";
 
 import ResetIcon from "@material-ui/icons/DeleteForever";
+import * as contactFormService from "../../../service/contactFormService";
 
 //plain description of RHF Form
 const RHForm = (props) => <form {...props}>{props.children}</form>;
@@ -48,8 +49,11 @@ const ContactForm = () => {
 		mode: "onSubmit"
 	});
 
-	const onSubmit = () => {
-		console.log("submitted!");
+	const onSubmit = (data: any) => {
+		const { title, request } = data;
+
+		//execute form submission here
+		contactFormService.submitFormRequest(title, request);
 	};
 
 
@@ -75,7 +79,7 @@ const ContactForm = () => {
 											message: t("common:validation.minChar", { minCharNum: 2 })
 										},
 										maxLength: {
-											value: 8,
+											value: 100,
 											message: t("common:validation.maxChar", { maxCharNum: 8 })
 										}
 									}}
@@ -90,7 +94,7 @@ const ContactForm = () => {
 									rules={{
 										required: "common:validation.required",
 										minLength: {
-											value: 100,
+											value: 50,
 											message: t("common:validation.minChar", { minCharNum: 100 })
 										},
 										maxLength: {
@@ -99,16 +103,14 @@ const ContactForm = () => {
 										}
 									}}
 									multiline
-									rows={10}
-									rowsMax={Infinity}
+									minRows={10}
+									maxRows={Infinity}
 								/>
 							</Grid>
 						</Grid>
 
 					</StyledCardContent>
 					<CardActions>
-						{/*<Button size="small">Share</Button>*/}
-						{/*<Button size="small">Learn More</Button>*/}
 						<Grid
 							container
 							spacing={4}

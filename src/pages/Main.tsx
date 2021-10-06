@@ -24,7 +24,7 @@ const SectionItem = styled.section<SectionGridItemType>`
 	align-items: center;
 	min-height: 400px;
 	padding: 100px 20vw;
-	background: ${props => props.background || "#202731"};
+	background: ${props => props.background || props.theme.palette.regularCommon.white};
 `;
 
 // const SectionGridItem = styled(Grid)<SectionGridItemType>`
@@ -35,7 +35,11 @@ const SectionItem = styled.section<SectionGridItemType>`
 // 	background: ${props => props.background || "white"};
 // `;
 
-const GeneratedCurveStyles = styled.div`
+type AnyType = {
+	[key: string]: any
+}
+
+const GeneratedCurveStyles = styled.div<AnyType>`
 	
 	position: absolute;
 	bottom: 0;
@@ -43,7 +47,8 @@ const GeneratedCurveStyles = styled.div`
 	width: 100%;
 	overflow: hidden;
 	line-height: 0;
-	transform: rotate(180deg);
+	transform: ${props => props.inverted ? `rotate(0deg)` : `rotate(180deg)`};
+	//transform: rotate(-180deg);
 	
 	& svg {
 		position: relative;
@@ -53,8 +58,10 @@ const GeneratedCurveStyles = styled.div`
 	}
 	
 	& .shape-fill {
-		fill: #1D1D1D;
-	}
+		//fill: #1D1D1D;
+		fill: ${props => props.backgroundColor || "red"};
+	};
+	
 
 `;
 
@@ -71,8 +78,8 @@ const HaikeiCurve = styled.div<HaikeCurveProps>`
 	background-image: url(${props => props.svg});
 `;
 
-const GeneratedCurve = () => (
-	<GeneratedCurveStyles>
+const GeneratedCurve = (props: any) => (
+	<GeneratedCurveStyles {...props}>
 		<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
 			<path
 				d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
@@ -132,12 +139,13 @@ const SectionTitle = (props) => <Typography variant={"h3"} style={{marginBottom:
 
 
 const BannerSection: FC<SectionPropsType> = ({ theme, title, text }) => (
-	<SectionItem background={theme.palette.regularCommon.blue}>
+	// <SectionItem background={theme.palette.regularCommon.blue}>
+	<SectionItem background={theme.palette.primary.main}>
 		{title && <SectionTitle title={title}/>}
 		{text && <p>{text}</p>}
 
 		{/*<ComplexCurve />*/}
-		<GeneratedCurve />
+		<GeneratedCurve backgroundColor={theme.palette.regularCommon.white}/>
 	</SectionItem>
 );
 
@@ -146,13 +154,17 @@ const GoalSection: FC<SectionPropsType> = ({ theme, title }) => (
 		{title && <SectionTitle title={title}/>}
 		<GoalSectionContent />
 
-		<GeneratedCurve />
+
 	</SectionItem>
 );
 
+const BlankSection: FC<SectionPropsType> = ({ theme, title, text }) => (
+	<GeneratedCurve backgroundColor={theme.palette.regularCommon.white}  />
+)
 
-const AboutSection: FC<SectionPropsType> = ({ theme, title, text }) => (
+const ServicesSection: FC<SectionPropsType> = ({ theme, title, text }) => (
 	<SectionItem background={theme.palette.regularCommon.red}>
+		{/*<GeneratedCurve backgroundColor={theme.palette.regularCommon.white} inverted={true} />*/}
 		{title && <SectionTitle title={title}/>}
 		{text && <p>{text}</p>}
 	</SectionItem>
@@ -165,7 +177,7 @@ const WaveSection: FC<SectionPropsType> = () => (
 );
 
 const ContactSection: FC<SectionPropsType> = ({ theme, title, text }) => (
-	<SectionItem>
+	<SectionItem background={"#202731"}>
 		{title && <SectionTitle title={title}/>}
 		<ContactForm/>
 	</SectionItem>
@@ -175,10 +187,16 @@ const ContactSection: FC<SectionPropsType> = ({ theme, title, text }) => (
 const sectionComponentMap: ReactNode[] = [
 	BannerSection,
 	GoalSection,
-	AboutSection,
+	// BlankSection,
+	ServicesSection,
 	WaveSection,
 	ContactSection
 ];
+
+//primary btn
+// background: #00D8FF;
+// border: 1px solid #00D8FF;
+// color: white;
 
 const Main = () => {
 

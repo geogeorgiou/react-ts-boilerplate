@@ -3,7 +3,6 @@ import TextField from "@material-ui/core/TextField";
 import { Controller, RegisterOptions } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { LocalesNsOption } from "../../context/LangContextProvider";
-import placeholder from "lodash/fp/placeholder";
 
 type TextFieldWrapperProps = {
 	control: any;
@@ -18,6 +17,7 @@ type TextFieldWrapperProps = {
  * Component bound with RHF framework to produce a localised TextField with rules functionality
  * @param control
  * @param label
+ * @param placeholder
  * @param name
  * @param defaultValue
  * @param rules

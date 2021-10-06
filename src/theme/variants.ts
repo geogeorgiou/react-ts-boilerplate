@@ -15,12 +15,29 @@ const customBlue = {
 	900: "#2052c2"
 };
 
+
+const palette = {
+	primary: {
+		light: "#00D8FF",
+		dark: "#022388"
+	},
+	regularCommon: {
+		white: {
+			light: "#F2F2F2",
+			dark: "#B3B3B3"
+		}
+	}
+
+
+}
+
 const defaultVariant = {
 	name: THEME.DEFAULT,
 	palette: {
 		type: "light",
 		primary: {
-			main: customBlue[700],
+			// main: customBlue[700],
+			main: palette.primary.light,
 			contrastText: "#FFF"
 		},
 		secondary: {
@@ -36,7 +53,8 @@ const defaultVariant = {
 			blue: "#3c31dd",
 			red: "#dd3f31",
 			pink: "#ff0066",
-			dark: "#0f0f10"
+			dark: "#0f0f10",
+			white: palette.regularCommon.white.light
 		}
 	},
 	header: {
@@ -96,7 +114,8 @@ const darkVariant = merge(defaultVariant, {
 	palette: {
 		type: "dark",
 		primary: {
-			main: customBlue[600],
+			// main: customBlue[600],
+			main: palette.primary.dark,
 			contrastText: "#FFF"
 		},
 		background: {
