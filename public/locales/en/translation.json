@@ -35,7 +35,11 @@
     "title": "Title",
     "request": {
       "label": "Request",
-      "placeholder": "Please write your request in free form"
+      "placeholder": "Please enter your request in free form"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Please enter your contact email"
     }
   },
   "cardContent": {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { FormProvider, useForm } from "react-hook-form";
 import { Card } from "@material-ui/core";
@@ -8,14 +8,15 @@ import CardActions from "@material-ui/core/CardActions";
 import Grid from "@material-ui/core/Grid";
 import TextFieldWrapper from "../../rhf/TextFieldWrapper";
 import styled from "styled-components";
-import { useTranslation } from "react-i18next";
-import { LocalesNsOption } from "../../../context/LangContextProvider";
+import { useCustomTranslation } from "../../../context/LangContextProvider";
 
 import ResetIcon from "@material-ui/icons/DeleteForever";
 import * as contactFormService from "../../../service/contactFormService";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { useSnackbarCreator } from "../../SnackbarCreator";
 
 //plain description of RHF Form
-const RHForm = (props) => <form {...props}>{props.children}</form>;
+const RHForm = (props) => <form {...props} noValidate>{props.children}</form>;
 
 const StyledCardContent = styled(CardContent)`
 	padding: 3rem;
@@ -28,38 +29,43 @@ const initialValues = {
 	request: ""
 };
 
+const CircularProgressSubmitIcon = () => <CircularProgress style={{width: "0.8rem", height: "0.8rem", color: "#BDC1C7" }}/>;
+
 const ContactForm = () => {
 
-	const { t } = useTranslation([LocalesNsOption.Common]);
+	const { t } = useCustomTranslation();
 
+	const { enqueueCustomSnackbar } = useSnackbarCreator();
 
-	// const [formState, setFormState] = useState<any>({
-	// 	isLoading: true,
-	// 	isResetToggle: false,
-	// 	error: "",
-	// 	formData: {
-	// 		title: "",
-	// 		request: ""
-	// 	},
-	// });
+	const [loading, setIsLoading] = useState(false);
 
+	function toggleLoading() {
+		setIsLoading(prevState => !prevState);
+	}
 
 	const methods = useForm({
 		defaultValues: { ...initialValues }, //just get the values from state...
-		mode: "onSubmit"
+		mode: "onBlur"
 	});
 
 	const onSubmit = (data: any) => {
-		const { title, request } = data;
+		const { title, request, email } = data;
+
+		toggleLoading();
 
 		//execute form submission here
-		contactFormService.submitFormRequest(title, request);
+		contactFormService.submitFormRequest(`${title} - [${email}]`, request)
+			.then(_ => enqueueCustomSnackbar("common:form.successSubmit", { variant: "success" }))
+			.catch(_ => enqueueCustomSnackbar("common:form.errorSubmit", { variant: "error" }))
+			.finally(toggleLoading);
 	};
+
+	const { handleSubmit, control, reset } = methods;
 
 
 	return (
 		<FormProvider {...methods}>
-			<RHForm onSubmit={methods.handleSubmit(onSubmit)}>
+			<RHForm onSubmit={handleSubmit(onSubmit)}>
 				<Card>
 					<StyledCardContent>
 						<Grid
@@ -69,7 +75,7 @@ const ContactForm = () => {
 						>
 							<Grid item>
 								<TextFieldWrapper
-									control={methods.control}
+									control={control}
 									label={"translation:contactForm.title"}
 									name={"title"}
 									rules={{
@@ -87,7 +93,22 @@ const ContactForm = () => {
 							</Grid>
 							<Grid item>
 								<TextFieldWrapper
-									control={methods.control}
+									control={control}
+									label={"translation:contactForm.email.label"}
+									placeholder={"translation:contactForm.email.placeholder"}
+									name={"email"}
+									rules={{
+										required: "common:validation.required",
+										pattern: {
+											value: /^([a-zA-Z0-9_\-\.]+)@(([a-zA-Z0-9_\-\.]+))\.([a-zA-Z]{2,5})$/,
+											message: "common:validation.email"
+										}
+									}}
+								/>
+							</Grid>
+							<Grid item>
+								<TextFieldWrapper
+									control={control}
 									label={"translation:contactForm.request.label"}
 									placeholder={"translation:contactForm.request.placeholder"}
 									name={"request"}
@@ -122,8 +143,8 @@ const ContactForm = () => {
 								<Button
 									type="submit"
 									variant={"outlined"}
-									// color="primary"
-									// variant={btnItem.isChecked ? "contained" : "outlined"}
+									disabled={loading}
+									endIcon={loading && <CircularProgressSubmitIcon/>}
 								>
 									{t("common:form.submit")}
 								</Button>
@@ -135,7 +156,8 @@ const ContactForm = () => {
 									variant={"outlined"}
 									color="secondary"
 									endIcon={<ResetIcon />}
-									onClick={() => methods.reset({ ...initialValues })}
+									onClick={() => reset({ ...initialValues })}
+									disabled={loading}
 								>
 									{t("common:form.reset")}
 								</Button>

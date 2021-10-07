@@ -76,6 +76,18 @@ export const LangContext = createContext({
 	...defaultStateValue
 });
 
+/**
+ * Custom hook that returns updated useTranslation namespace
+ * @param nsOptionArr - if none defined returned all namespaces otherwise what you have set
+ */
+export const useCustomTranslation = (nsOptionArr ?: LocalesNsOption[]) => {
+
+	const { t } = useTranslation(nsOptionArr && [LocalesNsOption.Common, LocalesNsOption.Translation] )
+
+	return { t }
+}
+
+
 export const useLang = () => useContext(LangContext);
 
 //basically an App Wrapper for localisation exposed from this file

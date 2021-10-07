@@ -1,8 +1,7 @@
 import React, { FC } from "react";
 import TextField from "@material-ui/core/TextField";
 import { Controller, RegisterOptions } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { LocalesNsOption } from "../../context/LangContextProvider";
+import { useCustomTranslation } from "../../context/LangContextProvider";
 
 type TextFieldWrapperProps = {
 	control: any;
@@ -35,7 +34,7 @@ const TextFieldWrapper: FC<TextFieldWrapperProps> =
 		 ...muiProps
 	}) => {
 
-	const { t } = useTranslation([LocalesNsOption.Common, LocalesNsOption.Translation])
+	const { t } = useCustomTranslation();
 
 	return (
 		<Controller
@@ -47,8 +46,8 @@ const TextFieldWrapper: FC<TextFieldWrapperProps> =
 				<TextField
 					{...field}
 					{...muiProps}
-					label={t(label) || ""}
-					placeholder={t(placeholder) || ""}
+					label={label && t(label)}
+					placeholder={placeholder && t(placeholder)}
 					error={invalid}
 					helperText={invalid ? t(error?.message as string) : ""}
 					fullWidth

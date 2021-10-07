@@ -25,11 +25,14 @@
   },
   "form": {
     "submit": "Submit",
-    "reset": "Reset"
+    "reset": "Reset",
+    "successSubmit": "The form has been submitted successfully!",
+    "errorSubmit": "An error occurred during form submission!"
   },
   "validation": {
     "required": "Required Field",
     "minChar": "{minCharNum, plural, =0 {Required Field} =1 {At least one character is needed} other {Minimum Length #}}",
-    "maxChar": "{maxCharNum, plural, =0 {Required Field} other {Maximum Length #}}"
+    "maxChar": "{maxCharNum, plural, =0 {Required Field} other {Maximum Length #}}",
+    "email": "Please enter valid email address"
   }
 }

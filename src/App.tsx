@@ -3,6 +3,7 @@ import Routes from "./routes/Routes";
 import ThemeContextProvider from "./context/ThemeContextProvider";
 
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { SnackbarProvider } from "notistack";
 
 function App() {
 
@@ -11,7 +12,14 @@ function App() {
 			<Helmet titleTemplate={"Dummy Project"} defaultTitle={"Dummy"} />
 
 			<ThemeContextProvider>
-				<Routes />
+				<SnackbarProvider
+					anchorOrigin={{
+						vertical: 'top',
+						horizontal: 'center',
+					}}
+				>
+					<Routes />
+				</SnackbarProvider>
 			</ThemeContextProvider>
 
 		</HelmetProvider>
