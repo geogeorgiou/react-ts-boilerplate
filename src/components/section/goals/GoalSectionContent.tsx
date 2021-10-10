@@ -37,9 +37,9 @@ export function GoalSectionContent() {
 		<Grid
 			container
 			// direction={matches ? "column" : "row"}
-			justifyContent={"center"}
-			// alignItems={"baseline"}
-			spacing={6}
+			// justifyContent={"flex-end"}
+			// alignItems={"stretch"}
+			spacing={4}
 		>
 			{
 				cardContentArr.map(({icon}, index) => {

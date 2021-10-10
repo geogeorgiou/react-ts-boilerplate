@@ -21,7 +21,21 @@ const RHForm = (props) => <form {...props} noValidate>{props.children}</form>;
 const StyledCardContent = styled(CardContent)`
 	padding: 3rem;
     width: 40rem;
+    
+    ${props => props.theme.breakpoints.down("md")} {
+		width: 20rem;
+	}
+	
+	${props => props.theme.breakpoints.down("md")} {
+		width: 15rem;
+	}
+    
+}
 `;
+
+const StyledCardAction = styled(CardActions)`
+    padding-bottom: 30px;
+`
 
 //form initial values
 const initialValues = {
@@ -131,7 +145,7 @@ const ContactForm = () => {
 						</Grid>
 
 					</StyledCardContent>
-					<CardActions>
+					<StyledCardAction>
 						<Grid
 							container
 							spacing={4}
@@ -163,7 +177,7 @@ const ContactForm = () => {
 								</Button>
 							</Grid>
 						</Grid>
-					</CardActions>
+					</StyledCardAction>
 
 				</Card>
 			</RHForm>

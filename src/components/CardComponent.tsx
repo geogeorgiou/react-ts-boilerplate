@@ -26,8 +26,13 @@ const GridContentWrapper = styled(Grid)`
 	margin-bottom: 1rem;
 `
 
+const StyledCard = styled(Card)`
+	//width: 18rem;
+`
+
 const GridContainer = styled(Grid)`
-	height: 11rem;
+	height: 16rem;
+	text-align: center;
 `
 
 export function CardComponent({title, textContent, showCardActions, icon}: CardComponentType) {
@@ -35,7 +40,7 @@ export function CardComponent({title, textContent, showCardActions, icon}: CardC
 	const CardIcon = icon;
 
 	return (
-		<Card>
+		<StyledCard>
 			{/*<CardMedia*/}
 			{/*	component="img"*/}
 			{/*	height="140"*/}
@@ -72,7 +77,7 @@ export function CardComponent({title, textContent, showCardActions, icon}: CardC
 					</CardActions>
 				)
 			}
-		</Card>
+		</StyledCard>
 	)
 
 }
