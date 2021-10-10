@@ -19,10 +19,13 @@ import { useTranslation } from "react-i18next";
 import LanguagesDropdown from "../../components/LanguagesDropdown";
 import styled from "styled-components/macro";
 
-import LightModeIcon from '@material-ui/icons/Brightness7';
-import DarkModeIcon from '@material-ui/icons/Brightness3';
+import LightModeIcon from "@material-ui/icons/Brightness7";
+import DarkModeIcon from "@material-ui/icons/Brightness3";
 import Box from "@material-ui/core/Box";
 import { LocalesNsOption } from "../../context/LangContextProvider";
+import { scroller } from "react-scroll";
+
+
 
 function ElevationScroll(props) {
 	const { children } = props;
@@ -78,7 +81,7 @@ const useStyles = makeStyles(theme => ({
 	//fast re-usability expose feature!!!
 	tab: {
 		// ...theme.typography.tab,
-		minWidth: 10,
+		minWidth: "8rem",
 		marginLeft: "25px"
 	},
 
@@ -154,6 +157,7 @@ const useStyles = makeStyles(theme => ({
 
 const TabContainer = styled(Tabs)`
 	margin-right: 1rem;
+	//margin-top: 0.6rem;
 `
 
 enum HeaderIndexEnum {
@@ -191,25 +195,41 @@ const routes = [
 	{
 		link: "/",
 		name: "header.homepage",
+		section: "home",
 		activeIndex: HeaderIndexEnum.INDEX_0
-	},
-	{
-		link: "/services",
-		name: "header.services",
-		activeIndex: HeaderIndexEnum.INDEX_1,
 	},
 	{
 		link: "/goals",
 		name: "header.goals",
-		activeIndex: HeaderIndexEnum.INDEX_2
+		section: "goals",
+		activeIndex: HeaderIndexEnum.INDEX_1
+	},
+	{
+		link: "/services",
+		name: "header.services",
+		section: "services",
+		activeIndex: HeaderIndexEnum.INDEX_2,
 	},
 	{
 		link: "/contact",
 		name: "header.contact-us",
+		section: "contact",
 		activeIndex: HeaderIndexEnum.INDEX_3
 	}
 ];
 
+/**
+ * scrolling function
+ * @param id - input id to navigate to
+ */
+function scrollToSection(id: string) {
+	scroller.scrollTo(id, {
+		duration: 500,
+		offset: -20,
+		delay: 0,
+		smooth: true
+	});
+};
 
 export default function Header(props: any) {
 
@@ -231,35 +251,48 @@ export default function Header(props: any) {
 
 	//basically check when user refreshes the page set the correct active tab
 	//if not set it via custom way
+	// useEffect(() => {
+	//
+	// 	[...routes].forEach(route => {
+	//
+	// 		console.log(window.location.pathname);
+	//
+	// 		switch (window.location.pathname) {
+	// 			case `${route.link}`:
+	// 				if (props.selectedIndex !== route.activeIndex) {
+	//
+	// 					// props.setValue(route.activeIndex);
+	//
+	// 					// if (!route?.selectedIndex)
+	// 					// 	return;
+	// 					//
+	// 					// props.setValue(route.activeIndex);
+	// 					//
+	// 					// //check if selectedIndex is defined before comparing with selectedIndex
+	// 					if (route.activeIndex && route.activeIndex !== props.selectedIndex) {
+	// 						props.setSelectedIndex(route.activeIndex);
+	// 					}
+	// 				}
+	// 				break;
+	// 			// case "/estimate":
+	// 			// 	props.setValue(5);
+	// 			// 	break;
+	// 			default:
+	// 				break;
+	// 		}
+	// 	});
+	//
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// // }, [props.value, props.selectedIndex, routes, props]);
+	// }, [props.value, props.selectedIndex]);
+
 	useEffect(() => {
 
-		[...routes].forEach(route => {
-
-			switch (window.location.pathname) {
-				case `${route.link}`:
-					if (props.value !== route.activeIndex) {
-
-						// if (!route?.selectedIndex)
-						// 	return;
-						//
-						// props.setValue(route.activeIndex);
-						//
-						// //check if selectedIndex is defined before comparing with selectedIndex
-						// if (route.selectedIndex && route.selectedIndex !== props.selectedIndex) {
-						// 	props.setSelectedIndex(route.selectedIndex);
-						// }
-					}
-					break;
-				case "/estimate":
-					props.setValue(5);
-					break;
-				default:
-					break;
-			}
-		});
+		let sectionFound = routes.find(i => i.activeIndex === props.value)
+		sectionFound && scrollToSection(sectionFound.section);
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [props.value, props.selectedIndex, routes, props]);
+	}, [props.value])
 
 	const drawer = (
 		<>
@@ -321,16 +354,26 @@ export default function Header(props: any) {
 				value={props.value}
 				className={classes.tabContainer}
 				onChange={handleChange}
-				indicatorColor="primary"
+				// indicatorColor="primary"
+				// indicatorColor={{backgroundColor: '#e77600'}}
+				// TabIndicatorProps={{style: {background:'#e77600'}}}
 			>
 				{
 					routes.map((route, index) => {
+
+						const routeIdx = `route-${index}`;
+
 						return (
 							<Tab
-								key={`route_${index}`}
+								key={`${routeIdx}-tab`}
 								className={classes.tab}
 								component={Link}
-								to={route.link}
+								// to={route.link}
+								to={route.section}
+								// indicatorColor="primary"
+								// indicatorColor={{backgroundColor: '#e77600'}}
+								// TabIndicatorProps={{style: {background:'#021C6D'}}}
+								// value={route.activeIndex}
 								label={t(route.name)}
 							/>
 						);

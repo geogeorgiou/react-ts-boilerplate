@@ -5,16 +5,15 @@ import { withTheme } from "@material-ui/styles";
 import { GoalSectionContent } from "../components/section/goals/GoalSectionContent";
 import { useTranslation } from "react-i18next";
 import { Typography } from "@material-ui/core";
-import props from "../theme/props";
 import ContactForm from "../components/section/contact/ContactForm";
 import { LocalesNsOption } from "../context/LangContextProvider";
-
 
 /**
  * background - optional css color to use
  */
 type SectionGridItemType = {
 	background?: string
+	[key: string]: any;
 }
 
 const SectionItem = styled.section<SectionGridItemType>`
@@ -67,6 +66,7 @@ const GeneratedCurveStyles = styled.div<AnyType>`
 
 type HaikeCurveProps = {
 	svg: any
+	flip?: boolean
 }
 const HaikeiCurve = styled.div<HaikeCurveProps>`
 	aspect-ratio: 960/300;
@@ -76,6 +76,13 @@ const HaikeiCurve = styled.div<HaikeCurveProps>`
 	background-size: cover;
 	
 	background-image: url(${props => props.svg});
+	
+	transform: ${props => props.flip && `rotate(180)`};		
+
+	//
+	//& svg {
+	//	fill: red;
+	//}
 `;
 
 const GeneratedCurve = (props: any) => (
@@ -131,6 +138,7 @@ const GeneratedCurve = (props: any) => (
 
 type SectionPropsType = {
 	theme: any,
+	// routeId: number;
 	title?: string;
 	text?: string;
 }
@@ -140,7 +148,7 @@ const SectionTitle = (props) => <Typography variant={"h3"} style={{marginBottom:
 
 const BannerSection: FC<SectionPropsType> = ({ theme, title, text }) => (
 	// <SectionItem background={theme.palette.regularCommon.blue}>
-	<SectionItem background={theme.palette.primary.main}>
+	<SectionItem id={"home"} background={theme.palette.primary.main}>
 		{title && <SectionTitle title={title}/>}
 		{text && <p>{text}</p>}
 
@@ -150,7 +158,7 @@ const BannerSection: FC<SectionPropsType> = ({ theme, title, text }) => (
 );
 
 const GoalSection: FC<SectionPropsType> = ({ theme, title }) => (
-	<SectionItem>
+	<SectionItem id={"goals"}>
 		{title && <SectionTitle title={title}/>}
 		<GoalSectionContent />
 
@@ -163,7 +171,7 @@ const BlankSection: FC<SectionPropsType> = ({ theme, title, text }) => (
 )
 
 const ServicesSection: FC<SectionPropsType> = ({ theme, title, text }) => (
-	<SectionItem background={theme.palette.regularCommon.red}>
+	<SectionItem id={"services"} background={theme.palette.regularCommon.red}>
 		{/*<GeneratedCurve backgroundColor={theme.palette.regularCommon.white} inverted={true} />*/}
 		{title && <SectionTitle title={title}/>}
 		{text && <p>{text}</p>}
@@ -176,21 +184,39 @@ const WaveSection: FC<SectionPropsType> = () => (
 	</section>
 );
 
+// const ServiceWaveSection: FC<SectionPropsType> = () => (
+// 	<section>
+// 		<HaikeiCurve svg={"/svg/ServiceWavesTop.svg"} />
+// 	</section>
+// );
+
+// const ContactFormWaveSection: FC<SectionPropsType> = () => (
+// 	<section>
+// 		<HaikeiCurve svg={"/svg/ContactFormWave.svg"} />
+// 	</section>
+// );
+
+
 const ContactSection: FC<SectionPropsType> = ({ theme, title, text }) => (
-	<SectionItem background={"#202731"}>
+	<SectionItem id={"contact"} background={"#202731"}>
 		{title && <SectionTitle title={title}/>}
 		<ContactForm/>
+
+		{/*<ContactFormWaveSection theme={theme}/>*/}
+
 	</SectionItem>
 );
+
 
 
 const sectionComponentMap: ReactNode[] = [
 	BannerSection,
 	GoalSection,
-	// BlankSection,
+	// ServiceWaveSection,
 	ServicesSection,
 	WaveSection,
-	ContactSection
+	ContactSection,
+	// ContactFormWaveSection
 ];
 
 //primary btn
