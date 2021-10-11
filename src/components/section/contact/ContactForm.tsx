@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { Card } from "@material-ui/core";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
@@ -14,6 +14,8 @@ import ResetIcon from "@material-ui/icons/DeleteForever";
 import * as contactFormService from "../../../service/contactFormService";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useSnackbarCreator } from "../../SnackbarCreator";
+import { Alert } from "@material-ui/lab";
+import Collapse from "@material-ui/core/Collapse";
 
 //plain description of RHF Form
 const RHForm = (props) => <form {...props} noValidate>{props.children}</form>;
@@ -37,11 +39,50 @@ const StyledCardAction = styled(CardActions)`
     padding-bottom: 30px;
 `
 
+enum AlertEnum {
+	HIDDEN = -1,
+	SHOWN = 0,
+	NOTIFIED = 1 //handle this as final state
+}
+
 //form initial values
 const initialValues = {
 	title: "",
+	email: "",
 	request: ""
 };
+
+type UserNotificationAlertProps = {
+	control: any;
+}
+
+//alert to notify user about stuff
+const UserNotificationAlert:FC<UserNotificationAlertProps> = ({ control }) => {
+
+	const { t } = useCustomTranslation();
+	const emailVal = useWatch({
+		control,
+		name: "email" // without supply name will watch the entire form, or ['firstName', 'lastName'] to watch both
+	});
+	const [isAlertOpen, setIsAlertOpen] = useState(true); //initialize as shown
+
+	const hasUserTyped = emailVal.length > 0;
+
+	return (
+		<Grid item>
+			{
+				hasUserTyped && (
+					<Collapse in={isAlertOpen}>
+						<Alert severity="info" onClose={() => setIsAlertOpen(false)}>
+							{t("translation:contactForm.alertInfo")}
+						</Alert>
+					</Collapse>
+				)
+			}
+		</Grid>
+	);
+
+}
 
 const CircularProgressSubmitIcon = () => <CircularProgress style={{width: "0.8rem", height: "0.8rem", color: "#BDC1C7" }}/>;
 
@@ -52,6 +93,7 @@ const ContactForm = () => {
 	const { enqueueCustomSnackbar } = useSnackbarCreator();
 
 	const [loading, setIsLoading] = useState(false);
+
 
 	function toggleLoading() {
 		setIsLoading(prevState => !prevState);
@@ -87,10 +129,14 @@ const ContactForm = () => {
 							spacing={6}
 							direction={"column"}
 						>
+
+							<UserNotificationAlert control={control}/>
+
 							<Grid item>
 								<TextFieldWrapper
 									control={control}
-									label={"translation:contactForm.title"}
+									label={"translation:contactForm.title.label"}
+									placeholder={"translation:contactForm.title.placeholder"}
 									name={"title"}
 									rules={{
 										required: "common:validation.required",
@@ -156,7 +202,9 @@ const ContactForm = () => {
 							>
 								<Button
 									type="submit"
+									// variant="contained"
 									variant={"outlined"}
+									// color="primary"
 									disabled={loading}
 									endIcon={loading && <CircularProgressSubmitIcon/>}
 								>
@@ -168,7 +216,7 @@ const ContactForm = () => {
 							>
 								<Button
 									variant={"outlined"}
-									color="secondary"
+									// color="secondary"
 									endIcon={<ResetIcon />}
 									onClick={() => reset({ ...initialValues })}
 									disabled={loading}

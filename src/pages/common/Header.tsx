@@ -47,9 +47,11 @@ const useStyles = makeStyles(theme => ({
 
 	toolbarMargin: {
 		...theme.mixins.toolbar,
+
 		// marginBottom: "3em",
 		// [theme.breakpoints.down("md")]: {
-		// 	marginBottom: "2em"
+		// 	// marginBottom: "2em"
+		// 	minWidth: "23vw"
 		// },
 		// [theme.breakpoints.down("xs")]: {
 		// 	marginBottom: "1.25em"
@@ -124,6 +126,13 @@ const useStyles = makeStyles(theme => ({
 
 	drawer: {
 		// backgroundColor: theme.palette.common.blue
+		// [theme.breakpoints.down("md")]: {
+		// 	width: "30vw"
+		// },
+		[theme.breakpoints.down("md")]: {
+			width: "50vw"
+		}
+
 	},
 
 	drawerItem: {
@@ -244,6 +253,7 @@ export default function Header(props: any) {
 
 	const [openDrawer, setOpenDrawer] = useState(false);
 
+	const toggleDrawer = () => setOpenDrawer(prevState => !prevState);
 
 	const handleChange = (e, value) => {
 		props.setValue(value);
@@ -300,8 +310,8 @@ export default function Header(props: any) {
 				// disableBackdropTransition={!iOS}
 				// disableDiscovery={iOS}
 				open={openDrawer}
-				onClose={() => setOpenDrawer(false)}
-				onOpen={() => setOpenDrawer(true)}
+				onClose={toggleDrawer}
+				onOpen={toggleDrawer}
 				classes={{ paper: classes.drawer }}
 			>
 				<div className={classes.toolbarMargin} />
@@ -317,7 +327,7 @@ export default function Header(props: any) {
 									component={Link}
 									to={tab.link}
 									onClick={() => {
-										setOpenDrawer(false);
+										toggleDrawer();
 										props.setValue(i);
 									}}
 									classes={{ selected: classes.drawerItemSelected }}
@@ -327,14 +337,23 @@ export default function Header(props: any) {
 										disableTypography
 										className={classes.drawerItem}
 									>
-										{tab.name}
+										{t(tab.name)}
 									</ListItemText>
 								</ListItem>
 							);
 						})
 					}
 
-					<LanguagesDropdown/>
+					<ListItem>
+						<LanguagesDropdown/>
+
+					</ListItem>
+
+					<ListItem>
+						<ThemeSwitch/>
+
+
+					</ListItem>
 
 				</List>
 			</SwipeableDrawer>
@@ -368,12 +387,7 @@ export default function Header(props: any) {
 								key={`${routeIdx}-tab`}
 								className={classes.tab}
 								component={Link}
-								// to={route.link}
 								to={route.section}
-								// indicatorColor="primary"
-								// indicatorColor={{backgroundColor: '#e77600'}}
-								// TabIndicatorProps={{style: {background:'#021C6D'}}}
-								// value={route.activeIndex}
 								label={t(route.name)}
 							/>
 						);

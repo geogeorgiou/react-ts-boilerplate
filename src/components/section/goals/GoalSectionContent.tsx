@@ -36,7 +36,6 @@ export function GoalSectionContent() {
 	return (
 		<Grid
 			container
-			// direction={matches ? "column" : "row"}
 			// justifyContent={"flex-end"}
 			// alignItems={"stretch"}
 			spacing={4}

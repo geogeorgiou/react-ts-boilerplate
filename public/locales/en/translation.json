@@ -30,7 +30,11 @@
     }
   ],
   "contactForm": {
-    "title": "Title",
+    "alertInfo": "The information you register is confidential, it's not going to be saved anywhere and won't be used for commercial purposes.",
+    "title": {
+      "label": "Title",
+      "placeholder": "Please enter an indicative title"
+    },
     "request": {
       "label": "Request",
       "placeholder": "Please enter your request in free form"

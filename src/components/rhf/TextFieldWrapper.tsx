@@ -42,10 +42,11 @@ const TextFieldWrapper: FC<TextFieldWrapperProps> =
 			control={control}
 			defaultValue={defaultValue || ""} //if none defined setup as empty
 			rules={rules}
-			render={({ field, fieldState: {error, invalid} }) =>
+			render={({ field: { ref, ...fieldProps}, fieldState: { error, invalid } }) =>
 				<TextField
-					{...field}
+					{...fieldProps}
 					{...muiProps}
+					inputRef={ref}
 					label={label && t(label)}
 					placeholder={placeholder && t(placeholder)}
 					error={invalid}
