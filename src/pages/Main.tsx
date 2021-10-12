@@ -65,6 +65,7 @@ const GeneratedCurveStyles = styled.div<AnyType>`
 type HaikeCurveProps = {
 	svg: any
 	flip?: boolean
+	backgroundColor?: string
 }
 const HaikeiCurve = styled.div<HaikeCurveProps>`
 	aspect-ratio: 960/300;
@@ -76,6 +77,11 @@ const HaikeiCurve = styled.div<HaikeCurveProps>`
 	background-image: url(${props => props.svg});
 	
 	transform: ${props => props.flip && `rotate(180)`};		
+	
+	& .shape-fill {
+		//fill: #1D1D1D;
+		fill: ${props => props.backgroundColor};
+	};
 `;
 
 const GeneratedCurve = (props: any) => (
@@ -148,19 +154,19 @@ const BannerSection: FC<SectionPropsType> = ({ theme, title, text }) => (
 	<SectionItem id={"home"} background={theme.palette.primary.main}>
 		{title && <SectionTitle title={title}/>}
 		{text && <p>{text}</p>}
-		<GeneratedCurve backgroundColor={theme.palette.regularCommon.white}/>
+		<GeneratedCurve backgroundColor={theme.section.goal.main}/>
 	</SectionItem>
 );
 
 const GoalSection: FC<SectionPropsType> = ({ theme, title }) => (
 	<>
-		<SectionItem id={"goals"}>
+		<SectionItem id={"goals"} background={theme.section.goal.main}>
 			{title && <SectionTitle title={title} color={theme.palette.primary.main}/>}
 		<GoalSectionContent />
 
 		</SectionItem>
 		<section style={{height: "18vh"}}>
-			<HaikeiCurve svg={"/svg/ServiceWavesTop.svg"} />
+			<HaikeiCurve svg={"/svg/ServiceWavesTop.svg"} backgroundColor={theme.section.goal.main}/>
 		</section>
 	</>
 );

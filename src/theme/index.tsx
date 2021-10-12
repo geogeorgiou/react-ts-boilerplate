@@ -28,7 +28,8 @@ const createTheme = (name: string): Theme => {
 			name: themeConfig.name,
 			header: themeConfig.header,
 			footer: themeConfig.footer,
-			sidebar: themeConfig.sidebar
+			sidebar: themeConfig.sidebar,
+			section: themeConfig.section
 		}
 	);
 

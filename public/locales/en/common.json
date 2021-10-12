@@ -1,6 +1,6 @@
 {
   "general": {
-    "appTitle": "Dummy App",
+    "appTitle": "Promo App",
     "username": "Username",
     "password": "Password"
   },
@@ -15,6 +15,7 @@
     "contact-us": "Contact Us"
   },
   "lang": {
+    "label": "Language",
     "el": "Greek",
     "en": "English"
   },

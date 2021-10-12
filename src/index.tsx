@@ -4,13 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { EnhancedI18Provider } from "./context/LangContextProvider";
+import { LinearProgress } from "@material-ui/core";
+import StylesProvider from "@material-ui/styles/StylesProvider";
 
 
 const WrappedApp = () => (
-	<Suspense fallback="...is loading">
-		<EnhancedI18Provider>
-			<App />
-		</EnhancedI18Provider>
+	<Suspense fallback={<LinearProgress />}>
+		<StylesProvider injectFirst>
+			<EnhancedI18Provider>
+				<App />
+			</EnhancedI18Provider>
+		</StylesProvider>
 	</Suspense>
 )
 

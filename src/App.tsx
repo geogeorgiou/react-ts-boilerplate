@@ -4,12 +4,15 @@ import ThemeContextProvider from "./context/ThemeContextProvider";
 
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { SnackbarProvider } from "notistack";
+import { useCustomTranslation } from "./context/LangContextProvider";
 
 function App() {
 
+	const { t } = useCustomTranslation();
+
 	return (
 		<HelmetProvider>
-			<Helmet titleTemplate={"Dummy Project"} defaultTitle={"Dummy"} />
+			<Helmet defaultTitle={t("common:general.appTitle")} />
 
 			<ThemeContextProvider>
 				<SnackbarProvider

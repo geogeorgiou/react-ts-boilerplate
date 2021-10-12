@@ -26,7 +26,6 @@ import { LocalesNsOption } from "../../context/LangContextProvider";
 import { scroller } from "react-scroll";
 
 
-
 function ElevationScroll(props) {
 	const { children } = props;
 	// Note that you normally won't need to set the window ref as useScrollTrigger
@@ -46,7 +45,7 @@ function ElevationScroll(props) {
 const useStyles = makeStyles(theme => ({
 
 	toolbarMargin: {
-		...theme.mixins.toolbar,
+		...theme.mixins.toolbar
 
 		// marginBottom: "3em",
 		// [theme.breakpoints.down("md")]: {
@@ -149,7 +148,7 @@ const useStyles = makeStyles(theme => ({
 
 	drawerItemEstimate: {
 		// backgroundColor: theme.palette.common.orange
-	},
+	}
 
 	// appBar: {
 	// 	zIndex: theme.zIndex.modal + 1
@@ -167,7 +166,7 @@ const useStyles = makeStyles(theme => ({
 const TabContainer = styled(Tabs)`
 	margin-right: 1rem;
 	//margin-top: 0.6rem;
-`
+`;
 
 enum HeaderIndexEnum {
 	INDEX_0,
@@ -189,15 +188,15 @@ const ThemeSwitch = () => {
 	return (
 		<ControlledSwitch
 			// label={t(`theme.${currentTheme.toLowerCase()}`)}
-			labelConfig={{checked: LightModeIcon, unchecked: DarkModeIcon}}
+			labelConfig={{ checked: LightModeIcon, unchecked: DarkModeIcon }}
 			label={label}
 			labelPlacement={"end"}
 			isChecked={currentTheme === THEME.DEFAULT}
 			handleChange={() => setCurrentTheme(currentTheme === THEME.DEFAULT ? THEME.DARK : THEME.DEFAULT)}
 		/>
-	)
+	);
 
-}
+};
 
 
 const routes = [
@@ -217,7 +216,7 @@ const routes = [
 		link: "/services",
 		name: "header.services",
 		section: "services",
-		activeIndex: HeaderIndexEnum.INDEX_2,
+		activeIndex: HeaderIndexEnum.INDEX_2
 	},
 	{
 		link: "/contact",
@@ -298,11 +297,11 @@ export default function Header(props: any) {
 
 	useEffect(() => {
 
-		let sectionFound = routes.find(i => i.activeIndex === props.value)
+		let sectionFound = routes.find(i => i.activeIndex === props.value);
 		sectionFound && scrollToSection(sectionFound.section);
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [props.value])
+	}, [props.value]);
 
 	const drawer = (
 		<>
@@ -345,12 +344,12 @@ export default function Header(props: any) {
 					}
 
 					<ListItem>
-						<LanguagesDropdown/>
+						<LanguagesDropdown />
 
 					</ListItem>
 
 					<ListItem>
-						<ThemeSwitch/>
+						<ThemeSwitch />
 
 
 					</ListItem>
@@ -373,9 +372,7 @@ export default function Header(props: any) {
 				value={props.value}
 				className={classes.tabContainer}
 				onChange={handleChange}
-				// indicatorColor="primary"
-				// indicatorColor={{backgroundColor: '#e77600'}}
-				// TabIndicatorProps={{style: {background:'#e77600'}}}
+				TabIndicatorProps={{ style: { background: "#FFFFFF" } }}
 			>
 				{
 					routes.map((route, index) => {
@@ -405,10 +402,10 @@ export default function Header(props: any) {
 			</TabContainer>
 
 			<Box mr={6}>
-				<LanguagesDropdown/>
+				<LanguagesDropdown />
 			</Box>
 
-			<ThemeSwitch/>
+			<ThemeSwitch />
 
 		</>
 	);
@@ -416,12 +413,12 @@ export default function Header(props: any) {
 	return (
 		<>
 			<ElevationScroll {...props}>
-				<AppBar position="fixed" >
+				<AppBar position="fixed">
 					<Toolbar disableGutters={true}>
 
 						<Button
 							component={Link}
-							to={"/"}
+							to={"/home"}
 							className={classes.logoContainer}
 							onClick={() => props.setValue(0)}
 							disableRipple

@@ -117,7 +117,7 @@ const LanguagesDropdown = () => {
 
 	return (
 		<>
-			<Tooltip title={"Languages"}>
+			<Tooltip title={t("common:lang.label") as string}>
 				<IconButton
 					aria-owns={Boolean(anchorMenu) ? "menu-appbar" : undefined}
 					// aria-haspup={"true"}

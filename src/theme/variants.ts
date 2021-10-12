@@ -18,15 +18,25 @@ const customBlue = {
 
 const palette = {
 	primary: {
-		light: "#00D8FF",
+		light: "#3868fc",
 		dark: "#022388"
+	},
+	secondary: {
+		light: "#f7f7f7",
+		dark: "#bbb"
 	},
 	regularCommon: {
 		white: {
-			light: "#F2F2F2",
-			dark: "#B3B3B3"
+			light: "#FFFFFF",
+			dark: "#FFFFFF"
 		}
 	}
+	// section: {
+	// 	goal: {
+	// 		light: "#FFFFFF",
+	// 		dark: "#F2F2F2"
+	// 	}
+	// }
 
 
 }
@@ -41,7 +51,7 @@ const defaultVariant = {
 			contrastText: "#FFF"
 		},
 		secondary: {
-			main: customBlue[500],
+			main: palette.secondary.light,
 			contrastText: "#FFF"
 		},
 		background: {
@@ -74,6 +84,11 @@ const defaultVariant = {
 		fontFamily: `"Prompt", sans-serif`,
 		h2: {
 			fontSize: "1.5rem",
+		}
+	},
+	section: {
+		goal: {
+			main: "#FFF"
 		}
 	},
 	footer: {
@@ -114,20 +129,24 @@ const darkVariant = merge(defaultVariant, {
 	palette: {
 		type: "dark",
 		primary: {
-			// main: customBlue[600],
-			main: palette.primary.dark,
-			contrastText: "#FFF"
+			main: palette.primary.dark
+		},
+		secondary: {
+			main: palette.secondary.dark
 		},
 		background: {
 			default: "#1B2635",
 			paper: "#233044",
 			card: "#c2d2ec66"
 		},
+		regularCommon: {
+			white: palette.regularCommon.white.dark
+		}
 		// text: {
 		// 	primary: "rgba(255, 255, 255, 0.95)",
 		// 	secondary: "rgba(255, 255, 255, 0.5)"
 		// }
-	},
+	}
 	// footer: {
 	// 	color: grey[300],
 	// 	background: "#233044"
@@ -163,6 +182,11 @@ export type VariantType = {
 		},
 		filterCategory: {
 			background: string
+		}
+	},
+	section: {
+		goal: {
+			main: string
 		}
 	},
 	footer: ColorBgType,

@@ -1,6 +1,6 @@
 {
   "general": {
-    "appTitle": "Dummy App",
+    "appTitle": "Promo App",
     "username": "Όνομα Χρήστη",
     "password": "Κωδικός Πρόσβασης"
   },
@@ -15,6 +15,7 @@
     "contact-us": "Επικοινωνία"
   },
   "lang": {
+    "label": "Γλώσσα",
     "el": "Ελληνικά",
     "en": "Αγγλικά"
   },

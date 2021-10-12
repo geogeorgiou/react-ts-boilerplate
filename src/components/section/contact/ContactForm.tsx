@@ -39,12 +39,6 @@ const StyledCardAction = styled(CardActions)`
     padding-bottom: 30px;
 `
 
-enum AlertEnum {
-	HIDDEN = -1,
-	SHOWN = 0,
-	NOTIFIED = 1 //handle this as final state
-}
-
 //form initial values
 const initialValues = {
 	title: "",
@@ -85,6 +79,32 @@ const UserNotificationAlert:FC<UserNotificationAlertProps> = ({ control }) => {
 }
 
 const CircularProgressSubmitIcon = () => <CircularProgress style={{width: "0.8rem", height: "0.8rem", color: "#BDC1C7" }}/>;
+
+const SubmitButton = styled(Button)`
+
+	color: ${props => props.color || props.theme.palette.primary.main};
+	border-color: ${props => props.color || props.theme.palette.primary.main};
+	
+	&:hover {
+		color: #FFFFFF;
+    	//border-color: ${props => props.color || props.theme.palette.primary.main};
+    	background: ${props => props.color || props.theme.palette.primary.main};
+	}
+
+`
+
+const ResetButton = styled(Button)`
+	
+	color: #FFFFFF;
+	background-color: ${props => props.theme.palette.secondary.main};
+	
+	&:hover {
+		//color: rgb(221,63,49);
+    	//border-color: rgb(221,63,49);
+    	//background-color: inherit; //resets mui fuckin theme
+		background-color: ${props => props.theme.palette.secondary.main};
+	}
+`
 
 const ContactForm = () => {
 
@@ -200,7 +220,7 @@ const ContactForm = () => {
 							<Grid
 								item
 							>
-								<Button
+								<SubmitButton
 									type="submit"
 									// variant="contained"
 									variant={"outlined"}
@@ -209,20 +229,20 @@ const ContactForm = () => {
 									endIcon={loading && <CircularProgressSubmitIcon/>}
 								>
 									{t("common:form.submit")}
-								</Button>
+								</SubmitButton>
 							</Grid>
 							<Grid
 								item
 							>
-								<Button
+								<ResetButton
 									variant={"outlined"}
-									// color="secondary"
+									color="secondary"
 									endIcon={<ResetIcon />}
 									onClick={() => reset({ ...initialValues })}
 									disabled={loading}
 								>
 									{t("common:form.reset")}
-								</Button>
+								</ResetButton>
 							</Grid>
 						</Grid>
 					</StyledCardAction>
