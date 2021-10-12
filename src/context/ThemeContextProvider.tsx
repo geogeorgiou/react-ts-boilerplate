@@ -25,7 +25,7 @@ const IThemeContext = createContext<StylesContextProviderState>({
 	...defaultStateValue
 })
 
-//custom hook to use in order to fetch context (use this only to access context)
+//custom hooks to use in order to fetch context (use this only to access context)
 export const useTheme = () => useContext(IThemeContext);
 
 const ThemeContextProvider: React.FC = ({ children }) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
@@ -22,9 +22,13 @@ import styled from "styled-components/macro";
 import LightModeIcon from "@material-ui/icons/Brightness7";
 import DarkModeIcon from "@material-ui/icons/Brightness3";
 import Box from "@material-ui/core/Box";
-import { LocalesNsOption } from "../../context/LangContextProvider";
+import { LocalesNsOption, useCustomTranslation } from "../../context/LangContextProvider";
 import { scroller } from "react-scroll";
-
+import { ClassNameMap } from "@material-ui/styles";
+interface Process {
+	browser: boolean
+}
+declare var process: Process
 
 function ElevationScroll(props) {
 	const { children } = props;
@@ -185,6 +189,12 @@ const ThemeSwitch = () => {
 	//label is inverse of what u think
 	const label = currentTheme === THEME.DEFAULT ? t("theme.dark") : t("theme.default");
 
+	console.log('changed brahh');
+
+	function changeTheme() {
+		setCurrentTheme(currentTheme === THEME.DEFAULT ? THEME.DARK : THEME.DEFAULT);
+	}
+
 	return (
 		<ControlledSwitch
 			// label={t(`theme.${currentTheme.toLowerCase()}`)}
@@ -192,7 +202,7 @@ const ThemeSwitch = () => {
 			label={label}
 			labelPlacement={"end"}
 			isChecked={currentTheme === THEME.DEFAULT}
-			handleChange={() => setCurrentTheme(currentTheme === THEME.DEFAULT ? THEME.DARK : THEME.DEFAULT)}
+			handleChange={changeTheme}
 		/>
 	);
 
@@ -239,24 +249,144 @@ function scrollToSection(id: string) {
 	});
 };
 
-export default function Header(props: any) {
+type ResponsiveComponentType = {
+	classes: ClassNameMap<any>;
+	value: number;
+	setValue: (arg: number) => void;
+}
 
-	const theme = useThemeObject();
-	const classes = useStyles();
-	const { t } = useTranslation(LocalesNsOption.Common);
+const DrawerComponent:FC<ResponsiveComponentType> = ({classes, value, setValue}) => {
 
-	//selects anything that's medium and below
-	const matches = useMediaQuery(theme.breakpoints.down("md"));
-	// const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
+	const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-
+	const { t } = useTranslation([LocalesNsOption.Common]);
 	const [openDrawer, setOpenDrawer] = useState(false);
 
 	const toggleDrawer = () => setOpenDrawer(prevState => !prevState);
 
+	return (
+		(
+			<>
+				<SwipeableDrawer
+					disableBackdropTransition={!iOS}
+					disableDiscovery={iOS}
+					open={openDrawer}
+					onClose={toggleDrawer}
+					onOpen={toggleDrawer}
+					classes={{ paper: classes.drawer }}
+				>
+					<div className={classes.toolbarMargin} />
+					<List disablePadding>
+
+						{
+							routes.map((tab, i) => {
+								return (
+									<ListItem
+										divider
+										button
+										key={`drawer_item_${tab.name}`}
+										component={Link}
+										to={tab.link}
+										onClick={() => {
+											toggleDrawer();
+											setValue(i);
+										}}
+										classes={{ selected: classes.drawerItemSelected }}
+										selected={value === i}
+									>
+										<ListItemText
+											disableTypography
+											className={classes.drawerItem}
+										>
+											{t(tab.name)}
+										</ListItemText>
+									</ListItem>
+								);
+							})
+						}
+
+						<ListItem>
+							<LanguagesDropdown />
+
+						</ListItem>
+
+						<ListItem>
+							<ThemeSwitch />
+
+
+						</ListItem>
+
+					</List>
+				</SwipeableDrawer>
+				<IconButton
+					className={classes.drawerIconContainer}
+					onClick={() => setOpenDrawer(!openDrawer)}
+					disableRipple
+				>
+					<MenuIcon className={classes.drawerIcon} />
+				</IconButton>
+			</>
+		)
+	)
+
+};
+
+const TabComponent:FC<ResponsiveComponentType> = ({classes, value, setValue}) => {
+
+	const { t } = useTranslation([LocalesNsOption.Common]);
+
 	const handleChange = (e, value) => {
-		props.setValue(value);
+		setValue(value);
 	};
+
+	return (
+			<>
+				<TabContainer
+					value={value}
+					className={classes.tabContainer}
+					onChange={handleChange}
+					TabIndicatorProps={{ style: { background: "#FFFFFF" } }}
+				>
+					{
+						routes.map((route, index) => {
+
+							const routeIdx = `route-${index}`;
+
+							return (
+								<Tab
+									key={`${routeIdx}-tab`}
+									className={classes.tab}
+									component={Link}
+									to={route.section}
+									label={t(route.name)}
+								/>
+							);
+						})
+					}
+
+				</TabContainer>
+
+				<Box mr={6}>
+					<LanguagesDropdown />
+				</Box>
+
+				<ThemeSwitch />
+
+			</>
+	)
+
+}
+
+export default function Header(props: any) {
+
+	const theme = useThemeObject();
+	const classes = useStyles();
+	// const { t } = useTranslation(LocalesNsOption.Common);
+
+	//selects anything that's medium and below
+	const matches = useMediaQuery(theme.breakpoints.down("md"));
+
+
 
 	//basically check when user refreshes the page set the correct active tab
 	//if not set it via custom way
@@ -303,113 +433,6 @@ export default function Header(props: any) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [props.value]);
 
-	const drawer = (
-		<>
-			<SwipeableDrawer
-				// disableBackdropTransition={!iOS}
-				// disableDiscovery={iOS}
-				open={openDrawer}
-				onClose={toggleDrawer}
-				onOpen={toggleDrawer}
-				classes={{ paper: classes.drawer }}
-			>
-				<div className={classes.toolbarMargin} />
-				<List disablePadding>
-
-					{
-						routes.map((tab, i) => {
-							return (
-								<ListItem
-									divider
-									button
-									key={`drawer_item_${tab.name}`}
-									component={Link}
-									to={tab.link}
-									onClick={() => {
-										toggleDrawer();
-										props.setValue(i);
-									}}
-									classes={{ selected: classes.drawerItemSelected }}
-									selected={props.value === i}
-								>
-									<ListItemText
-										disableTypography
-										className={classes.drawerItem}
-									>
-										{t(tab.name)}
-									</ListItemText>
-								</ListItem>
-							);
-						})
-					}
-
-					<ListItem>
-						<LanguagesDropdown />
-
-					</ListItem>
-
-					<ListItem>
-						<ThemeSwitch />
-
-
-					</ListItem>
-
-				</List>
-			</SwipeableDrawer>
-			<IconButton
-				className={classes.drawerIconContainer}
-				onClick={() => setOpenDrawer(!openDrawer)}
-				disableRipple
-			>
-				<MenuIcon className={classes.drawerIcon} />
-			</IconButton>
-		</>
-	);
-
-	const tabs = (
-		<>
-			<TabContainer
-				value={props.value}
-				className={classes.tabContainer}
-				onChange={handleChange}
-				TabIndicatorProps={{ style: { background: "#FFFFFF" } }}
-			>
-				{
-					routes.map((route, index) => {
-
-						const routeIdx = `route-${index}`;
-
-						return (
-							<Tab
-								key={`${routeIdx}-tab`}
-								className={classes.tab}
-								component={Link}
-								to={route.section}
-								label={t(route.name)}
-							/>
-						);
-					})
-				}
-
-				{/*<Tab*/}
-				{/*	key={`lang_tab`}*/}
-				{/*	className={classes.tab}*/}
-				{/*	component={LanguagesDropdown}*/}
-				{/*	// to={route.link}*/}
-				{/*	// label={t(route.name)}*/}
-				{/*/>*/}
-
-			</TabContainer>
-
-			<Box mr={6}>
-				<LanguagesDropdown />
-			</Box>
-
-			<ThemeSwitch />
-
-		</>
-	);
-
 	return (
 		<>
 			<ElevationScroll {...props}>
@@ -431,7 +454,19 @@ export default function Header(props: any) {
 							<SettingsEthernetIcon />
 						</Button>
 
-						{matches ? drawer : tabs}
+						{matches ?
+							<DrawerComponent
+								classes={classes}
+								value={props.value}
+								setValue={props.setValue}
+							/>
+							:
+							<TabComponent
+								classes={classes}
+								value={props.value}
+								setValue={props.setValue}
+							/>
+						}
 
 					</Toolbar>
 				</AppBar>

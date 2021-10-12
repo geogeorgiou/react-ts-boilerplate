@@ -19,7 +19,7 @@ export enum LocalesNsOption {
 }
 
 // /**
-//  * map function to use with i18n translation hook to retrieve all namespaces
+//  * map function to use with i18n translation hooks to retrieve all namespaces
 //  */
 // export function getAllLocalesNs(): LocalesNsOption[] {
 //
@@ -77,7 +77,7 @@ export const LangContext = createContext({
 });
 
 /**
- * Custom hook that returns updated useTranslation namespace
+ * Custom hooks that returns updated useTranslation namespace
  * @param nsOptionArr - if none defined returned all namespaces otherwise what you have set
  */
 export const useCustomTranslation = (nsOptionArr ?: LocalesNsOption[]) => {
