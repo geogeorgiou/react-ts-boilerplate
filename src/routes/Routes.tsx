@@ -1,6 +1,6 @@
 import { createBrowserHistory } from "history";
 import { Route, RouteComponentProps, Router, Switch } from "react-router-dom";
-import React, { useState } from "react";
+import React from "react";
 import { RouteType } from "../types/routes";
 import AuthLayout from "../layouts/AuthLayout";
 import Page404 from "../pages/auth/Page404";

@@ -2,7 +2,7 @@ import * as React from "react";
 import { FC, ReactNode } from "react";
 import styled, { ThemeConsumer } from "styled-components/macro";
 import { withTheme } from "@material-ui/styles";
-import { GoalSectionContent, StyledGoalSectionContent } from "../components/section/goals/GoalSectionContent";
+import { GoalSectionContent } from "../components/section/goals/GoalSectionContent";
 import { useTranslation } from "react-i18next";
 import { Typography } from "@material-ui/core";
 import ContactForm, { AnyProps } from "../components/section/contact/ContactForm";
