@@ -30,7 +30,7 @@
     "lodash": "^4.17.21",
     "mui-datatables": "^3.7.8",
     "mui-modal-provider": "^1.5.0",
-    "notistack": "^2.0.2",
+    "notistack": "^1.0.10",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
