@@ -5,6 +5,7 @@ import ThemeContextProvider from "./context/ThemeContextProvider";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { SnackbarProvider } from "notistack";
 import { useCustomTranslation } from "./context/LangContextProvider";
+import SectionContextProvider from "./context/SectionContextProvider";
 
 function App() {
 
@@ -21,7 +22,9 @@ function App() {
 						horizontal: 'center',
 					}}
 				>
-					<Routes />
+					<SectionContextProvider>
+						<Routes />
+					</SectionContextProvider>
 				</SnackbarProvider>
 			</ThemeContextProvider>
 

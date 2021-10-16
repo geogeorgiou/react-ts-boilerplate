@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="18b7436f-9422-469e-a7b6-e43f9118e483" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.babelrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" />
+    <list default="true" id="18b7436f-9422-469e-a7b6-e43f9118e483" name="Default Changelist" comment="Adding minor style fixes, translation.json + axios micro config">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/context/SectionContextProvider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/locales/el/translation.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/el/translation.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/locales/en/translation.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/en/translation.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CardComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CardComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/section/contact/ContactForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/section/contact/ContactForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/common/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/common/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/Routes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/Routes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/theme/typography.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/typography.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,16 +36,36 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JavaScript" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/svg" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="ts.external.directory.path" value="C:\Users\geogeorgiou\Desktop\react-ts-boilerplate\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\geogeorgiou\Desktop\react-ts-boilerplate" />
+      <recent name="C:\Users\geogeorgiou\Desktop\react-ts-boilerplate\public\svg" />
+      <recent name="C:\Users\geogeorgiou\Desktop\react-ts-boilerplate\src\components\section\goals" />
+      <recent name="C:\Users\geogeorgiou\Desktop\react-ts-boilerplate\public" />
+      <recent name="C:\Users\geogeorgiou\Desktop\react-ts-boilerplate\src\vendors" />
+      <recent name="C:\Users\geogeorgiou\Desktop\react-ts-boilerplate\src\vendors\svg" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\geogeorgiou\Desktop\react-ts-boilerplate\public\svg" />
+      <recent name="C:\Users\geogeorgiou\Desktop\react-ts-boilerplate\public" />
+      <recent name="C:\Users\geogeorgiou\Desktop\react-ts-boilerplate\src" />
+      <recent name="C:\Users\geogeorgiou\Desktop\react-ts-boilerplate\public\locales" />
+      <recent name="C:\Users\geogeorgiou\Desktop\react-ts-boilerplate\src\translations\en" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="npm startw" />
+      <command value="npm start" />
+    </option>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -54,29 +75,323 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1631302609385</updated>
-      <workItem from="1631302610433" duration="256000" />
+      <workItem from="1631302610433" duration="676000" />
+      <workItem from="1631303318889" duration="4590000" />
+      <workItem from="1631308174479" duration="206000" />
+      <workItem from="1631395512912" duration="8191000" />
+      <workItem from="1631441189180" duration="5090000" />
+      <workItem from="1631552967707" duration="8851000" />
+      <workItem from="1631563542879" duration="2072000" />
+      <workItem from="1632333331978" duration="3762000" />
+      <workItem from="1632337137442" duration="176000" />
+      <workItem from="1632337322147" duration="24000" />
+      <workItem from="1632572095382" duration="14461000" />
+      <workItem from="1632647309105" duration="5130000" />
+      <workItem from="1632940180031" duration="5694000" />
+      <workItem from="1632946067261" duration="30000" />
+      <workItem from="1633105090091" duration="2266000" />
+      <workItem from="1633185509197" duration="12984000" />
+      <workItem from="1633198795369" duration="8342000" />
+      <workItem from="1633251131218" duration="15298000" />
+      <workItem from="1633543036304" duration="37000" />
+      <workItem from="1633543080510" duration="6834000" />
+      <workItem from="1633630295476" duration="9418000" />
+      <workItem from="1633862824943" duration="9527000" />
+      <workItem from="1633887342067" duration="9341000" />
+      <workItem from="1633977869597" duration="6273000" />
+      <workItem from="1634063207904" duration="8513000" />
+      <workItem from="1634383698289" duration="5670000" />
+      <workItem from="1634413378489" duration="2612000" />
     </task>
+    <task id="LOCAL-00001" summary="Initializing _tsOverload branch">
+      <created>1631302930972</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1631302930972</updated>
+    </task>
+    <task id="LOCAL-00002" summary="changing index.tsx">
+      <created>1631303711188</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1631303711188</updated>
+    </task>
+    <task id="LOCAL-00003" summary="adding dependencies and code styling">
+      <created>1631304350585</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1631304350585</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Adding routing components and types">
+      <created>1631308376518</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1631308376518</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Initializing theming and styles + some providers">
+      <created>1631403769294</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1631403769294</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Fixing issues related to theming and adding a Page404 component">
+      <created>1631446315735</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1631446315735</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Managing at last correctly translations! &lt;3">
+      <created>1632337118041</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1632337118041</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Initializing config for .svg support, adding some global styles and adding fixes for MuiTheme styling">
+      <created>1632587004327</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1632587004327</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Adding Header to App with CustomTheme switcher + translation">
+      <created>1632652451238</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1632652451238</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Adding the CardComponent plus some rework of LangContextProvider">
+      <created>1633185616516</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1633185616516</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Adding changes to translations, LanguagesDropdown w flags, Header changes and alignments">
+      <created>1633198679728</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1633198679728</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fixing minor styles issues with toolbar + appBar, otherStuff">
+      <created>1633203277288</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1633203277288</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Adding some spacing and height to cards">
+      <created>1633207517432</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1633207517432</updated>
+    </task>
+    <task id="LOCAL-00014" summary="typography and translations changes">
+      <created>1633254154559</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1633254154559</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Assigning some enum for LocalesNs, ContactForm initialized with TextFieldWrapper bound with RHF">
+      <created>1633258497450</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1633258497450</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Resolving issues with translations and namespaces + customizing TextFieldWrapper">
+      <created>1633268455470</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1633268455470</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Adding ICU support in localisation">
+      <created>1633269461392</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1633269461392</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Adding minor style fixes, translation.json + axios micro config">
+      <created>1633549939909</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1633549939909</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Refactoring code, adding email field, adding Custom Translation hook, adding custom Snackbar hook">
+      <created>1633638951894</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1633638951894</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Implementing scrolling functionality">
+      <created>1633891322290</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1633891322290</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Implementing many responsive CSS styles">
+      <created>1633894838347</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1633894838347</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Implementing scalable isolated watcher for alert, some translations, fix for mui label shrink">
+      <created>1633982685637</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1633982685637</updated>
+    </task>
+    <task id="LOCAL-00023" summary="adding translations, ui coloring + general fixes">
+      <created>1634070180209</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1634070180209</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Fixing major issue with ControlledSwitch, adding first render custom hook and refactoring the Header">
+      <created>1634071980031</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1634071980031</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initializing _tsOverload branch" />
+    <MESSAGE value="changing index.tsx" />
+    <MESSAGE value="adding dependencies and code styling" />
+    <MESSAGE value="Adding routing components and types" />
+    <MESSAGE value="Initializing theming and styles + some providers" />
+    <MESSAGE value="Fixing issues related to theming and adding a Page404 component" />
+    <MESSAGE value="Managing at last correctly translations! &lt;3" />
+    <MESSAGE value="Initializing config for .svg support, adding some global styles and adding fixes for MuiTheme styling" />
+    <MESSAGE value="Adding Header to App with CustomTheme switcher + translation" />
+    <MESSAGE value="Adding the CardComponent plus some rework of LangContextProvider" />
+    <MESSAGE value="Adding changes to translations, LanguagesDropdown w flags, Header changes and alignments" />
+    <MESSAGE value="fixing minor styles issues with toolbar + appBar, otherStuff" />
+    <MESSAGE value="Adding some spacing and height to cards" />
+    <MESSAGE value="typography and translations changes" />
+    <MESSAGE value="Assigning some enum for LocalesNs, ContactForm initialized with TextFieldWrapper bound with RHF" />
+    <MESSAGE value="Resolving issues with translations and namespaces + customizing TextFieldWrapper" />
+    <MESSAGE value="Adding ICU support in localisation" />
+    <MESSAGE value="Adding minor style fixes, translation.json + axios micro config" />
+    <MESSAGE value="Refactoring code, adding email field, adding Custom Translation hook, adding custom Snackbar hook" />
+    <MESSAGE value="Implementing scrolling functionality" />
+    <MESSAGE value="Implementing many responsive CSS styles" />
+    <MESSAGE value="Implementing scalable isolated watcher for alert, some translations, fix for mui label shrink" />
+    <MESSAGE value="adding translations, ui coloring + general fixes" />
+    <MESSAGE value="Fixing major issue with ControlledSwitch, adding first render custom hook and refactoring the Header" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixing major issue with ControlledSwitch, adding first render custom hook and refactoring the Header" />
+  </component>
   <component name="WindowStateProjectService">
-    <state width="1899" height="284" key="GridCell.Tab.0.bottom" timestamp="1631302755046">
+    <state x="714" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1633548793703">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1631302755046" />
-    <state width="1899" height="284" key="GridCell.Tab.0.center" timestamp="1631302755046">
+    <state x="714" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1633548793703" />
+    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1631553770936">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="284" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1631302755046" />
-    <state width="1899" height="284" key="GridCell.Tab.0.left" timestamp="1631302755045">
+    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1631553770936" />
+    <state x="585" y="85" key="CommitChangelistDialog2" timestamp="1634071979562">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="284" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1631302755045" />
-    <state width="1899" height="284" key="GridCell.Tab.0.right" timestamp="1631302755046">
+    <state x="585" y="85" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1634071979562" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1633982680269">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="284" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1631302755046" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1633982680269" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1633888693344">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1633888693344" />
+    <state width="1899" height="147" key="GridCell.Tab.0.bottom" timestamp="1634390392705">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="147" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1634390392705" />
+    <state width="1899" height="147" key="GridCell.Tab.0.center" timestamp="1634390392705">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="147" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1634390392705" />
+    <state width="1899" height="147" key="GridCell.Tab.0.left" timestamp="1634390392705">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="147" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1634390392705" />
+    <state width="1899" height="147" key="GridCell.Tab.0.right" timestamp="1634390392705">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="147" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1634390392705" />
+    <state x="734" y="222" key="RollbackChangesDialog" timestamp="1633862948331">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="734" y="222" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1633862948331" />
+    <state x="222" y="165" width="1373" height="708" key="SettingsEditor" timestamp="1633266634825">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="222" y="165" width="1373" height="708" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1633266634825" />
+    <state width="498" height="446" key="SwitcherDM" timestamp="1633257295908">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1633257295908" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1631303325727">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1631303325727" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1633887692126">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1633887692126" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog" timestamp="1633189691173">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1633189691173" />
+    <state x="433" y="105" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1633636997927">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="433" y="105" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1633636997927" />
+    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1634065805469">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1634065805469" />
+    <state x="953" y="0" width="974" height="1047" key="dock-window-1" timestamp="1633259478088">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="953" y="0" width="974" height="1047" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1633259478088" />
+    <state x="92" y="92" width="1736" height="856" key="dock-window-2" timestamp="1633255527587">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="dock-window-2/0.0.1920.1040@0.0.1920.1040" timestamp="1633255527587" />
+    <state x="667" y="119" width="585" height="801" key="find.popup" timestamp="1634389043254">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="667" y="119" width="585" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1634389043254" />
+    <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1634383833287">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1634383833287" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1634415307972">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1634415307972" />
   </component>
 </project>

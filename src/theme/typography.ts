@@ -5,7 +5,7 @@ const typography: TypographyOptions = {
 		"Prompt",
 		"sans-serif"
 	].join(","),
-	fontSize: 13,
+	fontSize: 16,
 	fontWeightLight: 300,
 	fontWeightRegular: 400,
 	fontWeightMedium: 500,
@@ -45,6 +45,10 @@ const typography: TypographyOptions = {
 	},
 	button: {
 		textTransform: "none"
+	},
+	subtitle1: {
+		textAlign: "center",
+		lineHeight: "28px"
 	}
 }
 

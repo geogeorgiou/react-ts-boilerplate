@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
@@ -22,9 +22,11 @@ import styled from "styled-components/macro";
 import LightModeIcon from "@material-ui/icons/Brightness7";
 import DarkModeIcon from "@material-ui/icons/Brightness3";
 import Box from "@material-ui/core/Box";
-import { LocalesNsOption, useCustomTranslation } from "../../context/LangContextProvider";
-import { scroller } from "react-scroll";
+import { LocalesNsOption } from "../../context/LangContextProvider";
 import { ClassNameMap } from "@material-ui/styles";
+import { routes, useSectionContext } from "../../context/SectionContextProvider";
+import props from "../../theme/props";
+
 interface Process {
 	browser: boolean
 }
@@ -172,14 +174,6 @@ const TabContainer = styled(Tabs)`
 	//margin-top: 0.6rem;
 `;
 
-enum HeaderIndexEnum {
-	INDEX_0,
-	INDEX_1,
-	INDEX_2,
-	INDEX_3,
-	INDEX_4
-}
-
 const ThemeSwitch = () => {
 
 	const { t } = useTranslation(LocalesNsOption.Common);
@@ -189,15 +183,12 @@ const ThemeSwitch = () => {
 	//label is inverse of what u think
 	const label = currentTheme === THEME.DEFAULT ? t("theme.dark") : t("theme.default");
 
-	console.log('changed brahh');
-
 	function changeTheme() {
 		setCurrentTheme(currentTheme === THEME.DEFAULT ? THEME.DARK : THEME.DEFAULT);
 	}
 
 	return (
 		<ControlledSwitch
-			// label={t(`theme.${currentTheme.toLowerCase()}`)}
 			labelConfig={{ checked: LightModeIcon, unchecked: DarkModeIcon }}
 			label={label}
 			labelPlacement={"end"}
@@ -209,45 +200,7 @@ const ThemeSwitch = () => {
 };
 
 
-const routes = [
-	{
-		link: "/",
-		name: "header.homepage",
-		section: "home",
-		activeIndex: HeaderIndexEnum.INDEX_0
-	},
-	{
-		link: "/goals",
-		name: "header.goals",
-		section: "goals",
-		activeIndex: HeaderIndexEnum.INDEX_1
-	},
-	{
-		link: "/services",
-		name: "header.services",
-		section: "services",
-		activeIndex: HeaderIndexEnum.INDEX_2
-	},
-	{
-		link: "/contact",
-		name: "header.contact-us",
-		section: "contact",
-		activeIndex: HeaderIndexEnum.INDEX_3
-	}
-];
 
-/**
- * scrolling function
- * @param id - input id to navigate to
- */
-function scrollToSection(id: string) {
-	scroller.scrollTo(id, {
-		duration: 500,
-		offset: -20,
-		delay: 0,
-		smooth: true
-	});
-};
 
 type ResponsiveComponentType = {
 	classes: ClassNameMap<any>;
@@ -377,10 +330,16 @@ const TabComponent:FC<ResponsiveComponentType> = ({classes, value, setValue}) =>
 
 }
 
-export default function Header(props: any) {
+export default function Header() {
 
 	const theme = useThemeObject();
 	const classes = useStyles();
+
+	const {
+		sectionValue,
+		setSectionValue,
+	} = useSectionContext();
+
 	// const { t } = useTranslation(LocalesNsOption.Common);
 
 	//selects anything that's medium and below
@@ -400,12 +359,12 @@ export default function Header(props: any) {
 	// 			case `${route.link}`:
 	// 				if (props.selectedIndex !== route.activeIndex) {
 	//
-	// 					// props.setValue(route.activeIndex);
+	// 					// setSectionValue(route.activeIndex);
 	//
 	// 					// if (!route?.selectedIndex)
 	// 					// 	return;
 	// 					//
-	// 					// props.setValue(route.activeIndex);
+	// 					// setSectionValue(route.activeIndex);
 	// 					//
 	// 					// //check if selectedIndex is defined before comparing with selectedIndex
 	// 					if (route.activeIndex && route.activeIndex !== props.selectedIndex) {
@@ -414,7 +373,7 @@ export default function Header(props: any) {
 	// 				}
 	// 				break;
 	// 			// case "/estimate":
-	// 			// 	props.setValue(5);
+	// 			// 	setSectionValue(5);
 	// 			// 	break;
 	// 			default:
 	// 				break;
@@ -422,16 +381,10 @@ export default function Header(props: any) {
 	// 	});
 	//
 	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// // }, [props.value, props.selectedIndex, routes, props]);
-	// }, [props.value, props.selectedIndex]);
+	// // }, [sectionValue, props.selectedIndex, routes, props]);
+	// }, [sectionValue, props.selectedIndex]);
 
-	useEffect(() => {
 
-		let sectionFound = routes.find(i => i.activeIndex === props.value);
-		sectionFound && scrollToSection(sectionFound.section);
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [props.value]);
 
 	return (
 		<>
@@ -443,7 +396,7 @@ export default function Header(props: any) {
 							component={Link}
 							to={"/home"}
 							className={classes.logoContainer}
-							onClick={() => props.setValue(0)}
+							onClick={() => setSectionValue(0)}
 							disableRipple
 						>
 							{/*<img*/}
@@ -457,14 +410,14 @@ export default function Header(props: any) {
 						{matches ?
 							<DrawerComponent
 								classes={classes}
-								value={props.value}
-								setValue={props.setValue}
+								value={sectionValue}
+								setValue={setSectionValue}
 							/>
 							:
 							<TabComponent
 								classes={classes}
-								value={props.value}
-								setValue={props.setValue}
+								value={sectionValue}
+								setValue={setSectionValue}
 							/>
 						}
 

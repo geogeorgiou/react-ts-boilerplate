@@ -28,6 +28,28 @@ const GridContentWrapper = styled(Grid)`
 
 const StyledCard = styled(Card)`
 	//width: 18rem;
+	
+    font-weight: bold;
+    .MuiTypography-h5 {
+    	font-weight: bold;
+  	};
+    
+  
+    &:hover {
+		background: #2A5AF6;
+		box-shadow: 0 4px 9px 2px rgb(0 0 0 / 27%);
+		
+		svg {
+			fill: #FFFFFF;
+		}
+		
+		.MuiTypography-h5 {
+    		color: #FFFFFF;
+  		};
+		
+	}
+	
+	transition: background .25s ease-in-out,color .05s ease-in-out;
 `
 
 const GridContainer = styled(Grid)`

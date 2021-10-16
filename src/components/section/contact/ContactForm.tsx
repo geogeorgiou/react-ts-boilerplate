@@ -39,6 +39,10 @@ const StyledCardAction = styled(CardActions)`
     padding-bottom: 30px;
 `
 
+export type AnyProps = {
+	[key: string]: any
+}
+
 //form initial values
 const initialValues = {
 	title: "",
@@ -80,20 +84,23 @@ const UserNotificationAlert:FC<UserNotificationAlertProps> = ({ control }) => {
 
 const CircularProgressSubmitIcon = () => <CircularProgress style={{width: "0.8rem", height: "0.8rem", color: "#BDC1C7" }}/>;
 
-const SubmitButton = styled(Button)`
+const CommonButton = styled(Button)`
+	font-weight: bolder;
+`
 
-	color: ${props => props.color || props.theme.palette.primary.main};
-	border-color: ${props => props.color || props.theme.palette.primary.main};
+export const SubmitButton = styled(CommonButton)<AnyProps>`
+
+	color: ${props => props.btnColor || props.theme.palette.primary.main};
+	border-color: ${props => props.btnColor || props.theme.palette.primary.main};
 	
 	&:hover {
 		color: #FFFFFF;
-    	//border-color: ${props => props.color || props.theme.palette.primary.main};
-    	background: ${props => props.color || props.theme.palette.primary.main};
+    	background: ${props => props.btnColor || props.theme.palette.primary.main};
 	}
 
 `
 
-const ResetButton = styled(Button)`
+const ResetButton = styled(CommonButton)`
 	
 	color: #FFFFFF;
 	background-color: ${props => props.theme.palette.secondary.main};

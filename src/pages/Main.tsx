@@ -5,8 +5,11 @@ import { withTheme } from "@material-ui/styles";
 import { GoalSectionContent } from "../components/section/goals/GoalSectionContent";
 import { useTranslation } from "react-i18next";
 import { Typography } from "@material-ui/core";
-import ContactForm from "../components/section/contact/ContactForm";
+import ContactForm, { AnyProps, SubmitButton } from "../components/section/contact/ContactForm";
 import { LocalesNsOption } from "../context/LangContextProvider";
+import Box from "@material-ui/core/Box";
+import { Link } from "react-router-dom";
+import { SectionIndexEnum, sectionIndexToEnumMap, useSectionContext } from "../context/SectionContextProvider";
 
 /**
  * background - optional css color to use
@@ -138,6 +141,7 @@ const GeneratedCurve = (props: any) => (
 type SectionPropsType = {
 	theme: any,
 	// routeId: number;
+	sectionId: string,
 	title?: string;
 	text?: string;
 }
@@ -145,67 +149,82 @@ type SectionPropsType = {
 const StyledTitle = styled(Typography)`
 	color: ${props => props.color || props.theme.palette.regularCommon.white};
 	margin-bottom: 3rem;
-`
+`;
 
-const SectionTitle = (props) => <StyledTitle variant={"h3"} {...props}>{props.title}</StyledTitle>
+const SectionTitle = (props) => <StyledTitle variant={"h3"} {...props}>{props.title}</StyledTitle>;
 
+const BannerButton = styled(SubmitButton)<AnyProps>`
+	&:hover {
+			color: black;
+	}
+`;
+const BannerSection: FC<SectionPropsType> = ({ theme, sectionId, title, text }) => {
 
-const BannerSection: FC<SectionPropsType> = ({ theme, title, text }) => (
-	<SectionItem id={"home"} background={theme.palette.primary.main}>
-		{title && <SectionTitle title={title}/>}
-		{text && <p>{text}</p>}
-		<GeneratedCurve backgroundColor={theme.section.goal.main}/>
-	</SectionItem>
-);
+	const { setSectionBySectionId } = useSectionContext();
 
-const GoalSection: FC<SectionPropsType> = ({ theme, title }) => (
+	return(
+		<SectionItem id={sectionId} background={theme.palette.primary.main}>
+			{title && <SectionTitle title={title} />}
+			{text && <Typography variant={"subtitle1"} gutterBottom>{text}</Typography>}
+			<Box mt={8}>
+				<BannerButton
+					component={Link}
+					to={"/services"}
+					variant={"contained"}
+					btnColor={"white"}
+					onClick={() => setSectionBySectionId(SectionIndexEnum.SERVICES)}
+				>
+					Contact Us
+				</BannerButton>
+			</Box>
+			<GeneratedCurve backgroundColor={theme.section.goal.main} />
+		</SectionItem>
+	)
+};
+
+const GoalSection: FC<SectionPropsType> = ({ theme, sectionId, title }) => (
 	<>
-		<SectionItem id={"goals"} background={theme.section.goal.main}>
-			{title && <SectionTitle title={title} color={theme.palette.primary.main}/>}
-		<GoalSectionContent />
+		<SectionItem id={sectionId} background={theme.section.goal.main}>
+			{title && <SectionTitle title={title} color={theme.palette.primary.main} />}
+			<GoalSectionContent />
 
 		</SectionItem>
-		<section style={{height: "18vh"}}>
-			<HaikeiCurve svg={"/svg/ServiceWavesTop.svg"} backgroundColor={theme.section.goal.main}/>
+		<section style={{ height: "18vh" }}>
+			<HaikeiCurve svg={"/svg/ServiceWavesTop.svg"} backgroundColor={theme.section.goal.main} />
 		</section>
 	</>
 );
 
-const ServicesSection: FC<SectionPropsType> = ({ theme, title, text }) => (
+const ServicesSection: FC<SectionPropsType> = ({ theme, sectionId, title, text }) => (
 	<>
-		<SectionItem id={"services"} background={theme.palette.regularCommon.red}>
+		<SectionItem id={sectionId} background={theme.palette.regularCommon.red}>
 			{/*<GeneratedCurve backgroundColor={theme.palette.regularCommon.white} inverted={true} />*/}
-			{title && <SectionTitle title={title}/>}
-			{text && <p>{text}</p>}
+			{title && <SectionTitle title={title} />}
+			{text && <Typography variant={"subtitle1"}>{text}</Typography>}
 
 			{/*<section style={{height: "18vh"}}>*/}
 		</SectionItem>
-		<section style={{height: "18vh"}}>
+		<section style={{ height: "18vh" }}>
 			<HaikeiCurve svg={"/svg/LayeredWaves.svg"} />
 		</section>
 	</>
 );
 
-const ContactSection: FC<SectionPropsType> = ({ theme, title, text }) => (
-	<SectionItem id={"contact"} background={"#202731"}>
-		{title && <SectionTitle title={title}/>}
-		<ContactForm/>
+const ContactSection: FC<SectionPropsType> = ({ theme, sectionId, title, text }) => (
+	<SectionItem id={sectionId} background={"#202731"}>
+		{title && <SectionTitle title={title} />}
+		<ContactForm />
 	</SectionItem>
 );
-
 
 
 const sectionComponentMap: ReactNode[] = [
 	BannerSection,
 	GoalSection,
 	ServicesSection,
-	ContactSection,
+	ContactSection
 ];
 
-//primary btn
-// background: #00D8FF;
-// border: 1px solid #00D8FF;
-// color: white;
 
 const Main = () => {
 
@@ -216,13 +235,14 @@ const Main = () => {
 				{(theme) => (
 					<>
 						{
-							sectionComponentMap.map((JsxItem: any, index) => {
+							sectionComponentMap.map((SectionJsx: any, index) => {
 
 								const i18Accessor = `sectionContent.${index}`;
 
 								return (
-									<JsxItem
+									<SectionJsx
 										key={i18Accessor}
+										sectionId={sectionIndexToEnumMap(index)}
 										theme={theme}
 										title={t(`${i18Accessor}.title`)}
 										text={t(`${i18Accessor}.text`)}

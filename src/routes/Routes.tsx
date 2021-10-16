@@ -55,19 +55,14 @@ const childRoutes = (Layout: React.ElementType, routes: Array<RouteType>) =>
 
 const Routes = () => {
 
-	//These are Header related values
-	const [value, setValue] = useState(0);
-	const [selectedIndex, setSelectedIndex] = useState(0);
+	// //These are Header related values
+	// const [value, setValue] = useState(0);
+	// const [selectedIndex, setSelectedIndex] = useState(0);
 
 	return (
 		<Router history={browserHistory}>
 
-			<Header
-				value={value}
-				setValue={setValue}
-				selectedIndex={selectedIndex}
-				setSelectedIndex={setSelectedIndex}
-			/>
+			<Header/>
 
 			<Switch>
 				{/*{childRoutes(AuthLayout, authLayoutRoutes)}*/}
