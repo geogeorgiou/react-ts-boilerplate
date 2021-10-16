@@ -24,11 +24,11 @@ const StyledCardContent = styled(CardContent)`
 	padding: 3rem;
     width: 40rem;
     
-    ${props => props.theme.breakpoints.down("md")} {
-		width: 20rem;
-	}
+    // ${props => props.theme.breakpoints.down("md")} {
+	// 	width: 20rem;
+	// }
 	
-	${props => props.theme.breakpoints.down("md")} {
+	${props => props.theme.breakpoints.down("sm")} {
 		width: 15rem;
 	}
     
@@ -98,6 +98,10 @@ export const SubmitButton = styled(CommonButton)<AnyProps>`
     	background: ${props => props.btnColor || props.theme.palette.primary.main};
 	}
 
+`
+
+const SubmitButton2 = styled(SubmitButton)`
+	color: ${props => props.theme.section.contact.submitButton};
 `
 
 const ResetButton = styled(CommonButton)`
@@ -227,7 +231,7 @@ const ContactForm = () => {
 							<Grid
 								item
 							>
-								<SubmitButton
+								<SubmitButton2
 									type="submit"
 									// variant="contained"
 									variant={"outlined"}
@@ -236,7 +240,7 @@ const ContactForm = () => {
 									endIcon={loading && <CircularProgressSubmitIcon/>}
 								>
 									{t("common:form.submit")}
-								</SubmitButton>
+								</SubmitButton2>
 							</Grid>
 							<Grid
 								item

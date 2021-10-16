@@ -7,11 +7,7 @@ import TimeIcon from "@material-ui/icons/Timelapse";
 import MaintenanceIcon from "@material-ui/icons/NewReleases";
 import { useTranslation } from "react-i18next";
 import { LocalesNsOption } from "../../../context/LangContextProvider";
-
-// const BigQualityIcon = styled(QualityIcon)`
-// font-size: 5rem`
-// const BigTimeIcon = styled(QualityIcon)` font-size: 5rem`
-// const BigMaintenanceIcon = styled(QualityIcon)` font-size: 5rem`
+import styled from "styled-components";
 
 const cardContentArr = [
 	{
@@ -25,16 +21,20 @@ const cardContentArr = [
 	}
 ]
 
+export const StyledGoalSectionContent = styled(Grid)`
+	${props => props.theme.breakpoints.down("sm")} { 
+		width: 80vw;
+	}
+`
 
 export function GoalSectionContent() {
 
 	const { t } = useTranslation(LocalesNsOption.Translation);
 
-	// const theme = useThemeObj();
 	// const matches = useMediaQuery(theme.breakpoints.down('sm'));
 
 	return (
-		<Grid
+		<StyledGoalSectionContent
 			container
 			// justifyContent={"flex-end"}
 			// alignItems={"stretch"}
@@ -64,7 +64,7 @@ export function GoalSectionContent() {
 
 				})
 			}
-		</Grid>
+		</StyledGoalSectionContent>
 	);
 
 }

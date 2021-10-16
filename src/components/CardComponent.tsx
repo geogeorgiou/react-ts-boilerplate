@@ -32,24 +32,43 @@ const StyledCard = styled(Card)`
     font-weight: bold;
     .MuiTypography-h5 {
     	font-weight: bold;
+    	//color: ${props => props.theme.palette.primary.main};
   	};
-    
+  	
+  	// svg {
+  	// 	fill: ${props => props.theme.palette.primary.main};
+  	// }
+  	//
+  	// .MuiTypography-body2{
+    	// color: ${props => props.theme.palette.primary.main};
+  	// };
+  	
+  	
+  	//.MuiTypography-subtitle1 {
+  	//	line-height: 1.4rem;
+  	//}
+      //
   
     &:hover {
-		background: #2A5AF6;
+		background: ${props => props.theme.palette.primary.main};
 		box-shadow: 0 4px 9px 2px rgb(0 0 0 / 27%);
 		
 		svg {
 			fill: #FFFFFF;
 		}
 		
-		.MuiTypography-h5 {
+		.MuiTypography-h5,
+		.MuiTypography-body2{
     		color: #FFFFFF;
   		};
 		
 	}
 	
 	transition: background .25s ease-in-out,color .05s ease-in-out;
+`
+
+const StyledCardText = styled(Typography)`
+	line-height: 1.7;
 `
 
 const GridContainer = styled(Grid)`
@@ -85,9 +104,9 @@ export function CardComponent({title, textContent, showCardActions, icon}: CardC
 						</Typography>
 					</GridContentWrapper>
 					<Grid item>
-						<Typography variant="body2" color="secondary">
+						<StyledCardText variant="body2">
 							{textContent}
-						</Typography>
+						</StyledCardText>
 					</Grid>
 				</GridContainer>
 			</CardContent>

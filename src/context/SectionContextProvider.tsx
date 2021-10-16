@@ -13,7 +13,7 @@ export const sectionIndexToEnumMap = (index: number) => ({
 	1: [SectionIndexEnum.GOALS],
 	2: [SectionIndexEnum.SERVICES],
 	3: [SectionIndexEnum.CONTACT]
-})[index]
+})[index];
 
 export const routes = [
 	{
@@ -46,17 +46,15 @@ export const routes = [
 type SectionContextState = {
 	sectionValue: number,
 	setSectionValue: (index: number) => void
-	setSectionBySectionId: (sectionId: SectionIndexEnum) => void,
-	selectedSectionIndex: number,
-	setSelectedSectionIndex: (index: number) => void
+	setSectionBySectionId: (sectionId: SectionIndexEnum) => void
 }
 
 const defaultStateValue: SectionContextState = {
 	sectionValue: 0,
-	setSectionValue: (index: number) => {},
-	setSectionBySectionId: (sectionId: SectionIndexEnum) => {},
-	selectedSectionIndex: 0,
-	setSelectedSectionIndex: (index: number) => {}
+	setSectionValue: (index: number) => {
+	},
+	setSectionBySectionId: (sectionId: SectionIndexEnum) => {
+	}
 };
 
 //Lang context export no need to use this atomically
@@ -83,7 +81,6 @@ const SectionContextProvider: React.FC = ({ children }) => {
 
 	//These are Section related values
 	const [value, setValue] = useState(0);
-	const [selectedIndex, setSelectedIndex] = useState(0);
 
 	useEffect(() => {
 
@@ -102,9 +99,7 @@ const SectionContextProvider: React.FC = ({ children }) => {
 				let sectionFound = routes.find(i => i.section === sectionId);
 				sectionFound && setValue(sectionFound.activeIndex);
 
-			},
-			selectedSectionIndex: selectedIndex,
-			setSelectedSectionIndex: (index: number) => setSelectedIndex(index)
+			}
 		}}>
 			{children}
 		</SectionContext.Provider>

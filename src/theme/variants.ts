@@ -22,7 +22,7 @@ const palette = {
 		dark: "#022388"
 	},
 	secondary: {
-		light: "#f7f7f7",
+		light: "#E0E0E0",
 		dark: "#bbb"
 	},
 	regularCommon: {
@@ -89,6 +89,9 @@ const defaultVariant = {
 	section: {
 		goal: {
 			main: "#FFF"
+		},
+		contact: {
+			submitButton: palette.primary.light
 		}
 	},
 	footer: {
@@ -146,7 +149,12 @@ const darkVariant = merge(defaultVariant, {
 		// 	primary: "rgba(255, 255, 255, 0.95)",
 		// 	secondary: "rgba(255, 255, 255, 0.5)"
 		// }
-	}
+	},
+	section: {
+		contact: {
+			submitButton: "#FFF"
+		}
+	},
 	// footer: {
 	// 	color: grey[300],
 	// 	background: "#233044"
@@ -187,6 +195,9 @@ export type VariantType = {
 	section: {
 		goal: {
 			main: string
+		},
+		contact: {
+			submitButton: string
 		}
 	},
 	footer: ColorBgType,

@@ -398,6 +398,7 @@ export default function Header() {
 							className={classes.logoContainer}
 							onClick={() => setSectionValue(0)}
 							disableRipple
+							style={{color: "white"}}
 						>
 							{/*<img*/}
 							{/*	src={logo}*/}

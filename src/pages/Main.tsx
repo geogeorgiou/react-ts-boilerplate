@@ -2,14 +2,15 @@ import * as React from "react";
 import { FC, ReactNode } from "react";
 import styled, { ThemeConsumer } from "styled-components/macro";
 import { withTheme } from "@material-ui/styles";
-import { GoalSectionContent } from "../components/section/goals/GoalSectionContent";
+import { GoalSectionContent, StyledGoalSectionContent } from "../components/section/goals/GoalSectionContent";
 import { useTranslation } from "react-i18next";
 import { Typography } from "@material-ui/core";
-import ContactForm, { AnyProps, SubmitButton } from "../components/section/contact/ContactForm";
-import { LocalesNsOption } from "../context/LangContextProvider";
+import ContactForm, { AnyProps } from "../components/section/contact/ContactForm";
+import { LocalesNsOption, useCustomTranslation } from "../context/LangContextProvider";
 import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import { SectionIndexEnum, sectionIndexToEnumMap, useSectionContext } from "../context/SectionContextProvider";
+import Button from "@material-ui/core/Button";
 
 /**
  * background - optional css color to use
@@ -18,6 +19,10 @@ type SectionGridItemType = {
 	background?: string
 	[key: string]: any;
 }
+
+// padding-bottom: 20vh;
+// padding-left: 6px;
+// padding-right: 6px;
 
 const SectionItem = styled.section<SectionGridItemType>`
 	position: relative;
@@ -31,6 +36,16 @@ const SectionItem = styled.section<SectionGridItemType>`
 	> h3 {
 		text-align: center;
 	}
+	
+	${props => props.theme.breakpoints.down("sm")} {
+		padding-bottom: 20vh;
+		padding-left: 6px;
+		padding-right: 6px;
+		
+		
+	}
+	
+	
 	
 `;
 
@@ -146,23 +161,34 @@ type SectionPropsType = {
 	text?: string;
 }
 
-const StyledTitle = styled(Typography)`
-	color: ${props => props.color || props.theme.palette.regularCommon.white};
+const StyledTitle = styled(Typography)<AnyProps>`
+	color: ${props => props.titlecolor || props.theme.palette.regularCommon.white};
 	margin-bottom: 3rem;
 `;
 
+const StyledHaikeSection = styled.section`
+	height: 18vh;
+	
+	${props => props.theme.breakpoints.down("sm")} { 
+		height: 11vh;
+	}
+`
+
 const SectionTitle = (props) => <StyledTitle variant={"h3"} {...props}>{props.title}</StyledTitle>;
 
-const BannerButton = styled(SubmitButton)<AnyProps>`
-	&:hover {
-			color: black;
-	}
+const BannerButton = styled(Button)<AnyProps>`
+	color: ${props => props.theme.palette.primary.main};
+	font-weight: bold;
+	//&:hover {
+	//	color: red;
+	//}
 `;
 const BannerSection: FC<SectionPropsType> = ({ theme, sectionId, title, text }) => {
 
+	const { t } = useCustomTranslation([LocalesNsOption.Translation]);
 	const { setSectionBySectionId } = useSectionContext();
 
-	return(
+	return (
 		<SectionItem id={sectionId} background={theme.palette.primary.main}>
 			{title && <SectionTitle title={title} />}
 			{text && <Typography variant={"subtitle1"} gutterBottom>{text}</Typography>}
@@ -171,27 +197,28 @@ const BannerSection: FC<SectionPropsType> = ({ theme, sectionId, title, text }) 
 					component={Link}
 					to={"/services"}
 					variant={"contained"}
-					btnColor={"white"}
+					btncolor={"white"}
 					onClick={() => setSectionBySectionId(SectionIndexEnum.SERVICES)}
+					disableRipple
 				>
-					Contact Us
+					{t("translation:bannerSection.button")}
 				</BannerButton>
 			</Box>
 			<GeneratedCurve backgroundColor={theme.section.goal.main} />
 		</SectionItem>
-	)
+	);
 };
 
 const GoalSection: FC<SectionPropsType> = ({ theme, sectionId, title }) => (
 	<>
 		<SectionItem id={sectionId} background={theme.section.goal.main}>
-			{title && <SectionTitle title={title} color={theme.palette.primary.main} />}
+			{title && <SectionTitle title={title} titlecolor={theme.palette.primary.main} />}
 			<GoalSectionContent />
 
 		</SectionItem>
-		<section style={{ height: "18vh" }}>
+		<StyledHaikeSection>
 			<HaikeiCurve svg={"/svg/ServiceWavesTop.svg"} backgroundColor={theme.section.goal.main} />
-		</section>
+		</StyledHaikeSection>
 	</>
 );
 
@@ -204,9 +231,9 @@ const ServicesSection: FC<SectionPropsType> = ({ theme, sectionId, title, text }
 
 			{/*<section style={{height: "18vh"}}>*/}
 		</SectionItem>
-		<section style={{ height: "18vh" }}>
+		<StyledHaikeSection>
 			<HaikeiCurve svg={"/svg/LayeredWaves.svg"} />
-		</section>
+		</StyledHaikeSection>
 	</>
 );
 

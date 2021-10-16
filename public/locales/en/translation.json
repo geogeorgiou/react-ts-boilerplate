@@ -29,6 +29,9 @@
       "text": "Even after the completion of the site we stand by your side for improvements, changes and all your requests"
     }
   ],
+  "bannerSection": {
+    "button": "Contact Now"
+  },
   "contactForm": {
     "alertInfo": "The information you register is confidential, it's not going to be saved anywhere and won't be used for commercial purposes.",
     "title": {
