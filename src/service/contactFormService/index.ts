@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const mailRecipient = "9dd0d59ac9765c2c2d696e7ca495f57a";
+const mailRecipient = "649c6f8c517f62079705343e611ada3c";
 
 export function submitFormRequest(title: string, request: string): Promise<any> {
 	return new Promise<any>((resolve, reject) => {

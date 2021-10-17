@@ -34,7 +34,7 @@ const FlagIcon = (props) => {
 	useEffect(() => {
 		const loadSvg = async () => {
 			// const countryCode = currentLang; // "en-US" => "us"
-			const countryCode = getLangFlagSvgAccessor(props.currentLang) //props.currentLang
+			const countryCode = getLangFlagSvgAccessor(props.currentLang); //props.currentLang
 			const { default: response } = await import(`svg-country-flags/svg/${countryCode}.svg`);
 			setFlag(response);
 		};
@@ -45,7 +45,7 @@ const FlagIcon = (props) => {
 	return (
 		// <Flag src={process.env.PUBLIC_URL + `/static/img/flags/${currentLang}.png`} alt={`${currentLang}-logo`} />
 		<Flag src={flag} alt={`${props.currentLang}-logo`} />
-	)
+	);
 
 	// return <img src={flag} width={40} height={20}/>;
 };
@@ -74,7 +74,7 @@ const langMenuOptions: LangMenuOptionType[] = [
 
 const LangMenu = styled(Menu)`
 	margin-top: 2rem;
-`
+`;
 
 
 const LanguagesDropdown = () => {
@@ -117,39 +117,45 @@ const LanguagesDropdown = () => {
 
 	return (
 		<>
-			<Tooltip title={t("common:lang.label") as string}>
-				<IconButton
-					aria-owns={Boolean(anchorMenu) ? "menu-appbar" : undefined}
-					// aria-haspup={"true"}
-					onClick={toggleMenu}
-					color={"inherit"}
-				>
-					{/*{getFlagIcon(currentLang)}*/}
-					<FlagIcon currentLang={currentLang}/>
-				</IconButton>
-			</Tooltip>
-			<LangMenu
-				id={"menu-appbar"}
-				anchorEl={anchorMenu}
-				open={Boolean(anchorMenu)}
-				onClose={closeMenu}
-				keepMounted
-			>
-				{
-					langMenuOptions.map(({ i18nOption }, i) => (
-						<MenuItem
-							key={`lang-option-${i18nOption}`}
-							onClick={() => onClickHandler(i)}
-							selected={selectedIndex === i}
-						>
-							{t(`common:lang.${i18nOption}`)}
-						</MenuItem>
-					))
-				}
-			</LangMenu>
+			{
+				selectedIndex !== -1 && (
+						<>
+							<Tooltip title={t("common:lang.label") as string}>
+								<IconButton
+									aria-owns={Boolean(anchorMenu) ? "menu-appbar" : undefined}
+									// aria-haspup={"true"}
+									onClick={toggleMenu}
+									color={"inherit"}
+								>
+									{/*{getFlagIcon(currentLang)}*/}
+									<FlagIcon currentLang={currentLang} />
+								</IconButton>
+							</Tooltip>
+							<LangMenu
+								id={"menu-appbar"}
+								anchorEl={anchorMenu}
+								open={Boolean(anchorMenu)}
+								onClose={closeMenu}
+								keepMounted
+							>
+								{
+									langMenuOptions.map(({ i18nOption }, i) => (
+										<MenuItem
+											key={`lang-option-${i18nOption}`}
+											onClick={() => onClickHandler(i)}
+											selected={selectedIndex === i}
+										>
+											{t(`common:lang.${i18nOption}`)}
+										</MenuItem>
+									))
+								}
+							</LangMenu>
+						</>
+					)
+			}
 		</>
 	);
 
-}
+};
 
 export default LanguagesDropdown;

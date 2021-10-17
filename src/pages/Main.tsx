@@ -198,7 +198,7 @@ const BannerSection: FC<SectionPropsType> = ({ theme, sectionId, title, text }) 
 					to={"/services"}
 					variant={"contained"}
 					btncolor={"white"}
-					onClick={() => setSectionBySectionId(SectionIndexEnum.SERVICES)}
+					onClick={() => setSectionBySectionId(SectionIndexEnum.CONTACT)}
 					disableRipple
 				>
 					{t("translation:bannerSection.button")}

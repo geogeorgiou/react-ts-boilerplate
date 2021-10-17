@@ -1,4 +1,3 @@
-import React from "react";
 import { SharedProps, SnackbarMessage, useSnackbar } from "notistack";
 import { useCustomTranslation } from "../context/LangContextProvider";
 
@@ -22,6 +21,3 @@ export const useSnackbarCreator = () => {
 
 }
 
-
-const SnackbarCreator = () => {}
-export default SnackbarCreator;
