@@ -1,25 +1,23 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { scroller } from "react-scroll";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 
 /**
  * Analytics initialization function to use (production only func)
  *
- * @param renderedView - view rendered
  */
-function initializeAnalytics(renderedView){
+function initializeAnalytics(){
 	if (process.env.NODE_ENV === "production"){
 		ReactGA.initialize('G-7JLERN9XKQ', {
-			debug: true,
-			titleCase: false,
 			gaOptions: {
 				siteSpeedSampleRate: 100
 			}
 		});
-		ReactGA.pageview(renderedView);
 	}
-
 }
+
+function pageViewAnalytics(link: string) {
+	process.env.NODE_ENV === "production" && ReactGA.send({ hitType: "pageview", page: link });}
 
 
 export enum SectionIndexEnum {
@@ -104,11 +102,15 @@ const SectionContextProvider: React.FC = ({ children }) => {
 	const [value, setValue] = useState(0);
 
 	useEffect(() => {
+		initializeAnalytics();
+	}, [])
+
+	useEffect(() => {
 
 		let sectionFound = routes.find(i => i.activeIndex === value);
 		if (sectionFound) {
 			scrollToSection(sectionFound.section);
-			initializeAnalytics(sectionFound.section);
+			pageViewAnalytics(sectionFound.link);
 		}
 
 
