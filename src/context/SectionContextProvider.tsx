@@ -1,5 +1,20 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { scroller } from "react-scroll";
+import ReactGA from "react-ga";
+
+/**
+ * Analytics initialization function to use (production only func)
+ *
+ * @param renderedView - view rendered
+ */
+function initializeAnalytics(renderedView){
+	if (process.env.NODE_ENV === "production"){
+		ReactGA.initialize('G-7JLERN9XKQ');
+		ReactGA.pageview(renderedView);
+	}
+
+}
+
 
 export enum SectionIndexEnum {
 	HOME = "home",
@@ -85,7 +100,11 @@ const SectionContextProvider: React.FC = ({ children }) => {
 	useEffect(() => {
 
 		let sectionFound = routes.find(i => i.activeIndex === value);
-		sectionFound && scrollToSection(sectionFound.section);
+		if (sectionFound) {
+			scrollToSection(sectionFound.section);
+			initializeAnalytics(sectionFound.section);
+		}
+
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
