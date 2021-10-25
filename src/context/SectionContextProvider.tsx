@@ -9,7 +9,13 @@ import ReactGA from "react-ga";
  */
 function initializeAnalytics(renderedView){
 	if (process.env.NODE_ENV === "production"){
-		ReactGA.initialize('G-7JLERN9XKQ');
+		ReactGA.initialize('G-7JLERN9XKQ', {
+			debug: true,
+			titleCase: false,
+			gaOptions: {
+				siteSpeedSampleRate: 100
+			}
+		});
 		ReactGA.pageview(renderedView);
 	}
 
