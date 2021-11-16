@@ -27,6 +27,7 @@
   "form": {
     "submit": "Submit",
     "reset": "Reset",
+    "onConfirm": "Confirm",
     "successSubmit": "The form has been submitted successfully!",
     "errorSubmit": "An error occurred during form submission!"
   },

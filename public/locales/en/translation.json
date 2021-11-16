@@ -1,4 +1,11 @@
 {
+  "dialog": {
+    "cookie": {
+      "title": "This website uses cookies",
+      "content": "We are using cookie for personalisation of content and target ads,\nprovide social media features and to analyse traffic.\nWe also share information about your use of our site with social media, advertising and analytics partner who may combine this information\nwith other you have provided to them or have that they've collected from your use of their services. Please accept the necessary cookies in order to continue.",
+      "acceptNecessary": "Use only necessary cookies"
+    }
+  },
   "sectionContent": [
     {
       "title": "Welcome",

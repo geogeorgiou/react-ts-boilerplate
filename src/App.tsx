@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Routes from "./routes/Routes";
 import ThemeContextProvider from "./context/ThemeContextProvider";
 
@@ -6,6 +6,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { SnackbarProvider } from "notistack";
 import { useCustomTranslation } from "./context/LangContextProvider";
 import SectionContextProvider from "./context/SectionContextProvider";
+import ModalProvider from "mui-modal-provider";
 
 function App() {
 
@@ -22,9 +23,11 @@ function App() {
 						horizontal: 'center',
 					}}
 				>
-					<SectionContextProvider>
-						<Routes />
-					</SectionContextProvider>
+					<ModalProvider>
+						<SectionContextProvider>
+							<Routes />
+						</SectionContextProvider>
+					</ModalProvider>
 				</SnackbarProvider>
 			</ThemeContextProvider>
 

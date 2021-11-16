@@ -1,9 +1,8 @@
 import * as React from "react";
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useEffect } from "react";
 import styled, { ThemeConsumer } from "styled-components/macro";
 import { withTheme } from "@material-ui/styles";
 import { GoalSectionContent } from "../components/section/goals/GoalSectionContent";
-import { useTranslation } from "react-i18next";
 import { Typography } from "@material-ui/core";
 import ContactForm, { AnyProps } from "../components/section/contact/ContactForm";
 import { LocalesNsOption, useCustomTranslation } from "../context/LangContextProvider";
@@ -11,6 +10,7 @@ import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import { SectionIndexEnum, sectionIndexToEnumMap, useSectionContext } from "../context/SectionContextProvider";
 import Button from "@material-ui/core/Button";
+import { useModals } from "../hooks/useModals";
 
 /**
  * background - optional css color to use
@@ -255,7 +255,21 @@ const sectionComponentMap: ReactNode[] = [
 
 const Main = () => {
 
-		const { t } = useTranslation([LocalesNsOption.Translation, LocalesNsOption.Common]);
+		// const { t } = useTranslation([LocalesNsOption.Translation, LocalesNsOption.Common]);
+		const { t } = useCustomTranslation();
+
+		const { cookiesModal } = useModals();
+
+		useEffect(() => {
+			cookiesModal({
+				title: "translation:dialog.cookie.title",
+				content: "translation:dialog.cookie.content",
+				confirmText: "translation:dialog.cookie.acceptNecessary",
+				disableBackdropClick: true,
+				disableEscapeKeyDown: true,
+				maxWidth: "xs"
+			});
+		}, [])
 
 		return (
 			<ThemeConsumer>
