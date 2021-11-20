@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { SectionIndexEnum, sectionIndexToEnumMap, useSectionContext } from "../context/SectionContextProvider";
 import Button from "@material-ui/core/Button";
 import { useModals } from "../hooks/useModals";
+import { INIT, useAnalyticsDispatch } from "../context/AnalyticsContextProvider";
 
 /**
  * background - optional css color to use
@@ -257,17 +258,19 @@ const Main = () => {
 
 		// const { t } = useTranslation([LocalesNsOption.Translation, LocalesNsOption.Common]);
 		const { t } = useCustomTranslation();
+		const dispatchAnalytics = useAnalyticsDispatch();
 
-		const { cookiesModal } = useModals();
+		const { genericModal } = useModals();
 
 		useEffect(() => {
-			cookiesModal({
+			genericModal({
 				title: "translation:dialog.cookie.title",
 				content: "translation:dialog.cookie.content",
 				confirmText: "translation:dialog.cookie.acceptNecessary",
-				disableBackdropClick: true,
-				disableEscapeKeyDown: true,
-				maxWidth: "xs"
+				maxWidth: "xs",
+				onConfirm: _ => {
+					dispatchAnalytics({type: INIT})
+				}
 			});
 		}, [])
 

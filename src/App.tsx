@@ -7,6 +7,7 @@ import { SnackbarProvider } from "notistack";
 import { useCustomTranslation } from "./context/LangContextProvider";
 import SectionContextProvider from "./context/SectionContextProvider";
 import ModalProvider from "mui-modal-provider";
+import AnalyticsContextProvider from "./context/AnalyticsContextProvider";
 
 function App() {
 
@@ -24,9 +25,11 @@ function App() {
 					}}
 				>
 					<ModalProvider>
-						<SectionContextProvider>
-							<Routes />
-						</SectionContextProvider>
+						<AnalyticsContextProvider>
+							<SectionContextProvider>
+								<Routes />
+							</SectionContextProvider>
+						</AnalyticsContextProvider>
 					</ModalProvider>
 				</SnackbarProvider>
 			</ThemeContextProvider>

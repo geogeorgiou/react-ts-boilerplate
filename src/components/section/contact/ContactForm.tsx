@@ -216,7 +216,7 @@ const ContactForm = () => {
 									}}
 									multiline
 									minRows={10}
-									maxRows={Infinity}
+									// maxRows={Infinity}
 								/>
 							</Grid>
 						</Grid>

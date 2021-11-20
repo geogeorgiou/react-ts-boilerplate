@@ -6,3 +6,10 @@ export enum THEME {
 	DARK = "DARK",
 	LIGHT = "LIGHT"
 }
+
+/**
+ * Helper function to determine NODE_ENV MODE
+ */
+export function isProductionMode() {
+	return process.env.NODE_ENV === "production";
+}

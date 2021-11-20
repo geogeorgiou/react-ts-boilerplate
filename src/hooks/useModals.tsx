@@ -9,6 +9,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import { useCustomTranslation } from "../context/LangContextProvider";
 import { SubmitButton } from "../components/section/contact/ContactForm";
 import styled from "styled-components";
+import i18n from "../i18n";
 
 type Props = Omit<DialogProps, "open"> & {
 	open?: boolean;
@@ -30,6 +31,15 @@ const StyledDialogContentText = styled(DialogContentText)`
 	color: black;
 `
 
+const getTranslatedContent = (content) => {
+
+	if (typeof content === "string")
+		return i18n.t(content)
+
+	return null;
+
+}
+
 //  create the dialog you want to use
 const SimpleDialog: React.FC<Props> = ({
 										   title,
@@ -44,28 +54,34 @@ const SimpleDialog: React.FC<Props> = ({
 	const { t } = useCustomTranslation();
 	const [modalOpen, setModalOpen] = useState<boolean>(open || true);
 
-	const handleClose = () => {
+	const handleClose = (event, reason) => {
+		if (reason === "backdropClick") {
+			return false;
+		}
+
+		if (reason === "escapeKeyDown") {
+			return false;
+		}
+
+		if (typeof onCancel === "function") {
+			onCancel(event);
+		}
+
 		setModalOpen(false);
+
 	};
 
-	const onSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+	const onSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, reason) => {
 		onConfirm && onConfirm(event);
-		handleClose();
+		handleClose(event, reason);
 	}
 
-	const onDismiss = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+	const onDismiss = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, reason) => {
 		onCancel && onCancel(event);
-		handleClose();
+		handleClose(event, reason);
 	}
 
-	const getContentRendered = (content) => {
 
-		if (typeof content === "string")
-			return t(content)
-
-		return null;
-
-	}
 
 	return (
 		<Dialog
@@ -78,7 +94,7 @@ const SimpleDialog: React.FC<Props> = ({
 			<StyledDialogTitle id={`alert-dialog-${title}`}>{t(title)}</StyledDialogTitle>
 			<DialogContent>
 				<StyledDialogContentText id={`alert-dialog-${title}-descr`}>
-					{getContentRendered(content)}
+					{getTranslatedContent(content)}
 				</StyledDialogContentText>
 			</DialogContent>
 			<DialogActions>
@@ -103,12 +119,12 @@ export const useModals = () => {
 
 	const { showModal } = useModal();
 
-	const cookiesModal = (props: Props) => {
+	const genericModal = (props: Props) => {
 		return (
 			showModal(() => <SimpleDialog {...props} />)
 		)
 	}
 
-	return { cookiesModal }
+	return { genericModal }
 
 }
