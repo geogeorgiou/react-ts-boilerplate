@@ -28,9 +28,9 @@ import { routes, useSectionContext } from "../../context/SectionContextProvider"
 import props from "../../theme/props";
 
 interface Process {
-	browser: boolean
+	browser: boolean;
 }
-declare var process: Process
+declare var process: Process;
 
 function ElevationScroll(props) {
 	const { children } = props;
@@ -39,19 +39,18 @@ function ElevationScroll(props) {
 	// This is only being set here because the demo is in an iframe.
 	const trigger = useScrollTrigger({
 		disableHysteresis: true,
-		threshold: 0
+		threshold: 0,
 	});
 
 	return React.cloneElement(children, {
-		elevation: trigger ? 4 : 0
+		elevation: trigger ? 4 : 0,
 	});
 }
 
 //solves the toolbar overflowing over text issue
-const useStyles = makeStyles(theme => ({
-
+const useStyles = makeStyles((theme) => ({
 	toolbarMargin: {
-		...theme.mixins.toolbar
+		...theme.mixins.toolbar,
 
 		// marginBottom: "3em",
 		// [theme.breakpoints.down("md")]: {
@@ -66,22 +65,22 @@ const useStyles = makeStyles(theme => ({
 	logo: {
 		height: "8em",
 		[theme.breakpoints.down("md")]: {
-			height: "7em"
+			height: "7em",
 		},
 		[theme.breakpoints.down("xs")]: {
-			height: "5.5em"
-		}
+			height: "5.5em",
+		},
 	},
 
 	logoContainer: {
-		padding: 0,
 		"&:hover": {
-			"backgroundColor": "transparent"
-		}
+			padding: 0,
+			backgroundColor: "transparent",
+		},
 	},
 
 	tabContainer: {
-		marginLeft: "auto"
+		marginLeft: "auto",
 	},
 
 	//abstracting logic of tab into the theme!
@@ -89,7 +88,7 @@ const useStyles = makeStyles(theme => ({
 	tab: {
 		// ...theme.typography.tab,
 		minWidth: "8rem",
-		marginLeft: "25px"
+		marginLeft: "25px",
 	},
 
 	button: {
@@ -99,34 +98,34 @@ const useStyles = makeStyles(theme => ({
 		marginRight: "25px",
 		height: "45px",
 		"&:hover": {
-			backgroundColor: theme.palette.secondary.light
-		}
+			backgroundColor: theme.palette.secondary.light,
+		},
 	},
 
 	menu: {
 		// backgroundColor: theme.palette.common.blue,
 		color: "white",
-		borderRadius: 0
+		borderRadius: 0,
 	},
 
 	menuItem: {
 		// ...theme.typography.tab,
 		opacity: 0.7,
 		"&:hover": {
-			opacity: 1
-		}
+			opacity: 1,
+		},
 	},
 
 	drawerIconContainer: {
 		marginLeft: "auto",
 		"&:hover": {
-			backgroundColor: "transparent"
-		}
+			backgroundColor: "transparent",
+		},
 	},
 
 	drawerIcon: {
 		width: "50px",
-		height: "50px"
+		height: "50px",
 	},
 
 	drawer: {
@@ -135,31 +134,29 @@ const useStyles = makeStyles(theme => ({
 		// 	width: "30vw"
 		// },
 		[theme.breakpoints.down("md")]: {
-			width: "50vw"
-		}
-
+			width: "50vw",
+		},
 	},
 
 	drawerItem: {
 		// ...theme.typography.tab,
 		color: "white",
-		opacity: 0.7
+		opacity: 0.7,
 	},
 
 	drawerItemSelected: {
 		"& .MuiListItemText-root": {
-			opacity: 1
-		}
+			opacity: 1,
+		},
 	},
 
 	drawerItemEstimate: {
 		// backgroundColor: theme.palette.common.orange
-	}
+	},
 
 	// appBar: {
 	// 	zIndex: theme.zIndex.modal + 1
 	// }
-
 }));
 
 // type HeaderMenuOptionType = {
@@ -175,7 +172,6 @@ const TabContainer = styled(Tabs)`
 `;
 
 const ThemeSwitch = () => {
-
 	const { t } = useTranslation(LocalesNsOption.Common);
 
 	const { currentTheme, setCurrentTheme } = useTheme();
@@ -196,92 +192,70 @@ const ThemeSwitch = () => {
 			handleChange={changeTheme}
 		/>
 	);
-
 };
-
-
-
 
 type ResponsiveComponentType = {
 	classes: ClassNameMap<any>;
 	value: number;
 	setValue: (arg: number) => void;
-}
+};
 
-const DrawerComponent:FC<ResponsiveComponentType> = ({classes, value, setValue}) => {
-
+const DrawerComponent: FC<ResponsiveComponentType> = ({ classes, value, setValue }) => {
 	const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 	const { t } = useTranslation([LocalesNsOption.Common]);
 	const [openDrawer, setOpenDrawer] = useState(false);
 
-	const toggleDrawer = () => setOpenDrawer(prevState => !prevState);
+	const toggleDrawer = () => setOpenDrawer((prevState) => !prevState);
 
 	return (
-		(
-			<>
-				<SwipeableDrawer
-					disableBackdropTransition={!iOS}
-					disableDiscovery={iOS}
-					open={openDrawer}
-					onClose={toggleDrawer}
-					onOpen={toggleDrawer}
-					classes={{ paper: classes.drawer }}
-				>
-					<div className={classes.toolbarMargin} />
-					<List disablePadding>
+		<>
+			<SwipeableDrawer
+				disableBackdropTransition={!iOS}
+				disableDiscovery={iOS}
+				open={openDrawer}
+				onClose={toggleDrawer}
+				onOpen={toggleDrawer}
+				classes={{ paper: classes.drawer }}
+			>
+				<div className={classes.toolbarMargin} />
+				<List disablePadding>
+					{routes.map((tab, i) => {
+						return (
+							<ListItem
+								divider
+								button
+								key={`drawer_item_${tab.name}`}
+								component={Link}
+								to={tab.link}
+								onClick={() => {
+									toggleDrawer();
+									setValue(i);
+								}}
+								classes={{ selected: classes.drawerItemSelected }}
+								selected={value === i}
+							>
+								<ListItemText disableTypography className={classes.drawerItem}>
+									{t(tab.name)}
+								</ListItemText>
+							</ListItem>
+						);
+					})}
 
-						{
-							routes.map((tab, i) => {
-								return (
-									<ListItem
-										divider
-										button
-										key={`drawer_item_${tab.name}`}
-										component={Link}
-										to={tab.link}
-										onClick={() => {
-											toggleDrawer();
-											setValue(i);
-										}}
-										classes={{ selected: classes.drawerItemSelected }}
-										selected={value === i}
-									>
-										<ListItemText
-											disableTypography
-											className={classes.drawerItem}
-										>
-											{t(tab.name)}
-										</ListItemText>
-									</ListItem>
-								);
-							})
-						}
+					<ListItem>
+						<LanguagesDropdown />
+					</ListItem>
 
-						<ListItem>
-							<LanguagesDropdown />
-
-						</ListItem>
-
-						<ListItem>
-							<ThemeSwitch />
-
-
-						</ListItem>
-
-					</List>
-				</SwipeableDrawer>
-				<IconButton
-					className={classes.drawerIconContainer}
-					onClick={() => setOpenDrawer(!openDrawer)}
-					disableRipple
-				>
-					<MenuIcon className={classes.drawerIcon} />
-				</IconButton>
-			</>
-		)
-	)
-
+					<ListItem>
+						<ThemeSwitch />
+					</ListItem>
+				</List>
+			</SwipeableDrawer>
+			<IconButton className={classes.drawerIconContainer} onClick={() => setOpenDrawer(!openDrawer)} disableRipple>
+				<MenuIcon className={classes.drawerIcon} />
+			</IconButton>
+		</>
+	);
 };
 
 const TabComponent:FC<ResponsiveComponentType> = ({classes, value, setValue}) => {
@@ -293,59 +267,39 @@ const TabComponent:FC<ResponsiveComponentType> = ({classes, value, setValue}) =>
 	};
 
 	return (
-			<>
-				<TabContainer
-					value={value}
-					className={classes.tabContainer}
-					onChange={handleChange}
-					TabIndicatorProps={{ style: { background: "#FFFFFF" } }}
-				>
-					{
-						routes.map((route, index) => {
+		<>
+			<TabContainer
+				value={value}
+				className={classes.tabContainer}
+				onChange={handleChange}
+				TabIndicatorProps={{ style: { background: "#FFFFFF" } }}
+			>
+				{routes.map((route, index) => {
+					const routeIdx = `route-${index}`;
 
-							const routeIdx = `route-${index}`;
+					return <Tab key={`${routeIdx}-tab`} className={classes.tab} component={Link} to={route.section} label={t(route.name)} />;
+				})}
+			</TabContainer>
 
-							return (
-								<Tab
-									key={`${routeIdx}-tab`}
-									className={classes.tab}
-									component={Link}
-									to={route.section}
-									label={t(route.name)}
-								/>
-							);
-						})
-					}
+			<Box mr={6}>
+				<LanguagesDropdown />
+			</Box>
 
-				</TabContainer>
-
-				<Box mr={6}>
-					<LanguagesDropdown />
-				</Box>
-
-				<ThemeSwitch />
-
-			</>
-	)
-
-}
+			<ThemeSwitch />
+		</>
+	);
+};
 
 export default function Header() {
-
 	const theme = useThemeObject();
 	const classes = useStyles();
 
-	const {
-		sectionValue,
-		setSectionValue,
-	} = useSectionContext();
+	const { sectionValue, setSectionValue } = useSectionContext();
 
 	// const { t } = useTranslation(LocalesNsOption.Common);
 
 	//selects anything that's medium and below
 	const matches = useMediaQuery(theme.breakpoints.down("md"));
-
-
 
 	//basically check when user refreshes the page set the correct active tab
 	//if not set it via custom way
@@ -384,21 +338,18 @@ export default function Header() {
 	// // }, [sectionValue, props.selectedIndex, routes, props]);
 	// }, [sectionValue, props.selectedIndex]);
 
-
-
 	return (
 		<>
 			<ElevationScroll {...props}>
 				<AppBar position="fixed">
 					<Toolbar disableGutters={true}>
-
 						<Button
 							component={Link}
 							to={"/home"}
 							className={classes.logoContainer}
 							onClick={() => setSectionValue(0)}
 							disableRipple
-							style={{color: "white"}}
+							style={{ color: "white" }}
 						>
 							{/*<img*/}
 							{/*	src={logo}*/}
@@ -408,20 +359,11 @@ export default function Header() {
 							<SettingsEthernetIcon />
 						</Button>
 
-						{matches ?
-							<DrawerComponent
-								classes={classes}
-								value={sectionValue}
-								setValue={setSectionValue}
-							/>
-							:
-							<TabComponent
-								classes={classes}
-								value={sectionValue}
-								setValue={setSectionValue}
-							/>
-						}
-
+						{matches ? (
+							<DrawerComponent classes={classes} value={sectionValue} setValue={setSectionValue} />
+						) : (
+							<TabComponent classes={classes} value={sectionValue} setValue={setSectionValue} />
+						)}
 					</Toolbar>
 				</AppBar>
 			</ElevationScroll>
